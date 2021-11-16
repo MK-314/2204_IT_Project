@@ -17,7 +17,6 @@ const Box = styled.View`
 
   /* background-color: #78a5c4; */
 `
-
 const FoodItem = styled.Image`
   display: flex;
   position: absolute;
