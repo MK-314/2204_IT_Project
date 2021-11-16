@@ -35,23 +35,23 @@ const IconSt = styled(Icon)`
   color: #2ec269;
 `
 
-const SearchField = (props) => {
+const SearchField = props => {
   const [focusedBool, setfocusedBool] = useState(false)
   return (
-      <RowSt>
-        <TextInputSt
-          placeholder='Search a recipe'
-          focusedSt={focusedBool}
-          onFocus={() => {
-            setfocusedBool(true)
-            props.hidden()
-          }}
-          onBlur={() => {
-            setfocusedBool(false)
-          }}
-        />
-        <IconSt name='search' />
-      </RowSt>
+    <RowSt>
+      <TextInputSt
+        placeholder='Search a recipe'
+        focusedSt={focusedBool}
+        onFocus={() => {
+          setfocusedBool(true)
+          props.hidden()
+        }}
+        onBlur={() => {
+          setfocusedBool(false)
+        }}
+      />
+      <IconSt name='search' />
+    </RowSt>
   )
 }
 
