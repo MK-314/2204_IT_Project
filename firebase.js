@@ -88,7 +88,6 @@ const getUrlByName = (fileName) => {
         })
 }
 
-
 const uploadImageToFireBase = (uri) => {
     return new Promise(async(res, rej) => {
         // console.log(uri)
@@ -103,8 +102,10 @@ const uploadImageToFireBase = (uri) => {
     })
 }
 
+// password:
 export { appSignUp }
 export { appSignIn }
 export { resetPassword }
-export { getUrlByName }
+// image:
 export { uploadImageToFireBase }
+export { getUrlByName }

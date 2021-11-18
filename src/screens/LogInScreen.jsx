@@ -53,11 +53,9 @@ const LogInScreen = ({ navigation }) => {
 
   const handleSignUpUI = async () => {
     // getUrlByName('1.png')
+    // setImage(res.uri)
     let emailResult = await appSignUp(email, password)
     alert(emailResult)
-    // let res = await pickImage()
-    // setImage(res.uri)
-    // let snapshot = await uploadImageToFireBase(res.uri)
   }
   const handleSignInUI = async () => {
     let emailResult = await appSignIn(email, password)
@@ -71,6 +69,12 @@ const LogInScreen = ({ navigation }) => {
       .catch(err => {
         alert(err)
       })
+  }
+  // Upload Image:
+  const uploadImageUI = async () => {
+    let pickedImage = await pickImage()
+    let snapshot = await uploadImageToFireBase(pickedImage.uri)
+    alert(JSON.stringify(snapshot.metadata.fullPath))
   }
 
   return (
@@ -92,7 +96,9 @@ const LogInScreen = ({ navigation }) => {
         />
         <Btn onPress={handleSignUpUI} title='handleSignUpUI' />
         <Btn onPress={handleSignInUI} title='handleSignInUI' />
-        <Btn onPress={resetPasswordUI} title='resetPassword' />
+        <Btn onPress={resetPasswordUI} title='resetPasswordUI' />
+        {/*  */}
+        <Btn onPress={uploadImageUI} title='uploadImageUI' />
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
