@@ -17,6 +17,9 @@ import {
 import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
+// SESSION STORAGE:
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const ContainerSt = styled.View`
   display: flex;

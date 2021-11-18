@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { initializeApp } from 'firebase/app';
 import {
     getAuth,
@@ -26,13 +27,12 @@ const appSignUp = (email, password) => {
             .then(userCredential => {
                 // Signed in
                 const user = userCredential.user
+                    // AsyncStorage.setItem('user', user)
                 res(user.email)
 
                 // ...
             })
             .catch(error => {
-                const errorCode = error.code
-                const errorMessage = error.message
                 alert(error.message)
             })
     })
@@ -43,13 +43,12 @@ const appSignIn = (email, password) => {
             .then(userCredential => {
                 // Signed in
                 const user = userCredential.user
+                    // AsyncStorage.setItem('user', user)
                 res(user.email)
 
                 // ...
             })
             .catch(error => {
-                const errorCode = error.code
-                const errorMessage = error.message
                 alert(error.message)
             })
     })
@@ -61,8 +60,6 @@ const resetPassword = (email) => {
                 res("Succsess")
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
                 rej(error.message)
                     // ..
             });
