@@ -48,8 +48,8 @@ const LogInScreen = ({ navigation }) => {
 
   const handleSignUp = async () => {
     // getUrlByName('1.png')
-    let emailRes = await appSignUp(email, password)
-    alert(emailRes)
+    let emailResult = await appSignUp(email, password)
+    alert(emailResult)
     // let res = await pickImage()
     // setImage(res.uri)
     // let snapshot = await uploadImageToFireBase(res.uri)
