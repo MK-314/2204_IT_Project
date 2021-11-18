@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 const firebaseConfig = {
     apiKey: 'AIzaSyDUkVrBOAiVEHWUmnZuHN4KP35plq-rX9k',
@@ -15,6 +15,40 @@ const auth = getAuth();
 const storage = getStorage();
 
 
+const appSignUp = (email, password) => {
+    return new Promise(async(res, rej) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                // Signed in
+                const user = userCredential.user
+                res(user.email)
+
+                // ...
+            })
+            .catch(error => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(error.message)
+            })
+    })
+}
+const appSignIn = (email, password) => {
+    return new Promise(async(res, rej) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                // Signed in
+                const user = userCredential.user
+                res(user.email)
+
+                // ...
+            })
+            .catch(error => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(error.message)
+            })
+    })
+}
 const getUrlByName = (fileName) => {
     getDownloadURL(ref(storage, '1.png'))
         .then(url => {
@@ -35,23 +69,6 @@ const getUrlByName = (fileName) => {
         })
 }
 
-const appSignUp = (email, password) => {
-    return new Promise(async(res, rej) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                // Signed in
-                const user = userCredential.user
-                res(user.email)
-
-                // ...
-            })
-            .catch(error => {
-                const errorCode = error.code
-                const errorMessage = error.message
-                alert(error.message)
-            })
-    })
-}
 
 const uploadImageToFireBase = (uri) => {
     return new Promise(async(res, rej) => {
@@ -67,6 +84,7 @@ const uploadImageToFireBase = (uri) => {
     })
 }
 
-export { getUrlByName }
 export { appSignUp }
+export { appSignIn }
+export { getUrlByName }
 export { uploadImageToFireBase }

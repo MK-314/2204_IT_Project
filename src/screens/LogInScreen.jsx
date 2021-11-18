@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native-gesture-handler'
 // FIRE_BASE:
-import { appSignUp, uploadImageToFireBase } from '../../firebase'
+import { appSignUp, appSignIn, uploadImageToFireBase } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
@@ -54,6 +54,10 @@ const LogInScreen = ({ navigation }) => {
     // setImage(res.uri)
     // let snapshot = await uploadImageToFireBase(res.uri)
   }
+  const handleSignIn = async () => {
+    let emailResult = await appSignIn(email, password)
+    alert(emailResult)
+  }
 
   return (
     <ContainerSt>
@@ -72,7 +76,8 @@ const LogInScreen = ({ navigation }) => {
           }}
           value={password}
         />
-        <Btn onPress={handleSignUp} title='Submit' />
+        <Btn onPress={handleSignUp} title='handleSignUp' />
+        <Btn onPress={handleSignIn} title='handleSignIn' />
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
