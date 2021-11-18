@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail
+} from "firebase/auth";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 const firebaseConfig = {
     apiKey: 'AIzaSyDUkVrBOAiVEHWUmnZuHN4KP35plq-rX9k',
@@ -49,6 +54,20 @@ const appSignIn = (email, password) => {
             })
     })
 }
+const resetPassword = (email) => {
+    return new Promise((res, rej) => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                res("Succsess")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                rej(error.message)
+                    // ..
+            });
+    })
+}
 const getUrlByName = (fileName) => {
     getDownloadURL(ref(storage, '1.png'))
         .then(url => {
@@ -86,5 +105,6 @@ const uploadImageToFireBase = (uri) => {
 
 export { appSignUp }
 export { appSignIn }
+export { resetPassword }
 export { getUrlByName }
 export { uploadImageToFireBase }
