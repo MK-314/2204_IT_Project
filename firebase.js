@@ -27,10 +27,9 @@ const appSignUp = (email, password) => {
             .then(userCredential => {
                 // Signed in
                 const user = userCredential.user
-                    // AsyncStorage.setItem('user', user)
+                AsyncStorage.setItem('user', JSON.stringify(user))
+                AsyncStorage.setItem('auth', JSON.stringify(auth))
                 res(user.email)
-
-                // ...
             })
             .catch(error => {
                 alert(error.message)
@@ -43,10 +42,9 @@ const appSignIn = (email, password) => {
             .then(userCredential => {
                 // Signed in
                 const user = userCredential.user
-                    // AsyncStorage.setItem('user', user)
+                AsyncStorage.setItem('user', JSON.stringify(user))
+                AsyncStorage.setItem('auth', JSON.stringify(auth))
                 res(user.email)
-
-                // ...
             })
             .catch(error => {
                 alert(error.message)
@@ -61,7 +59,6 @@ const resetPassword = (email) => {
             })
             .catch((error) => {
                 rej(error.message)
-                    // ..
             });
     })
 }

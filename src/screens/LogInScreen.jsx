@@ -18,8 +18,7 @@ import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ContainerSt = styled.View`
   display: flex;
@@ -91,6 +90,10 @@ const LogInScreen = ({ navigation }) => {
     let deleteRes = await deleteImageFromFireBase(fileNameFromFb)
     alert(deleteRes)
   }
+  const getStorXXX = async () => {
+    let user = await AsyncStorage.getItem('auth')
+    alert(user)
+  }
 
   return (
     <ContainerSt>
@@ -116,6 +119,8 @@ const LogInScreen = ({ navigation }) => {
         <Btn onPress={uploadImageUI} title='uploadImageUI' />
         <Btn onPress={getImageUrlFirebaseUI} title='getImageUrlFirebaseUI' />
         <Btn onPress={deleteImageUI} title='deleteImageUI' />
+        {/*  */}
+        <Btn onPress={getStorXXX} title='getStorXXX' />
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
