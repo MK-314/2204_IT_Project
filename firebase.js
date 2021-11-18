@@ -72,9 +72,6 @@ const getUrlByName = (fileName) => {
     return new Promise(async(res, rej) => {
         getDownloadURL(ref(storage, fileName))
             .then(url => {
-                // `url` is the download URL for 'images/stars.jpg'
-
-                // This can be downloaded directly:
                 const xhr = new XMLHttpRequest()
                 xhr.responseType = 'blob'
                 xhr.onload = event => {
@@ -92,14 +89,11 @@ const getUrlByName = (fileName) => {
 
 const uploadImageToFireBase = (uri) => {
     return new Promise(async(res, rej) => {
-        // console.log(uri)
         const filename = uri.substring(uri.lastIndexOf('/') + 1).substring(0, 17)
         const storageRef = ref(storage, filename);
-        // console.log(response)
         let response = await fetch(uri)
         let blob = await response.blob()
         let snapshot = await uploadBytes(storageRef, blob)
-            // console.log(snapshot)
         res(snapshot)
     })
 }
