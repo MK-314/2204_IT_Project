@@ -1,16 +1,15 @@
 // REACT:
-import React, { useEffect, useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Button, Image } from 'react-native'
+import React, { useState } from 'react'
+import { Text, Image } from 'react-native'
 import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native-gesture-handler'
 // FIRE_BASE:
-import { appSignUp, getUrlByName, uploadImageToFireBase } from '../../firebase'
+import { uploadImageToFireBase } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
-import * as ImagePicker from 'expo-image-picker'
 
 const ContainerSt = styled.View`
   display: flex;
@@ -50,21 +49,10 @@ const LogInScreen = ({ navigation }) => {
   const handleSignUp = async () => {
     // getUrlByName('1.png')
     // appSignUp(email, password)
-    pickImage()
-      .then(res => {
-        setImage(res.uri)
-        // alert(res.uri)
-        uploadImageToFireBase(res.uri)
-          .then(snapshot => {
-            // alert(snapshot)
-          })
-          .catch(e => {
-            alert(e)
-          })
-      })
-      .catch(err => {
-        alert(err)
-      })
+    let res = await pickImage()
+    setImage(res.uri)
+    // alert(res.uri)
+    let snapshot = await uploadImageToFireBase(res.uri)
   }
 
   return (

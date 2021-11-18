@@ -52,25 +52,19 @@ const appSignUp = (email, password) => {
 }
 
 const uploadImageToFireBase = (uri) => {
-    return new Promise((res, rej) => {
-        console.log(uri)
+    return new Promise(async(res, rej) => {
+        // console.log(uri)
         const filename = uri.substring(uri.lastIndexOf('/') + 1).substring(0, 17)
         const storageRef = ref(storage, filename);
         // console.log(response)
-        fetch(uri)
-            .then(response => {
-                response.blob()
-                    .then(blob => {
-                        uploadBytes(storageRef, blob)
-                            .then((snapshot) => {
-                                // console.log(snapshot)
-                                res(snapshot)
-                                if (snapshot == null) {
-                                    rej("No snapshot")
-                                }
-                            }).catch((e) => { alert(e) })
-                    }).catch(e => { alert(e) })
-            }).catch(e => { alert(e) })
+        let response = await fetch(uri)
+        let blob = await response.blob()
+        let snapshot = await uploadBytes(storageRef, blob)
+            // console.log(snapshot)
+        res(snapshot)
+        if (snapshot == null) {
+            rej("No snapshot")
+        }
     })
 }
 
