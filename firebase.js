@@ -36,19 +36,21 @@ const getUrlByName = (fileName) => {
 }
 
 const appSignUp = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-            // Signed in
-            const user = userCredential.user
-            alert(user.email)
+    return new Promise(async(res, rej) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(userCredential => {
+                // Signed in
+                const user = userCredential.user
+                res(user.email)
 
-            // ...
-        })
-        .catch(error => {
-            const errorCode = error.code
-            const errorMessage = error.message
-            alert(error.message)
-        })
+                // ...
+            })
+            .catch(error => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(error.message)
+            })
+    })
 }
 
 const uploadImageToFireBase = (uri) => {
@@ -62,9 +64,6 @@ const uploadImageToFireBase = (uri) => {
         let snapshot = await uploadBytes(storageRef, blob)
             // console.log(snapshot)
         res(snapshot)
-        if (snapshot == null) {
-            rej("No snapshot")
-        }
     })
 }
 
