@@ -69,23 +69,25 @@ const resetPassword = (email) => {
     })
 }
 const getUrlByName = (fileName) => {
-    getDownloadURL(ref(storage, '1.png'))
-        .then(url => {
-            // `url` is the download URL for 'images/stars.jpg'
+    return new Promise(async(res, rej) => {
+        getDownloadURL(ref(storage, fileName))
+            .then(url => {
+                // `url` is the download URL for 'images/stars.jpg'
 
-            // This can be downloaded directly:
-            const xhr = new XMLHttpRequest()
-            xhr.responseType = 'blob'
-            xhr.onload = event => {
-                const blob = xhr.response
-            }
-            xhr.open('GET', url)
-            xhr.send()
-            alert(url)
-        })
-        .catch(error => {
-            alert(error)
-        })
+                // This can be downloaded directly:
+                const xhr = new XMLHttpRequest()
+                xhr.responseType = 'blob'
+                xhr.onload = event => {
+                    const blob = xhr.response
+                }
+                xhr.open('GET', url)
+                xhr.send()
+                res(url)
+            })
+            .catch(error => {
+                alert(error)
+            })
+    })
 }
 
 const uploadImageToFireBase = (uri) => {

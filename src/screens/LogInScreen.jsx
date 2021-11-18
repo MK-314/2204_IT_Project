@@ -10,7 +10,8 @@ import {
   appSignUp,
   appSignIn,
   resetPassword,
-  uploadImageToFireBase
+  uploadImageToFireBase,
+  getUrlByName
 } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 // STYLED:
@@ -50,6 +51,7 @@ const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [image, setImage] = useState(null)
+  const [fileNameFromFb, setfileName] = useState('')
 
   const handleSignUpUI = async () => {
     // getUrlByName('1.png')
@@ -74,7 +76,12 @@ const LogInScreen = ({ navigation }) => {
   const uploadImageUI = async () => {
     let pickedImage = await pickImage()
     let snapshot = await uploadImageToFireBase(pickedImage.uri)
-    alert(JSON.stringify(snapshot.metadata.fullPath))
+    alert(snapshot.metadata.fullPath)
+    setfileName(snapshot.metadata.fullPath)
+  }
+  const getImageUrlFirebase = async () => {
+    let fbImageUrl = await getUrlByName(fileNameFromFb)
+    setImage(fbImageUrl)
   }
 
   return (
@@ -99,6 +106,7 @@ const LogInScreen = ({ navigation }) => {
         <Btn onPress={resetPasswordUI} title='resetPasswordUI' />
         {/*  */}
         <Btn onPress={uploadImageUI} title='uploadImageUI' />
+        <Btn onPress={getImageUrlFirebase} title='getImageUrlFirebase' />
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
