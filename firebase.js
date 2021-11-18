@@ -5,7 +5,7 @@ import {
     signInWithEmailAndPassword,
     sendPasswordResetEmail
 } from "firebase/auth";
-import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, uploadBytes, deleteObject } from "firebase/storage";
 const firebaseConfig = {
     apiKey: 'AIzaSyDUkVrBOAiVEHWUmnZuHN4KP35plq-rX9k',
     authDomain: 'recipeapp2204.firebaseapp.com',
@@ -103,6 +103,18 @@ const uploadImageToFireBase = (uri) => {
         res(snapshot)
     })
 }
+const deleteImageFromFireBase = (fileName) => {
+    return new Promise(async(res, rej) => {
+        // Create a reference to the file to delete
+        const desertRef = ref(storage, fileName);
+        // Delete the file
+        deleteObject(desertRef).then(() => {
+            res("File deleted successfully")
+        }).catch((error) => {
+            rej("Uh-oh, an error occurred!")
+        });
+    })
+}
 
 // password:
 export { appSignUp }
@@ -111,3 +123,4 @@ export { resetPassword }
 // image:
 export { uploadImageToFireBase }
 export { getUrlByName }
+export { deleteImageFromFireBase }

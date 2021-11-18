@@ -11,7 +11,8 @@ import {
   appSignIn,
   resetPassword,
   uploadImageToFireBase,
-  getUrlByName
+  getUrlByName,
+  deleteImageFromFireBase
 } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 // STYLED:
@@ -79,9 +80,13 @@ const LogInScreen = ({ navigation }) => {
     alert(snapshot.metadata.fullPath)
     setfileName(snapshot.metadata.fullPath)
   }
-  const getImageUrlFirebase = async () => {
+  const getImageUrlFirebaseUI = async () => {
     let fbImageUrl = await getUrlByName(fileNameFromFb)
     setImage(fbImageUrl)
+  }
+  const deleteImageUI = async () => {
+    let deleteRes = await deleteImageFromFireBase(fileNameFromFb)
+    alert(deleteRes)
   }
 
   return (
@@ -106,7 +111,8 @@ const LogInScreen = ({ navigation }) => {
         <Btn onPress={resetPasswordUI} title='resetPasswordUI' />
         {/*  */}
         <Btn onPress={uploadImageUI} title='uploadImageUI' />
-        <Btn onPress={getImageUrlFirebase} title='getImageUrlFirebase' />
+        <Btn onPress={getImageUrlFirebaseUI} title='getImageUrlFirebaseUI' />
+        <Btn onPress={deleteImageUI} title='deleteImageUI' />
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
