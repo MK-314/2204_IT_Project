@@ -61,18 +61,24 @@ const LogInScreen = ({ navigation }) => {
     // getUrlByName('1.png')
     // setImage(res.uri)
     let emailResult = await appSignUp(email, password)
-    await FetchApi.post(
-      'https://recipe-ruby-api.herokuapp.com/api/users',
-      {
-        name: emailResult.split('@')[0],
-        email: emailResult
-      }
-    )
+    await FetchApi.post('https://recipe-ruby-api.herokuapp.com/api/users', {
+      name: emailResult.split('@')[0],
+      email: emailResult
+    })
     navigation.navigate('ProfileScreen')
   }
   const handleSignInUI = async () => {
-    await appSignIn(email, password)
-    navigation.navigate('ProfileScreen')
+    let temp = await appSignIn(email, password)
+    console.log(temp)
+    await FetchApi.getByEmail(
+      'https://recipe-ruby-api.herokuapp.com/api/users',
+      temp
+    )
+      .then(res => console.log(JSON.stringify(res)))
+      .catch(e => {
+        console.log(e + ' ERR')
+      })
+    // navigation.navigate('ProfileScreen')
   }
   const resetPasswordUI = async () => {
     resetPassword(email)

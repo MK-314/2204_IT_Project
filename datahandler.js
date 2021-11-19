@@ -36,5 +36,30 @@ class FetchApi {
                 })
         })
     }
+    static getByEmail(url, email) {
+        return new Promise(async(res, rej) => {
+            const sendObject = {
+                thisaction: "getByEmail",
+                email: email
+            }
+            const sendObjectStr = JSON.stringify(sendObject)
+            console.log(sendObject)
+            fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: sendObjectStr
+                        // "body": "{\"thisaction\":\"getByEmail\",\"email\":\"7@7.ru\"}"
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
 }
 export { FetchApi }
