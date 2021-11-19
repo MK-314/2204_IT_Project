@@ -4,7 +4,8 @@ import FoodCategory from './src/screens/FoodCategory'
 import HomeScreen from './src/screens/HomeScreen'
 import LogInScreen from './src/screens/LogInScreen'
 // warning:
-import { LogBox } from 'react-native';
+import { LogBox } from 'react-native'
+import ProfileScreen from './src/screens/ProfileScreen'
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core'])
 
@@ -12,7 +13,8 @@ const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     FoodCategory: FoodCategory,
-    LogInScreen: LogInScreen
+    LogInScreen: LogInScreen,
+    ProfileScreen: ProfileScreen
   },
   {
     initialRouteName: 'LogInScreen',

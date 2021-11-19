@@ -40,7 +40,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <ContainerSt>
       <RowSt>
-        
+        <Text>ok ok</Text>
       </RowSt>
     </ContainerSt>
   )
