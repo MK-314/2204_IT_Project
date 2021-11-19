@@ -64,7 +64,7 @@ const LogInScreen = ({ navigation }) => {
     let allUsers = await FetchApi.post(
       'https://recipe-ruby-api.herokuapp.com/api/users',
       {
-        name: 'TestName',
+        name: emailResult.split('@')[0],
         email: emailResult
       }
     )

@@ -11,7 +11,8 @@ class FetchApi {
                         // console.log(JSON.stringify(data))
                 })
                 .catch(err => {
-                    // console.log(JSON.stringify(err))
+                    rej(err)
+                        // console.log(JSON.stringify(err))
                 })
         })
     }
@@ -30,7 +31,8 @@ class FetchApi {
                         // console.log(JSON.stringify(data))
                 })
                 .catch(err => {
-                    // console.log(JSON.stringify(err))
+                    rej(err)
+                        // console.log(JSON.stringify(err))
                 })
         })
     }
