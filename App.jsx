@@ -15,7 +15,7 @@ const navigator = createStackNavigator(
     LogInScreen: LogInScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'LogInScreen',
     defaultNavigationOptions: {
       title: 'Recipe App'
     }

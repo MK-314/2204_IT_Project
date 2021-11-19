@@ -19,6 +19,7 @@ import { pickImage } from '../../imagePicker'
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { FetchApi } from '../../datahandler'
 
 const ContainerSt = styled.View`
   display: flex;
@@ -60,7 +61,14 @@ const LogInScreen = ({ navigation }) => {
     // getUrlByName('1.png')
     // setImage(res.uri)
     let emailResult = await appSignUp(email, password)
-    alert(emailResult)
+    let allUsers = await FetchApi.post(
+      'https://recipe-ruby-api.herokuapp.com/api/users',
+      {
+        name: 'TestName',
+        email: emailResult
+      }
+    )
+    alert(JSON.stringify(allUsers))
   }
   const handleSignInUI = async () => {
     let emailResult = await appSignIn(email, password)
