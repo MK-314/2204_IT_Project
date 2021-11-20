@@ -1,18 +1,6 @@
 // REACT:
 import React, { useState } from 'react'
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  Image
-} from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
+import { Pressable } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
