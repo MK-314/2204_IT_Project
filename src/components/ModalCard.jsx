@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native'
 import styled from 'styled-components/native'
-import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
 
@@ -43,7 +42,7 @@ const ModalCard = props => {
       }}
     >
       <CustomView style={styles.modalView}>
-        {/* INSIDE */}
+        {/* INSIDE START*/}
         <RowOfElements>
           <DirectionText>Put Directions here:</DirectionText>
         </RowOfElements>
@@ -55,9 +54,9 @@ const ModalCard = props => {
           />
         </RowOfElements>
         <Pressable onPress={() => props.visibleModalUp()}>
-          <SmallDefaultBtn text={'Hide Modal'} />
+          <SmallDefaultBtn text={'Save'} />
         </Pressable>
-        {/* END INSIDE */}
+        {/* INSIDE END */}
       </CustomView>
     </Modal>
   )
