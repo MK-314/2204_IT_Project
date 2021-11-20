@@ -17,7 +17,7 @@ import {
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import ModalCard from './../components/Modal'
+import ModalCard from '../components/ModalCard'
 
 const ContainerSt = styled.View`
   display: flex;
