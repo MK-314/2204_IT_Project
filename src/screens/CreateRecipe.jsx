@@ -27,15 +27,28 @@ const RowSt = styled.View`
   /*  */
   background-color: #78a5c4;
 `
+const CustomText = styled.Text`
+    margin-top: 40px;
+    font-size: 40px;
+`
 
-const ProfileScreen = ({ navigation }) => {
+const CreateRecipe = ({ navigation }) => {
 
   return (
     <ContainerSt>
       <RowSt>
-        
+        <CustomText>Name of Your Recipe</CustomText>
+      </RowSt>
+      <RowSt>
+        <CustomText>Ingredients</CustomText>
+      </RowSt>
+      <RowSt>
+        <CustomText>Directions</CustomText>
+      </RowSt>
+      <RowSt>
+        <CustomText>Image</CustomText>
       </RowSt>
     </ContainerSt>
   )
 }
-export default ProfileScreen
+export default CreateRecipe

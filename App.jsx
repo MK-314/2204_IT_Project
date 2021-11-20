@@ -7,6 +7,7 @@ import LogInScreen from './src/screens/LogInScreen'
 import { LogBox } from 'react-native'
 import ProfileScreen from './src/screens/ProfileScreen'
 import SingUpScreen from './src/screens/SingUpScreen'
+import CreateRecipe from './src/screens/CreateRecipe'
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core'])
 
@@ -16,10 +17,11 @@ const navigator = createStackNavigator(
     FoodCategory: FoodCategory,
     LogInScreen: LogInScreen,
     ProfileScreen: ProfileScreen,
-    SingUpScreen: SingUpScreen
+    SingUpScreen: SingUpScreen,
+    CreateRecipe: CreateRecipe
   },
   {
-    initialRouteName: 'SingUpScreen',
+    initialRouteName: 'CreateRecipe',
     defaultNavigationOptions: {
       title: 'Recipe App'
     }
