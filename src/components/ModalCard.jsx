@@ -3,6 +3,7 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native'
 import styled from 'styled-components/native'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
+import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
 
 const CustomView = styled.View`
   display: flex;
@@ -16,18 +17,19 @@ const CustomView = styled.View`
   min-height: 500px;
 `
 
-const DefaultBtn = styled(RowOfElements)`
-  background-color: ${ConstantsRecipe.green};
-  margin-top: 20px;
-  width: 40%;
-  border-radius: 20px;
-  padding: 10px;
-`
-const BtnText = styled.Text`
-  color: #fff;
-`
 const DirectionText = styled.Text`
   font-size: 25px;
+`
+const InputDirections = styled.TextInput`
+  /* min-height: 300px; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 12px;
+  border-width: 1px;
+  padding: 10px;
+  justify-content: flex-start;
+  height: 350px;
 `
 
 const ModalCard = props => {
@@ -45,12 +47,15 @@ const ModalCard = props => {
         <RowOfElements>
           <DirectionText>Put Directions here:</DirectionText>
         </RowOfElements>
+        <RowOfElements>
+          <InputDirections style={{ textAlignVertical: 'top',}}
+            placeholder={'Recipe directions ...'}
+            multiline={true}
+            // numberOfLines={25}
+          />
+        </RowOfElements>
         <Pressable onPress={() => props.visibleModalUp()}>
-          <RowOfElements>
-            <DefaultBtn>
-              <BtnText>Hide Modal</BtnText>
-            </DefaultBtn>
-          </RowOfElements>
+          <SmallDefaultBtn text={'Hide Modal'} />
         </Pressable>
         {/* END INSIDE */}
       </CustomView>
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 4,
     elevation: 17
+    
   }
 })
 
