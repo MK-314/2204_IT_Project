@@ -1,37 +1,27 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
+import { Dimensions } from 'react-native'
 import styled from 'styled-components/native'
+import { ConstantsRecipe } from '../../../constants'
+import { RowOfElements } from '../small_elements/RowOfElements'
+const { width, height } = Dimensions.get('window')
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
+const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
-  /* align-items: center; */
-  width: 100%;
-  /*  */
-  position: relative;
-  margin-top: 10px;
-
+  margin-top: ${height * 0.012875}px;
   overflow: hidden;
-  /*  */
-  /* background-color: #78a5c4; */
 `
-
 const ListItem = styled.Text`
   display: flex;
-  font-size: 25px;
+  font-size: ${height * 0.0321875}px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
-  margin-left: 45px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
+  margin-left: ${width * 0.115}px;
 `
-
 const IngredientsList = props => {
   return (
     <RowSt>
-      <ListItem>
-        {props.name}
-      </ListItem>
+      <ListItem>{props.name}</ListItem>
     </RowSt>
   )
 }

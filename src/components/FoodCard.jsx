@@ -1,74 +1,51 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
+import { ConstantsRecipe } from '../../constants'
+import { RowOfElements } from './small_elements/RowOfElements'
+import { MainHeader, WhiteRow } from './small_elements/MainHeader'
+
+const { width, height } = Dimensions.get('window')
 
 const Box = styled.View`
   position: relative;
-  width: 300px;
-  height: 500px;
+  width: ${width * 0.69}px;
+  height: ${height * 0.515}px;
   border-radius: 50px;
-  margin-right: 10px;
-  margin-left: 10px;
-
-  /* background-color: #78a5c4; */
+  margin-top: ${height * 0.0515}px;
+  margin-right: ${width * 0.025555}px;
+  margin-left: ${width * 0.076666}px;
 `
 const FoodItem = styled.Image`
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  width: 300px;
-  height: 500px;
+  width: ${width * 0.69}px;
+  height: ${height * 0.515}px;
   border-radius: 50px;
 `
 const IconSt = styled(Icon)`
   display: flex;
   position: absolute;
-  top: 30px;
-  left: 30px;
-  font-size: 45px;
-  color: #2ec269;
+  top:  ${height * 0.038625}px;
+  left: ${width * 0.076666}px;
+  font-size: ${height * 0.038625}px;
+  color: ${props =>
+    props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+  text-shadow: 1px 1px 1px #000000;
   z-index: 1;
 `
-const EmptyIcon = styled(Icon)`
-  display: flex;
-  position: absolute;
-  top: 110px;
-  left: 20px;
-  font-size: 250px;
-  color: transparent;
-  font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
-  z-index: 1;
-`
-const TextSt = styled.Text`
-  display: flex;
-  position: absolute;
-  bottom: 50px;
-  left: 30px;
-  font-size: 55px;
-  font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
-  z-index: 1;
-`
-
 const TextNum = styled.Text`
-  display: flex;
   position: absolute;
-  top: 27px;
-  right: 175px;
-  font-size: 35px;
+  top: ${height * 0.02575}px;
+  right: ${width * 0.3961111}px;
+  font-size: ${height * 0.0450625}px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 
@@ -77,15 +54,11 @@ const FoodCard = props => {
   const [number, setnumber] = useState(props.number)
 
   return (
-    <Box>
-      <EmptyIcon
-       name={'hearto'}
-        onPress={() => {
-          props.toFoodCategory()
-        }}
-      />
+    <Box style={styles.customShadow}>
       <TextNum>{number}</TextNum>
-      <TextSt>{props.textFood}</TextSt>
+      <WhiteRow style={styles.customShadow}>
+        <MainHeader>{props.textFood}</MainHeader>
+      </WhiteRow>
       <IconSt
         name={iconName}
         onPress={() => {
@@ -106,6 +79,18 @@ const FoodCard = props => {
     </Box>
   )
 }
+const styles = StyleSheet.create({
+  customShadow: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 17
+  }
+})
 
 export default FoodCard
-export {TextNum}
+export { TextNum }

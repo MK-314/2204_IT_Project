@@ -1,49 +1,48 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
+import { StyleSheet,Dimensions } from 'react-native'
 import styled from 'styled-components/native'
-import Icon from 'react-native-vector-icons/AntDesign'
-import BackIcon from 'react-native-vector-icons/Ionicons'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
-import { TextNum } from '../FoodCard'
+import { ConstantsRecipe } from '../../../constants'
+import { RowOfElements } from '../small_elements/RowOfElements'
+const { width, height } = Dimensions.get('window')
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
+const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
-  /* align-items: center; */
-  width: 100%;
-  /* min-height: 200px; */
-  /*  */
-  position: relative;
-  margin-top: 10px;
-
-  overflow: hidden;
-  /*  */
-  /* background-color: #78a5c4; */
 `
 const BlackAria = styled.View`
   display: flex;
   background-color: black;
   border-radius: 10px;
-  margin-left: 45px;
+  margin-left: ${width * 0.115}px;
+  margin-bottom: ${height * 0.012875}px;
 `
 const IngredientsText = styled.Text`
-  color: #fff;
-  font-size: 25px;
-  padding: 5px 15px;
+  color: ${ConstantsRecipe.white};
+  font-size: ${height * 0.023175}px;
+  padding:  ${height * 0.00643}px ${width * 0.038333}px;
+  text-transform: uppercase;
 `
 
 const Ingredients = props => {
   return (
     <RowSt>
-      <BlackAria>
+      <BlackAria style={styles.customShadow}>
         <IngredientsText>Ingredients:</IngredientsText>
       </BlackAria>
     </RowSt>
   )
 }
+
+const styles = StyleSheet.create({
+  customShadow: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 17
+  }
+})
 
 export default Ingredients

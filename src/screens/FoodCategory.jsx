@@ -1,73 +1,73 @@
-import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { FlatList } from 'react-native-gesture-handler'
-
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
-import { FooterSt } from './HomeScreen'
 import SmallFoodCard from './../components/foodCategory/SmallFoodCard'
 import Ingredients from './../components/foodCategory/Ingredients'
-import IngredientsList from './../components/foodCategory/IngredientsList'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
+import { FooterDefault } from '../components/small_elements/FooterDefault'
+import { Dimensions, ScrollView } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
-  background-color: #f1f1f4;
+const ContainerSt = styled(ContainerDefault)`
+  background-color: ${ConstantsRecipe.blue};
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  /* align-items: center; */
-  width: 100%;
-  height: 260px;
-  /*  */
-  position: relative;
-  margin-top: 10px;
-
+const RowSt = styled(RowOfElements)`
+  min-height: ${height * 0.0012875 * 200}px;
+`
+const Box = styled.View`
+  width: ${width * 0.0025555 * 350}px;
+  height: ${height * 0.0012875 * 250}px;
   overflow: hidden;
-  /*  */
-  /* background-color: #78a5c4; */
+  border-color: ${ConstantsRecipe.green};
+  border-left-width: 3px;
+  border-right-width: 3px;
 `
-
+const MainText = styled.Text`
+  font-size: ${height * 0.0012875 * 17}px;
+  font-style: italic;
+  line-height: ${height * 0.0012875 * 23}px;
+  background-color: ${ConstantsRecipe.blue};
+  padding-left: ${width * 0.0025555 * 10}px;
+`
 const FoodCategory = ({ navigation }) => {
-  const ingreds = [
-    { number: 1, name: '1 pound ground lean beef' },
-    { number: 2, name: '1 large egg' },
-    { number: 3, name: '½ cup minced onion' },
-    { number: 4, name: '¼ cup fine dried bread crumbs' },
-    { number: 5, name: '1 tablespoon Worcestershire' },
-    { number: 6, name: '1 or 2 cloves garlic, peeled and minced' },
-    { number: 7, name: 'About 1/2 teaspoon salt' },
-    { number: 8, name: 'About 1/4 teaspoon pepper' },
-    { number: 9, name: '4 hamburger buns (4 in. wide), split' },
-    { number: 10, name: 'About 1/4 cup mayonnaise' },
-    { number: 11, name: 'About 1/4 cup ketchup' }
-  ]
+  const item = navigation.getParam('item')
+  const [arrOfIngredients, setArrOfIngredients] = useState([])
+  useEffect(() => {
+    setArrOfIngredients(item.ingredients.split('\n'))
+  }, [])
   return (
     <ContainerSt>
-      <SmallFoodCard toHomeScreen={()=>{navigation.navigate('Home')}}/>
+      <SmallFoodCard
+        item={item}
+        toHomeScreen={() => {
+          navigation.navigate('Home')
+        }}
+      />
       <Ingredients />
       <RowSt>
-        <FlatList
-          vertical
-          data={ingreds}
-          keyExtractor={item => item.number}
-          renderItem={({ item }) => {
-            return <IngredientsList number={item.number} name={item.name} />
+        <Box>
+          <FlatList
+            vertical
+            data={arrOfIngredients}
+            keyExtractor={item => Math.random()}
+            renderItem={({ item }) => {
+              return <MainText>{item}</MainText>
+            }}
+            contentContainerStyle={{ paddingBottom: 200 }}
+          />
+        </Box>
+      </RowSt>
+      <FooterDefault>
+        <NavIcons
+          iconName='recipes'
+          toScreen={screen => {
+            navigation.navigate(screen)
           }}
         />
-      </RowSt>
-      <FooterSt>
-        <NavIcons />
-      </FooterSt>
+      </FooterDefault>
     </ContainerSt>
   )
 }

@@ -1,51 +1,65 @@
 // REACT:
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, Image, Button } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
-// FIRE_BASE:
-import { FireBaseAuthSystem, FireBaseImageHandler } from '../../firebase'
-import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
+import { FireBaseAuthSystem } from '../../firebase'
 import { FetchApi } from '../../datahandler'
+import { Pressable } from 'react-native'
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
-  background-color: #f1f1f4;
+const ContainerSt = styled(ContainerDefault)`
+  background-color: ${ConstantsRecipe.blue};
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /*  */
-  background-color: #78a5c4;
+const RowSt = styled(RowOfElements)`
+  background-color: ${ConstantsRecipe.lightBlue};
 `
 const TextInputSt = styled.TextInput`
   display: flex;
-  margin-top: 15px;
-  background-color: #fff;
+  margin-top: ${height * 0.0012875 * 15}px;
+  background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: 50px;
+  height: ${height * 0.0012875 * 50}px;
   border-radius: 100px;
 `
 const CustomText = styled.Text`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
 `
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    AsyncStorage.getItem('user_id')
+      .then(id => {
+        if (id) {
+          navigation.navigate('Home')
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [])
+
+  const handleSingIn = async () => {
+    FireBaseAuthSystem.appSignIn(email, password)
+      .then(async res => {
+        let user = await FetchApi.getUserByEmail(res)
+        let user_id = user[0].id
+        await AsyncStorage.setItem('user_id', `${user_id}`)
+        navigation.navigate('Home')
+      })
+      .catch(e => {
+        'Wrong credentials. Try again or reset password. Error: ' + e
+      })
+  }
 
   return (
     <ContainerSt>
@@ -53,25 +67,40 @@ const LogInScreen = ({ navigation }) => {
         <CustomText>Sign In</CustomText>
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Email' />
+        <TextInputSt
+          value={email}
+          onChangeText={newValue => setEmail(newValue)}
+          placeholder={'Enter your email ...'}
+        />
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Password' />
+        <TextInputSt
+          value={password}
+          onChangeText={newValue => setPassword(newValue)}
+          placeholder={'Enter your password ...'}
+        />
       </RowSt>
       <RowSt>
         <Text>Forgot password?</Text>
       </RowSt>
       <RowSt>
         <Button
-          onPress={()=>{}}
+          onPress={handleSingIn}
           title='Log In'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
         />
       </RowSt>
-      <RowSt>
-        <Text>Don't have an Account? Sing up</Text>
-      </RowSt>
+
+      <Pressable
+        onPress={() => {
+          navigation.navigate('SingUpScreen')
+        }}
+      >
+        <RowSt>
+          <Text>Don't have an Account? Sing up</Text>
+        </RowSt>
+      </Pressable>
     </ContainerSt>
   )
 }

@@ -29,26 +29,28 @@ class FireBaseAuthSystem {
                     const user = userCredential.user
                     AsyncStorage.setItem('user', JSON.stringify(user))
                     AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {
-                    alert(error.message)
+                    rej(error.message)
                 })
         })
     }
 
-    static appSignUp(email, password) {
+    static appSignIn(email, password) {
         return new Promise(async(res, rej) => {
-            createUserWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, password)
                 .then(userCredential => {
                     // Signed in
                     const user = userCredential.user
                     AsyncStorage.setItem('user', JSON.stringify(user))
                     AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {
-                    alert(error.message)
+                    rej(error.message)
                 })
         })
     }
@@ -64,7 +66,6 @@ class FireBaseAuthSystem {
         })
     }
 }
-
 
 class FireBaseImageHandler {
     static getUrlByName(fileName) {
@@ -93,6 +94,16 @@ class FireBaseImageHandler {
             let blob = await response.blob()
             let snapshot = await uploadBytes(storageRef, blob)
             res(snapshot)
+        })
+    }
+    static getUrlOfImageFireBase(filename) {
+        return new Promise(async(res, rej) => {
+            const storageRef = ref(storage, filename);
+            getDownloadURL(storageRef)
+                .then((url) => {
+                    res(url)
+                })
+                .catch(e => { console.log("ERROR GET URL: " + e) })
         })
     }
     static deleteImageFromFireBase(fileName) {

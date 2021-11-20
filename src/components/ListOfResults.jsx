@@ -1,57 +1,49 @@
-import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
-import styled from 'styled-components/native'
-import Icon from 'react-native-vector-icons/AntDesign'
+import React, { useState, useEffect } from 'react'
+import {  Pressable} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import { Shadow } from 'react-native-shadow-2'
-import FoodCard from './FoodCard';
+import FoodCard from './FoodCard'
+import { FetchApi } from '../../datahandler'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 400px;
-  /*  */
-  position: relative;
-  overflow: hidden;
-  /*  */
-  /* background-color: #78a5c4; */
-`
+const ListOfResults = props => {
+  const [itemsByUser, setItemsByUser] = useState([])
 
-const ListOfResults = (props) => {
-  const images = [
-    {
-      url:
-        'https://detoxinista.com/wp-content/uploads/2020/10/ginger-tea-recipe.jpg',
-        number: 17,
-      textFood: 'Ginger tea'
-    },
-    {
-      url: 'https://images.mktw.net/im-398488?width=1280&size=1',
-      number: 21,
-      textFood: 'Burger'
+  useEffect(async () => {
+    if (props.search == '' || props.search == " " || !props.search) {
+      let user_id = await AsyncStorage.getItem('user_id')
+      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
+      setItemsByUser(itemsInUseEffect)
+    } else {
+      let searchRes = itemsByUser.filter(it =>
+        it.name.toLocaleLowerCase().includes(props.search.toLocaleLowerCase())
+      )
+      setItemsByUser(searchRes)
     }
-  ]
+  }, [props.search])
+
   return (
-    <RowSt>
+    <>
       <FlatList
         horizontal
-        data={images}
-        keyExtractor={item => item.url}
+        data={itemsByUser}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => {
           return (
-            <FoodCard
-              number={item.number} 
-              textFood={item.textFood}
-              url={item.url}
-              toFoodCategory={()=>{props.toFoodCategory()}}
-            />
+            <Pressable
+              onPress={() => {
+                props.toFoodCategoryById(item)
+              }}
+            >
+              <FoodCard
+                number={item.id}
+                textFood={item.name}
+                url={item.imageUrl}
+              />
+            </Pressable>
           )
         }}
       />
-    </RowSt>
+    </>
   )
 }
 
