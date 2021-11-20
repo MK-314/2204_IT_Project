@@ -28,7 +28,7 @@ const RowSt = styled.View`
   background-color: #78a5c4;
 `
 
-const XXX = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
 
   return (
     <ContainerSt>
@@ -38,4 +38,4 @@ const XXX = ({ navigation }) => {
     </ContainerSt>
   )
 }
-export default XXX
+export default ProfileScreen
