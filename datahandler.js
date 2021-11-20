@@ -1,7 +1,7 @@
 class FetchApi {
-    static getAll(url) {
+    static getAllUsers() {
         return new Promise(async(res, rej) => {
-            fetch(url, {
+            fetch('https://recipe-ruby-api.herokuapp.com/api/users', {
                     method: 'GET',
                     headers: {}
                 })
@@ -16,9 +16,9 @@ class FetchApi {
                 })
         })
     }
-    static post(url, thisObject) {
+    static createUser(thisObject) {
         return new Promise(async(res, rej) => {
-            fetch(url, {
+            fetch('https://recipe-ruby-api.herokuapp.com/api/users', {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -36,12 +36,13 @@ class FetchApi {
                 })
         })
     }
-    static getByEmail(url, email) {
+    static getUserByEmail(email) {
         return new Promise(async(res, rej) => {
-            fetch(url + "?thisaction=getByEmail&email=" + email, {
-                    method: "GET",
-                    headers: {},
-                })
+            fetch('https://recipe-ruby-api.herokuapp.com/api/users' +
+                    "?thisaction=getByEmail&email=" + email, {
+                        method: "GET",
+                        headers: {},
+                    })
                 .then(response => response.json())
                 .then(data => {
                     res(data)

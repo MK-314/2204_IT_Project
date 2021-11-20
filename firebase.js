@@ -20,95 +20,99 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage();
 
+class FireBaseAuthSystem {
+    static appSignUp(email, password) {
+        return new Promise(async(res, rej) => {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    // Signed in
+                    const user = userCredential.user
+                    AsyncStorage.setItem('user', JSON.stringify(user))
+                    AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    res(user.email)
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
+        })
+    }
 
-const appSignUp = (email, password) => {
-    return new Promise(async(res, rej) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                // Signed in
-                const user = userCredential.user
-                AsyncStorage.setItem('user', JSON.stringify(user))
-                AsyncStorage.setItem('auth', JSON.stringify(auth))
-                res(user.email)
-            })
-            .catch(error => {
-                alert(error.message)
-            })
-    })
+    static appSignUp(email, password) {
+        return new Promise(async(res, rej) => {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    // Signed in
+                    const user = userCredential.user
+                    AsyncStorage.setItem('user', JSON.stringify(user))
+                    AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    res(user.email)
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
+        })
+    }
+    static resetPassword(email) {
+        return new Promise((res, rej) => {
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    res("Succsess")
+                })
+                .catch((error) => {
+                    rej(error.message)
+                });
+        })
+    }
 }
-const appSignIn = (email, password) => {
-    return new Promise(async(res, rej) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                // Signed in
-                const user = userCredential.user
-                AsyncStorage.setItem('user', JSON.stringify(user))
-                AsyncStorage.setItem('auth', JSON.stringify(auth))
-                res(user.email)
-            })
-            .catch(error => {
-                alert(error.message)
-            })
-    })
-}
-const resetPassword = (email) => {
-    return new Promise((res, rej) => {
-        sendPasswordResetEmail(auth, email)
-            .then(() => {
-                res("Succsess")
-            })
-            .catch((error) => {
-                rej(error.message)
+
+
+class FireBaseImageHandler {
+    static getUrlByName(fileName) {
+        return new Promise(async(res, rej) => {
+            getDownloadURL(ref(storage, fileName))
+                .then(url => {
+                    const xhr = new XMLHttpRequest()
+                    xhr.responseType = 'blob'
+                    xhr.onload = event => {
+                        const blob = xhr.response
+                    }
+                    xhr.open('GET', url)
+                    xhr.send()
+                    res(url)
+                })
+                .catch(error => {
+                    alert(error)
+                })
+        })
+    }
+    static uploadImageToFireBase(uri) {
+        return new Promise(async(res, rej) => {
+            const filename = uri.substring(uri.lastIndexOf('/') + 1).substring(0, 17)
+            const storageRef = ref(storage, filename);
+            let response = await fetch(uri)
+            let blob = await response.blob()
+            let snapshot = await uploadBytes(storageRef, blob)
+            res(snapshot)
+        })
+    }
+    static deleteImageFromFireBase(fileName) {
+        return new Promise(async(res, rej) => {
+            // Create a reference to the file to delete
+            const desertRef = ref(storage, fileName);
+            // Delete the file
+            deleteObject(desertRef).then(() => {
+                res("File deleted successfully")
+            }).catch((error) => {
+                rej("Uh-oh, an error occurred!")
             });
-    })
-}
-const getUrlByName = (fileName) => {
-    return new Promise(async(res, rej) => {
-        getDownloadURL(ref(storage, fileName))
-            .then(url => {
-                const xhr = new XMLHttpRequest()
-                xhr.responseType = 'blob'
-                xhr.onload = event => {
-                    const blob = xhr.response
-                }
-                xhr.open('GET', url)
-                xhr.send()
-                res(url)
-            })
-            .catch(error => {
-                alert(error)
-            })
-    })
+        })
+    }
 }
 
-const uploadImageToFireBase = (uri) => {
-    return new Promise(async(res, rej) => {
-        const filename = uri.substring(uri.lastIndexOf('/') + 1).substring(0, 17)
-        const storageRef = ref(storage, filename);
-        let response = await fetch(uri)
-        let blob = await response.blob()
-        let snapshot = await uploadBytes(storageRef, blob)
-        res(snapshot)
-    })
-}
-const deleteImageFromFireBase = (fileName) => {
-    return new Promise(async(res, rej) => {
-        // Create a reference to the file to delete
-        const desertRef = ref(storage, fileName);
-        // Delete the file
-        deleteObject(desertRef).then(() => {
-            res("File deleted successfully")
-        }).catch((error) => {
-            rej("Uh-oh, an error occurred!")
-        });
-    })
-}
 
-// password:
-export { appSignUp }
-export { appSignIn }
-export { resetPassword }
-// image:
-export { uploadImageToFireBase }
-export { getUrlByName }
-export { deleteImageFromFireBase }
+
+
+
+
+export { FireBaseAuthSystem }
+export { FireBaseImageHandler }

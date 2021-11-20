@@ -43,14 +43,17 @@ const CustomText = styled.Text`
   font-size: 50px;
 `
 
-const LogInScreen = ({ navigation }) => {
+const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   return (
     <ContainerSt>
       <RowSt>
-        <CustomText>Sign In</CustomText>
+        <CustomText>Sign Up</CustomText>
+      </RowSt>
+      <RowSt>
+        <TextInputSt placeholder='Name' />
       </RowSt>
       <RowSt>
         <TextInputSt placeholder='Email' />
@@ -59,20 +62,17 @@ const LogInScreen = ({ navigation }) => {
         <TextInputSt placeholder='Password' />
       </RowSt>
       <RowSt>
-        <Text>Forgot password?</Text>
-      </RowSt>
-      <RowSt>
         <Button
           onPress={()=>{}}
-          title='Log In'
+          title='Register'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
         />
       </RowSt>
       <RowSt>
-        <Text>Don't have an Account? Sing up</Text>
+        <Text>Have an Account? Sing In</Text>
       </RowSt>
     </ContainerSt>
   )
 }
-export default LogInScreen
+export default SingUpScreen
