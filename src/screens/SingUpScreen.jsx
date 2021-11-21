@@ -37,12 +37,13 @@ const CustomText = styled.Text`
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
 
   const handleSingUp = async () => {
     let data = await FetchApi.createUser({
-      name:"1",
-      email:'2',
-      avatar:"ok ok"
+      name: '1',
+      email: '2',
+      avatar: 'ok ok'
     })
   }
 
@@ -52,13 +53,25 @@ const SingUpScreen = ({ navigation }) => {
         <CustomText>Sign Up</CustomText>
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Name' />
+        <TextInputSt
+          value={name}
+          onChangeText={newValue => setName(newValue)}
+          placeholder={'Enter your name ...'}
+        />
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Email' />
+        <TextInputSt
+          value={email}
+          onChangeText={newValue => setEmail(newValue)}
+          placeholder={'Enter your name ...'}
+        />
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Password' />
+        <TextInputSt
+          value={password}
+          onChangeText={newValue => setPassword(newValue)}
+          placeholder={'Enter your password ...'}
+        />
       </RowSt>
       <RowSt>
         <Button
