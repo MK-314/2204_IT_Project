@@ -13,15 +13,15 @@ LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core'])
 
 const navigator = createStackNavigator(
   {
+    SingUpScreen: SingUpScreen,
+    LogInScreen: LogInScreen,
     Home: HomeScreen,
     FoodCategory: FoodCategory,
-    LogInScreen: LogInScreen,
     ProfileScreen: ProfileScreen,
-    SingUpScreen: SingUpScreen,
     CreateRecipe: CreateRecipe
   },
   {
-    initialRouteName: 'CreateRecipe',
+    initialRouteName: 'SingUpScreen',
     defaultNavigationOptions: {
       title: 'Recipe App'
     }

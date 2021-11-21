@@ -40,11 +40,16 @@ const SingUpScreen = ({ navigation }) => {
   const [name, setName] = useState('')
 
   const handleSingUp = async () => {
-    let data = await FetchApi.createUser({
-      name: '1',
-      email: '2',
-      avatar: 'ok ok'
+    let resEmail = await FireBaseAuthSystem.appSignUp(email,password)
+    await FetchApi.createUser({
+      name: name,
+      email: resEmail,
+      avatar: ''
     })
+    .then(res=>{
+      alert('Welcome!')
+    }).catch(e=>{alert('User was not created')})
+    navigation.navigate('CreateRecipe')
   }
 
   return (
@@ -63,7 +68,7 @@ const SingUpScreen = ({ navigation }) => {
         <TextInputSt
           value={email}
           onChangeText={newValue => setEmail(newValue)}
-          placeholder={'Enter your name ...'}
+          placeholder={'Enter your email ...'}
         />
       </RowSt>
       <RowSt>
