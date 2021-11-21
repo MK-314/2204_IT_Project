@@ -6,7 +6,6 @@ import { RowOfElements } from './small_elements/RowOfElements'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
 const CustomView = styled.View`
   display: flex;
   flex-direction: column;
@@ -35,10 +34,10 @@ const InputDirections = styled.TextInput`
 `
 
 const ModalCard = props => {
+  const [inputValue, setInputValue] = useState('')
 
-  const getStorXXX = async () => {
-    await AsyncStorage.setItem('recipeName')
-    alert(user)
+  const storeInput = async () => {
+    await AsyncStorage.setItem('recipeName', inputValue)
     props.visibleModalUp()
   }
 
@@ -57,13 +56,17 @@ const ModalCard = props => {
           <DirectionText>{props.modalText}</DirectionText>
         </RowOfElements>
         <RowOfElements>
-          <InputDirections style={{ textAlignVertical: 'top',}}
+          <InputDirections
+            style={{ textAlignVertical: 'top' }}
             placeholder={'Type here ...'}
             multiline={true}
-            // numberOfLines={25}
+            autoCapitalize='none'
+            autoCorrect={false}
+            value={inputValue}
+            onChangeText={(newValue = setInputValue(newValue))}
           />
         </RowOfElements>
-        <Pressable onPress={getStorXXX}>
+        <Pressable onPress={storeInput}>
           <SmallDefaultBtn text={'Save'} />
         </Pressable>
         {/* INSIDE END */}
