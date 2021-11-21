@@ -8,8 +8,6 @@ const RowOfElements = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  /*  */
-  /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 
 export { RowOfElements }
