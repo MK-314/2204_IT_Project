@@ -58,7 +58,7 @@ const SmallTitleBox = styled(TitleBox)`
   margin-top: 0px;
   margin-bottom: 0px;
 `
-const IngredientsText = styled.Text`
+const TextOfSmallBox = styled.Text`
   font-size: 20px;
   padding: 25px 10px;
 `
@@ -81,19 +81,19 @@ const CreateRecipe = ({ navigation }) => {
       <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
         <SmallTitleBox style={styles.elementShadow}>
-          <IngredientsText>Ingredients</IngredientsText>
+          <TextOfSmallBox>Ingredients</TextOfSmallBox>
         </SmallTitleBox>
       </ViewArrowAndText>
       <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
         <SmallTitleBox style={styles.elementShadow}>
-          <IngredientsText>Directions</IngredientsText>
+          <TextOfSmallBox>Directions</TextOfSmallBox>
         </SmallTitleBox>
       </ViewArrowAndText>
       <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
         <SmallTitleBox style={styles.elementShadow}>
-          <IngredientsText>Image</IngredientsText>
+          <TextOfSmallBox>Image</TextOfSmallBox>
         </SmallTitleBox>
       </ViewArrowAndText>
       <RowSt>
