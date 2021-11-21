@@ -12,7 +12,7 @@ const DefaultBtn = styled(RowOfElements)`
   padding: 10px;
 `
 const BtnText = styled.Text`
-  color: #fff;
+  color: ${ConstantsRecipe.white};
 `
 
 const SmallDefaultBtn = props => {

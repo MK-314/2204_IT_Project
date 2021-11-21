@@ -10,7 +10,6 @@ import { RowOfElements } from './small_elements/RowOfElements'
 const RowSt = styled(RowOfElements)`
   min-height: 400px;
   overflow: hidden;
-  /* background-color: #78a5c4; */
 `
 
 const ListOfResults = (props) => {

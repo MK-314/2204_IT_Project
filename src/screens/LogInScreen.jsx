@@ -7,17 +7,18 @@ import styled from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
 
 const ContainerSt = styled(ContainerDefault)`
-  background-color: #f1f1f4;
+  background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-  background-color: #78a5c4;
+    background-color: ${ConstantsRecipe.lightBlue};
 `
 const TextInputSt = styled.TextInput`
   display: flex;
   margin-top: 15px;
-  background-color: #fff;
+  background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
   height: 50px;
   border-radius: 100px;

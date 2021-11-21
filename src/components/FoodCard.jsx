@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native-gesture-handler'
+import { ConstantsRecipe } from '../../constants'
 
 const Box = styled.View`
   position: relative;
@@ -15,7 +16,6 @@ const Box = styled.View`
   margin-right: 10px;
   margin-left: 10px;
 
-  /* background-color: #78a5c4; */
 `
 const FoodItem = styled.Image`
   display: flex;
@@ -32,9 +32,9 @@ const IconSt = styled(Icon)`
   top: 30px;
   left: 30px;
   font-size: 45px;
-  color: #2ec269;
+  color: ${ConstantsRecipe.green};
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const EmptyIcon = styled(Icon)`
@@ -45,7 +45,7 @@ const EmptyIcon = styled(Icon)`
   font-size: 250px;
   color: transparent;
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const TextSt = styled.Text`
@@ -55,8 +55,8 @@ const TextSt = styled.Text`
   left: 30px;
   font-size: 55px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 
@@ -67,8 +67,8 @@ const TextNum = styled.Text`
   right: 175px;
   font-size: 35px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 
@@ -79,7 +79,7 @@ const FoodCard = props => {
   return (
     <Box>
       <EmptyIcon
-       name={'hearto'}
+        name={'hearto'}
         onPress={() => {
           props.toFoodCategory()
         }}
@@ -108,4 +108,4 @@ const FoodCard = props => {
 }
 
 export default FoodCard
-export {TextNum}
+export { TextNum }

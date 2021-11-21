@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/native'
+import { ConstantsRecipe } from '../../../constants'
 import { RowOfElements } from '../small_elements/RowOfElements'
 
 const RowSt = styled(RowOfElements)`
@@ -7,7 +8,7 @@ const RowSt = styled(RowOfElements)`
   margin-top: 10px;
   overflow: hidden;
   /*  */
-  /* background-color: #78a5c4; */
+  /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 const BlackAria = styled.View`
   display: flex;
@@ -16,7 +17,7 @@ const BlackAria = styled.View`
   margin-left: 45px;
 `
 const IngredientsText = styled.Text`
-  color: #fff;
+  color: ${ConstantsRecipe.white};
   font-size: 25px;
   padding: 5px 15px;
 `

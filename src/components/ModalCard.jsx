@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native'
 import styled from 'styled-components/native'
+import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
 
 const CustomView = styled.View`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${ConstantsRecipe.white};
   border-radius: 20px;
   padding: 35px;
   margin-top: 100px;

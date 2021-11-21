@@ -8,9 +8,10 @@ import Ingredients from './../components/foodCategory/Ingredients'
 import IngredientsList from './../components/foodCategory/IngredientsList'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
 
 const ContainerSt = styled(ContainerDefault)`
-  background-color: #f1f1f4;
+  background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
@@ -18,7 +19,7 @@ const RowSt = styled(RowOfElements)`
   margin-top: 10px;
   overflow: hidden;
   /*  */
-  /* background-color: #78a5c4; */
+  /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 
 const FoodCategory = ({ navigation }) => {

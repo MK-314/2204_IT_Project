@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, Keyboard } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
 
 const RowSt = styled(RowOfElements)`
   min-height: 70px;
@@ -13,7 +14,7 @@ const RowSt = styled(RowOfElements)`
 `
 const TextInputSt = styled.TextInput`
   display: flex;
-  background-color: #fff;
+  background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
   height: 50px;
   margin-right: -55px;
@@ -25,7 +26,7 @@ const IconSt = styled(Icon)`
   align-self: center;
   padding: 10px;
   font-size: 30px;
-  color: #2ec269;
+  color: ${ConstantsRecipe.green};
 `
 
 const SearchField = props => {

@@ -6,6 +6,7 @@ import IconFavorite from 'react-native-vector-icons/AntDesign'
 import IconProfile from 'react-native-vector-icons/AntDesign'
 import { ScrollView } from 'react-native-gesture-handler'
 import { RowOfElements } from './small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
 
 // const BoxSt = styled.View``
 
@@ -14,33 +15,31 @@ const RowSt = styled(RowOfElements)`
   justify-content: space-evenly;
   align-items: stretch;
   /*  */
-  background-color: #c6cac687;
 `
 
 const IconFavoriteSt = styled(IconFavorite)`
   display: flex;
   align-self: center;
   padding: 10px;
-  font-size: ${props=>props.big ? '85px' : '65px'};
-  color: ${props=>props.big ? 'red' : '#ccc'};
-  text-shadow: #000 1px 3px 5px;
-  margin-top: ${props=>props.big ? '-20px' : '0'};
+  font-size: ${props => (props.big ? '85px' : '65px')};
+  color: ${props => (props.big ? 'red' : ConstantsRecipe.white)};
+  text-shadow: ${ConstantsRecipe.text_shadow};
+  margin-top: ${props => (props.big ? '-20px' : '0')};
 `
 const IconBookSt = styled(IconBook)`
   display: flex;
   align-self: center;
   padding: 10px;
   font-size: 65px;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconProfileSt = styled(IconProfile)`
   display: flex;
   align-self: center;
   padding: 10px;
   font-size: 65px;
-  color: #ccc;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.white};
 `
 
 const BoxSt = styled.View`
@@ -49,17 +48,17 @@ const BoxSt = styled.View`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #d7dfe6;
+  background-color: ${ConstantsRecipe.gray};
 `
 const TextSt = styled.Text`
   display: flex;
   font-size: 25px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const DisabledText = styled(TextSt)`
-  color: #ccc;
+  color: ${ConstantsRecipe.gray};
 `
 
 const NavIcons = () => {

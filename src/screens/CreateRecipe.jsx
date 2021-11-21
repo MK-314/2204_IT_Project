@@ -9,12 +9,13 @@ import ModalCard from '../components/ModalCard'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../constants'
 
 const ContainerSt = styled(ContainerDefault)`
-  background-color: #f1f1f4;
+  background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-  background-color: #78a5c4;
+  background-color: ${ConstantsRecipe.lightBlue};
 `
 const CustomText = styled.Text`
   margin-top: 40px;

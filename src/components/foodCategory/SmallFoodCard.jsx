@@ -9,11 +9,12 @@ import {
 } from 'react-native-gesture-handler'
 import { TextNum } from '../FoodCard'
 import { RowOfElements } from '../small_elements/RowOfElements'
+import { ConstantsRecipe } from '../../../constants'
 
 const RowSt = styled(RowOfElements)`
   min-height: 200px;
   overflow: hidden;
-  /* background-color: #78a5c4; */
+  /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 const SmallFoodItem = styled.Image`
   display: flex;
@@ -30,8 +31,8 @@ const TextSt = styled.Text`
   left: 60px;
   font-size: 55px;
   font-weight: bold;
-  color: #2ec269;
-  text-shadow: #000 1px 3px 5px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 
@@ -41,9 +42,9 @@ const HeartIcon = styled(Icon)`
   top: 30px;
   right: 165px;
   font-size: 35px;
-  color: #2ec269;
+  color: ${ConstantsRecipe.green};
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+    text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const IconBack = styled(BackIcon)`
@@ -52,9 +53,9 @@ const IconBack = styled(BackIcon)`
   top: 30px;
   left: 60px;
   font-size: 40px;
-  color: #2ec269;
+  color: ${ConstantsRecipe.green};
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+    text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const IconShare = styled(Icon)`
@@ -63,9 +64,9 @@ const IconShare = styled(Icon)`
   top: 30px;
   right: 75px;
   font-size: 35px;
-  color: #2ec269;
+  color: ${ConstantsRecipe.green};
   font-weight: bold;
-  text-shadow: #000 1px 3px 5px;
+    text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const SmallTextNum = styled(TextNum)`

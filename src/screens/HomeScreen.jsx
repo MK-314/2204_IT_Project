@@ -20,8 +20,6 @@ const FooterSt = styled.View`
   bottom: 30px;
   min-height: 100px;
   z-index: 1;
-  /*  */
-  /* background-color: #1c1c75; */
 `
 
 const HomeScreen = ({ navigation }) => {
