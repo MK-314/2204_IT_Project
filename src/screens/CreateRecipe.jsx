@@ -110,7 +110,7 @@ const CreateRecipe = ({ navigation }) => {
   const [nameDone, setNameDone] = useState(false)
   const [ingredientsDone, setIngredientsDone] = useState(false)
   const [directionsDone, setDirectionsDone] = useState(false)
-  const [imageDone, setImageDone] = useState(false);
+  const [imageDone, setImageDone] = useState(false)
   //
   const [mode, setMode] = useState('')
 
@@ -135,6 +135,9 @@ const CreateRecipe = ({ navigation }) => {
         setDirectionsDone(true)
         break
     }
+  }
+  const uploadImageToFireBase = async () => {
+    
   }
 
   return (
@@ -203,18 +206,15 @@ const CreateRecipe = ({ navigation }) => {
       </Pressable>
       {/* DIRECTIONS END */}
       {/* IMAGE START */}
-      <Pressable
-        onPress={() => {
-        }}
-      >
-      <ImageRow>
-        <IconPhoto name={'photo'} onPress={() => {}} />
-        <SmallTitleBox3 style={styles.elementShadow}>
-          <TextOfSmallBox>Image</TextOfSmallBox>
-          {!imageDone && <IconHand name={'hand-pointer'} />}
-          {imageDone && <IconCheck name={'check'} />}
-        </SmallTitleBox3>
-      </ImageRow>
+      <Pressable onPress={uploadImageToFireBase}>
+        <ImageRow>
+          <IconPhoto name={'photo'} onPress={() => {}} />
+          <SmallTitleBox3 style={styles.elementShadow}>
+            <TextOfSmallBox>Image</TextOfSmallBox>
+            {!imageDone && <IconHand name={'hand-pointer'} />}
+            {imageDone && <IconCheck name={'check'} />}
+          </SmallTitleBox3>
+        </ImageRow>
       </Pressable>
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
