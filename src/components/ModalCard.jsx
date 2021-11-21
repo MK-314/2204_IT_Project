@@ -45,11 +45,11 @@ const ModalCard = props => {
       <CustomView style={styles.modalView}>
         {/* INSIDE START*/}
         <RowOfElements>
-          <DirectionText>Put Directions here:</DirectionText>
+          <DirectionText>{props.modalText}</DirectionText>
         </RowOfElements>
         <RowOfElements>
           <InputDirections style={{ textAlignVertical: 'top',}}
-            placeholder={'Recipe directions ...'}
+            placeholder={'Type here ...'}
             multiline={true}
             // numberOfLines={25}
           />

@@ -90,21 +90,31 @@ const ImageRow = styled(ViewArrowAndText)`
 
 const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
+  const [modalText, setModalText] = useState('')
+
   return (
     <ContainerSt>
       <ModalCard
         visibleModal={modalVisible}
+        modalText={modalText}
         visibleModalUp={() => {
           setModalVisible(false)
         }}
       />
-      <Pressable onPress={() => setModalVisible(true)}>
+      {/* NAME START */}
+      <Pressable
+        onPress={() => {
+          setModalText("Recipe name:")
+          setModalVisible(true)
+        }}
+      >
         <RowSt>
           <TitleBox style={styles.elementShadow}>
             <CustomText>Name of Your Recipe</CustomText>
           </TitleBox>
         </RowSt>
       </Pressable>
+      {/* NAME END */}
       <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
         <SmallTitleBox style={styles.elementShadow}>
