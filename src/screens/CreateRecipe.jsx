@@ -39,7 +39,7 @@ const TitleBox = styled.View`
   overflow: hidden;
   /*  */
   background-color: ${props =>
-    props.bgGreen ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
+    props.nameDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
 
 const CustomText = styled.Text`
@@ -71,15 +71,28 @@ const IconPhoto = styled(PhotoIcon)`
   text-shadow: ${ConstantsRecipe.text_shadow};
   margin-right: 17px;
   margin-left: 5px;
-  /* margin-top: 15px; */
 `
-const SmallTitleBox = styled(TitleBox)`
+const IconCheck = styled(Icon)`
+  font-size: 35px;
+  color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const SmallTitleBox1 = styled(TitleBox)`
   min-width: 42%;
   max-width: 42%;
   margin-top: 0px;
   margin-bottom: 0px;
   justify-content: space-around;
+  background-color: ${props =>
+    props.ingredientsDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
+const SmallTitleBox2 = styled(SmallTitleBox1)`
+  background-color: ${props =>
+    props.directionsDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
+`
+const SmallTitleBox3 = styled(SmallTitleBox1)``
+
 const TextOfSmallBox = styled.Text`
   font-size: 20px;
   padding: 25px 10px;
@@ -93,19 +106,34 @@ const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalText, setModalText] = useState('')
   const [recipeName, setRecipeName] = useState('Name of Your Recipe')
-  const [bgGreen, setbgGreen] = useState(false)
+  //
+  const [nameDone, setNameDone] = useState(false)
+  const [ingredientsDone, setIngredientsDone] = useState(false)
+  const [directionsDone, setDirectionsDone] = useState(false)
+  //
   const [mode, setMode] = useState('')
 
   const dataFromModal = async () => {
     setModalVisible(false)
-    AsyncStorage.getItem('recipeName')
-      .then(tempName => {
-        if (tempName.length > 0) {
-          setRecipeName(tempName)
-          setbgGreen(true)
-        }
-      })
-      .catch(e => {})
+
+    switch (mode) {
+      case 'recipeName':
+        AsyncStorage.getItem('recipeName')
+          .then(tempName => {
+            if (tempName.length > 0) {
+              setRecipeName(tempName)
+              setNameDone(true)
+            }
+          })
+          .catch(e => {})
+        break
+      case 'Ingredients':
+        setIngredientsDone(true)
+        break
+      case 'Directions':
+        setDirectionsDone(true)
+        break
+    }
   }
 
   return (
@@ -125,32 +153,60 @@ const CreateRecipe = ({ navigation }) => {
         }}
       >
         <RowSt>
-          <TitleBox style={styles.elementShadow} bgGreen={bgGreen}>
+          <TitleBox style={styles.elementShadow} nameDone={nameDone}>
             <CustomText>{recipeName}</CustomText>
           </TitleBox>
         </RowSt>
       </Pressable>
       {/* NAME END */}
-      <ViewArrowAndText>
-        <IconArr name={'arrow-long-right'} onPress={() => {}} />
-        <SmallTitleBox style={styles.elementShadow}>
-          <TextOfSmallBox>Ingredients</TextOfSmallBox>
-          <IconHand name={'hand-pointer'} onPress={() => {}} />
-        </SmallTitleBox>
-      </ViewArrowAndText>
-      <ViewArrowAndText>
-        <IconArr name={'arrow-long-right'} onPress={() => {}} />
-        <SmallTitleBox style={styles.elementShadow}>
-          <TextOfSmallBox>Directions</TextOfSmallBox>
-          <IconHand name={'hand-pointer'} onPress={() => {}} />
-        </SmallTitleBox>
-      </ViewArrowAndText>
+      {/* INGREDIENTS START */}
+      <Pressable
+        onPress={() => {
+          setModalText('Ingredients')
+          setMode('Ingredients')
+          setModalVisible(true)
+        }}
+      >
+        <ViewArrowAndText>
+          <IconArr name={'arrow-long-right'} />
+          <SmallTitleBox1
+            style={styles.elementShadow}
+            ingredientsDone={ingredientsDone}
+          >
+            <TextOfSmallBox>Ingredients</TextOfSmallBox>
+            {!ingredientsDone && <IconHand name={'hand-pointer'} />}
+            {ingredientsDone && <IconCheck name={'check'} />}
+          </SmallTitleBox1>
+        </ViewArrowAndText>
+      </Pressable>
+      {/* INGREDIENTS END */}
+      {/* DIRECTIONS START */}
+      <Pressable
+        onPress={() => {
+          setModalText('Directions')
+          setMode('Directions')
+          setModalVisible(true)
+        }}
+      >
+        <ViewArrowAndText>
+          <IconArr name={'arrow-long-right'} />
+          <SmallTitleBox2
+            style={styles.elementShadow}
+            directionsDone={directionsDone}
+          >
+            <TextOfSmallBox>Directions</TextOfSmallBox>
+            {!directionsDone && <IconHand name={'hand-pointer'} />}
+            {directionsDone && <IconCheck name={'check'} />}
+          </SmallTitleBox2>
+        </ViewArrowAndText>
+      </Pressable>
+      {/* DIRECTIONS END */}
       <ImageRow>
         <IconPhoto name={'photo'} onPress={() => {}} />
-        <SmallTitleBox style={styles.elementShadow}>
+        <SmallTitleBox3 style={styles.elementShadow}>
           <TextOfSmallBox>Image</TextOfSmallBox>
           <IconHand name={'hand-pointer'} onPress={() => {}} />
-        </SmallTitleBox>
+        </SmallTitleBox3>
       </ImageRow>
       {/* <Pressable onPress={() => setModalVisible(true)}>
           <CustomText>Directions</CustomText>

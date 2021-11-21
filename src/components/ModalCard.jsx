@@ -38,7 +38,20 @@ const ModalCard = props => {
 
   const storeInput = async () => {
     if (inputValue.length > 0) {
-      await AsyncStorage.setItem(props.mode, inputValue)
+      switch (props.mode) {
+        case 'recipeName':
+          await AsyncStorage.setItem(props.mode, inputValue)
+          setInputValue('')
+          break
+        case 'Ingredients':
+          await AsyncStorage.setItem(props.mode, inputValue)
+          setInputValue('')
+          break
+        case 'Directions':
+          await AsyncStorage.setItem(props.mode, inputValue)
+          setInputValue('')
+          break
+      }
     }
     props.visibleModalUp()
   }
