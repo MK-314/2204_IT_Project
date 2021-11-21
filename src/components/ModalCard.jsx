@@ -35,6 +35,13 @@ const InputDirections = styled.TextInput`
 `
 
 const ModalCard = props => {
+
+  const getStorXXX = async () => {
+    await AsyncStorage.setItem('recipeName')
+    alert(user)
+    props.visibleModalUp()
+  }
+
   return (
     <Modal
       animationType='slide'
@@ -56,7 +63,7 @@ const ModalCard = props => {
             // numberOfLines={25}
           />
         </RowOfElements>
-        <Pressable onPress={() => props.visibleModalUp()}>
+        <Pressable onPress={getStorXXX}>
           <SmallDefaultBtn text={'Save'} />
         </Pressable>
         {/* INSIDE END */}
