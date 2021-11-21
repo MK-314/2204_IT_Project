@@ -10,6 +10,7 @@ import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
+import Icon from 'react-native-vector-icons/Entypo'
 
 const ContainerSt = styled(ContainerDefault)`
   /*  */
@@ -40,6 +41,12 @@ const CustomText = styled.Text`
   /*  */
   /* background-color: red; */
 `
+const IconArr = styled(Icon)`
+font-size: 150px;
+  color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
 
 const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -55,6 +62,9 @@ const CreateRecipe = ({ navigation }) => {
         <TitleBox style={styles.elementShadow}>
           <CustomText>Name of Your Recipe</CustomText>
         </TitleBox>
+      </RowSt>
+      <RowSt>
+        <IconArr name={'arrow-long-right'} onPress={() => {}} />
       </RowSt>
       <RowSt>
         {/* <Pressable onPress={() => setModalVisible(true)}>
