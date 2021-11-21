@@ -41,7 +41,7 @@ const SingUpScreen = ({ navigation }) => {
 
   const handleSingUp = async () => {
     await FireBaseAuthSystem.appSignUp(email,password)
-    .then(resEmail=>{
+    .then(async (resEmail)=>{
       await FetchApi.createUser({
         name: name,
         email: resEmail,
