@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState } from 'react'
-import { Pressable } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
@@ -27,12 +27,12 @@ const TitleBox = styled.View`
   min-width: 85%;
   align-items: center;
   justify-content: center;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 20px;
   margin-top: 30px;
   overflow: hidden;
   /*  */
-  /* background-color: aqua; */
+  background-color: #aff1c9;
 `
 
 const CustomText = styled.Text`
@@ -47,7 +47,7 @@ const CreateRecipe = ({ navigation }) => {
   return (
     <ContainerSt>
       <RowSt>
-        <TitleBox>
+        <TitleBox style={styles.elementShadow}>
           <CustomText>Name of Your Recipe</CustomText>
         </TitleBox>
       </RowSt>
@@ -74,4 +74,16 @@ const CreateRecipe = ({ navigation }) => {
     </ContainerSt>
   )
 }
+const styles = StyleSheet.create({
+  elementShadow: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 17
+  }
+})
 export default CreateRecipe
