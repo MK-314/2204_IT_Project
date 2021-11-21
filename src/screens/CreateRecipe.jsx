@@ -7,32 +7,21 @@ import styled from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ModalCard from '../components/ModalCard'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
+const ContainerSt = styled(ContainerDefault)`
   background-color: #f1f1f4;
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /*  */
+const RowSt = styled(RowOfElements)`
   background-color: #78a5c4;
 `
 const CustomText = styled.Text`
   margin-top: 40px;
   font-size: 40px;
 `
-
 const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
-
   return (
     <ContainerSt>
       <RowSt>

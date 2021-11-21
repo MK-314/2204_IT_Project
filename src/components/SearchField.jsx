@@ -2,17 +2,10 @@ import React, { useState } from 'react'
 import { Text, StyleSheet, View, Keyboard } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { RowOfElements } from './small_elements/RowOfElements'
 
-// const BoxSt = styled.View``
-
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+const RowSt = styled(RowOfElements)`
   min-height: 70px;
-  position: relative;
-  justify-content: center;
-  align-items: center;
   margin-top: 3%;
   margin-bottom: 3%;
   /*  */

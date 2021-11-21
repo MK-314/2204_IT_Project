@@ -8,15 +8,8 @@ import styled from 'styled-components/native'
 import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
-  background-color: #f1f1f4;
-`
 const FooterSt = styled.View`
   display: flex;
   flex-direction: row;
@@ -43,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
         }, 200)
       }}
     >
-      <ContainerSt>
+      <ContainerDefault>
         <SearchField
           hidden={() => {
             setfooterHidden(true)
@@ -53,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
         <FooterSt hidden={footerHidden}>
           <NavIcons />
         </FooterSt>
-      </ContainerSt>
+      </ContainerDefault>
     </TouchableWithoutFeedback>
   )
 }

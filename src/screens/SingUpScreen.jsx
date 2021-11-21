@@ -13,22 +13,13 @@ import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FetchApi } from '../../datahandler'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
+const ContainerSt = styled(ContainerDefault)`
   background-color: #f1f1f4;
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /*  */
+const RowSt = styled(RowOfElements)`
   background-color: #78a5c4;
 `
 const TextInputSt = styled.TextInput`
@@ -42,7 +33,6 @@ const TextInputSt = styled.TextInput`
 const CustomText = styled.Text`
   font-size: 50px;
 `
-
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

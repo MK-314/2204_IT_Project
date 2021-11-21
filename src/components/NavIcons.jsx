@@ -5,15 +5,12 @@ import IconBook from 'react-native-vector-icons/FontAwesome'
 import IconFavorite from 'react-native-vector-icons/AntDesign'
 import IconProfile from 'react-native-vector-icons/AntDesign'
 import { ScrollView } from 'react-native-gesture-handler'
+import { RowOfElements } from './small_elements/RowOfElements'
 
 // const BoxSt = styled.View``
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+const RowSt = styled(RowOfElements)`
   min-height: 30px;
-  position: relative;
   justify-content: space-evenly;
   align-items: stretch;
   /*  */
@@ -46,7 +43,7 @@ const IconProfileSt = styled(IconProfile)`
   text-shadow: #000 1px 3px 5px;
 `
 
-const Box1 = styled.View`
+const BoxSt = styled.View`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -54,23 +51,6 @@ const Box1 = styled.View`
   align-items: center;
   background-color: #d7dfe6;
 `
-const Box2 = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #d7dfe6;
-`
-const Box3 = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #d7dfe6;
-`
-
 const TextSt = styled.Text`
   display: flex;
   font-size: 25px;
@@ -86,11 +66,11 @@ const NavIcons = () => {
   const [bigHeart, setBigHeart] = useState(false)
   return (
     <RowSt>
-      <Box1>
+      <BoxSt>
         <IconBookSt name='book' />
         <TextSt>Recipes</TextSt>
-      </Box1>
-      <Box2>
+      </BoxSt>
+      <BoxSt>
         <IconFavoriteSt
           name='heart'
           big={bigHeart}
@@ -102,11 +82,11 @@ const NavIcons = () => {
           }}
         />
         <DisabledText>Favorites</DisabledText>
-      </Box2>
-      <Box3>
+      </BoxSt>
+      <BoxSt>
         <IconProfileSt name='github' />
         <DisabledText>Profile</DisabledText>
-      </Box3>
+      </BoxSt>
     </RowSt>
   )
 }

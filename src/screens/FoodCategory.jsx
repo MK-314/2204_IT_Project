@@ -1,37 +1,21 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
 import { FooterSt } from './HomeScreen'
 import SmallFoodCard from './../components/foodCategory/SmallFoodCard'
 import Ingredients from './../components/foodCategory/Ingredients'
 import IngredientsList from './../components/foodCategory/IngredientsList'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
+const ContainerSt = styled(ContainerDefault)`
   background-color: #f1f1f4;
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
+const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
-  /* align-items: center; */
-  width: 100%;
   height: 260px;
-  /*  */
-  position: relative;
   margin-top: 10px;
-
   overflow: hidden;
   /*  */
   /* background-color: #78a5c4; */

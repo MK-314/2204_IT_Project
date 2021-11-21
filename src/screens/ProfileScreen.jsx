@@ -1,40 +1,19 @@
 // REACT:
 import React, { useState } from 'react'
 import { Text, Image } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
-// FIRE_BASE:
-import {
-  uploadImageToFireBase,
-  getUrlByName,
-  deleteImageFromFireBase
-} from '../../firebase'
-import { pickImage } from '../../imagePicker'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements'
 
-const ContainerSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  /*  */
+const ContainerSt = styled(ContainerDefault)`
   background-color: #f1f1f4;
 `
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /*  */
+const RowSt = styled(RowOfElements)`
   background-color: #78a5c4;
 `
-
 const ProfileScreen = ({ navigation }) => {
 
   return (

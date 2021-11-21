@@ -8,18 +8,11 @@ import {
   TouchableWithoutFeedback
 } from 'react-native-gesture-handler'
 import { TextNum } from '../FoodCard'
+import { RowOfElements } from '../small_elements/RowOfElements'
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+const RowSt = styled(RowOfElements)`
   min-height: 200px;
-  /*  */
-  position: relative;
   overflow: hidden;
-  /*  */
   /* background-color: #78a5c4; */
 `
 const SmallFoodItem = styled.Image`

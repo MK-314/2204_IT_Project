@@ -5,18 +5,11 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { FlatList } from 'react-native-gesture-handler'
 import { Shadow } from 'react-native-shadow-2'
 import FoodCard from './FoodCard';
+import { RowOfElements } from './small_elements/RowOfElements'
 
-const RowSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+const RowSt = styled(RowOfElements)`
   min-height: 400px;
-  /*  */
-  position: relative;
   overflow: hidden;
-  /*  */
   /* background-color: #78a5c4; */
 `
 
