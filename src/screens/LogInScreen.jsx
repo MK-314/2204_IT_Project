@@ -10,6 +10,7 @@ import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import { FireBaseAuthSystem } from '../../firebase'
 import { FetchApi } from '../../datahandler'
+import { Pressable } from 'react-native'
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
@@ -76,9 +77,16 @@ const LogInScreen = ({ navigation }) => {
           accessibilityLabel='Learn more about this purple button'
         />
       </RowSt>
-      <RowSt>
-        <Text>Don't have an Account? Sing up</Text>
-      </RowSt>
+
+      <Pressable
+        onPress={() => {
+          navigation.navigate('SingUpScreen')
+        }}
+      >
+        <RowSt>
+          <Text>Don't have an Account? Sing up</Text>
+        </RowSt>
+      </Pressable>
     </ContainerSt>
   )
 }

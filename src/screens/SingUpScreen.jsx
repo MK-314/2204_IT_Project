@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState } from 'react'
-import { Text, Image, Button } from 'react-native'
+import { Text, Image, Button, Pressable } from 'react-native'
 import {
   TouchableOpacity,
   TouchableWithoutFeedback
@@ -95,9 +95,11 @@ const SingUpScreen = ({ navigation }) => {
           accessibilityLabel='Learn more about this purple button'
         />
       </RowSt>
-      <RowSt>
-        <Text>Have an Account? Sing In</Text>
-      </RowSt>
+      <Pressable onPress={() => {navigation.navigate('LogInScreen')}}>
+        <RowSt>
+          <Text>Have an Account? Sing In</Text>
+        </RowSt>
+      </Pressable>
     </ContainerSt>
   )
 }
