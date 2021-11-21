@@ -21,7 +21,7 @@ const navigator = createStackNavigator(
     CreateRecipe: CreateRecipe
   },
   {
-    initialRouteName: 'LogInScreen',
+    initialRouteName: 'SingUpScreen',
     defaultNavigationOptions: {
       title: 'Recipe App'
     }

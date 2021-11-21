@@ -34,11 +34,16 @@ const LogInScreen = ({ navigation }) => {
   const [password, setPassword] = useState('')
 
   const handleSingIn = async () => {
-    await FireBaseAuthSystem.appSignIn(email, password)
-    .then(res => {
-      navigation.navigate('CreateRecipe')
-    })
-    .catch(e=>{'Wrong credentials. Try again or reset password. Error: '+e})
+    FireBaseAuthSystem.appSignIn(email, password)
+      .then(async res => {
+        let user = await FetchApi.getUserByEmail(res)
+        let user_id = user[0].id
+        await AsyncStorage.setItem('user_id', `${user_id}`)
+        navigation.navigate('CreateRecipe')
+      })
+      .catch(e => {
+        'Wrong credentials. Try again or reset password. Error: ' + e
+      })
   }
 
   return (

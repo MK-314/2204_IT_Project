@@ -111,6 +111,7 @@ const ImageRow = styled(ViewArrowAndText)`
 const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalText, setModalText] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
   const [recipeName, setRecipeName] = useState('Name of Your Recipe')
   //
   const [nameDone, setNameDone] = useState(false)
@@ -147,14 +148,20 @@ const CreateRecipe = ({ navigation }) => {
     let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
       pickedImage.uri
     )
-    await AsyncStorage.setItem('PostPhoto', snapshot.metadata.fullPath)
+    setImageUrl(snapshot.metadata.fullPath)
+    AsyncStorage.setItem('PostPhoto', snapshot.metadata.fullPath)
     setImageDone(true)
   }
   const saveNewPost = async () => {
-    let data = await FetchApi.createUser({
-      name:"1",
-      email:'2',
-      avatar:"ok ok"
+    let directions = await AsyncStorage.getItem('Directions')
+    let ingredients = await AsyncStorage.getItem('Ingredients')
+    let user_id = await AsyncStorage.getItem('user_id')
+    let data = await FetchApi.createPost({
+      name: recipeName,
+      imageUrl: imageUrl,
+      directions: directions,
+      ingredients: ingredients,
+      user_id: user_id
     })
   }
 

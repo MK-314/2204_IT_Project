@@ -40,19 +40,25 @@ const SingUpScreen = ({ navigation }) => {
   const [name, setName] = useState('')
 
   const handleSingUp = async () => {
-    await FireBaseAuthSystem.appSignUp(email,password)
-    .then(async (resEmail)=>{
-      await FetchApi.createUser({
-        name: name,
-        email: resEmail,
-        avatar: ''
+    FireBaseAuthSystem.appSignUp(email, password)
+      .then(async resEmail => {
+        FetchApi.createUser({
+          name: name,
+          email: resEmail,
+          avatar: ''
+        })
+          .then(async user => {
+            await AsyncStorage.setItem('user_id', `${user.id}`)
+            alert('Welcome!')
+          })
+          .catch(e => {
+            alert('User was not created')
+          })
+        navigation.navigate('CreateRecipe')
       })
-      .then(res=>{
-        alert('Welcome!')
-      }).catch(e=>{alert('User was not created')})
-      navigation.navigate('CreateRecipe')
-    })
-    .catch(e=>{'Firebase sing up error: '+e})
+      .catch(e => {
+        'Firebase sing up error: ' + e
+      })
   }
 
   return (
