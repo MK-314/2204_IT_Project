@@ -18,6 +18,7 @@ import { default as PhotoIcon } from 'react-native-vector-icons/Foundation'
 import { Text } from 'react-native'
 import { FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
+import { FetchApi } from '../../datahandler'
 
 const ContainerSt = styled(ContainerDefault)`
   /*  */
@@ -149,6 +150,13 @@ const CreateRecipe = ({ navigation }) => {
     await AsyncStorage.setItem('PostPhoto', snapshot.metadata.fullPath)
     setImageDone(true)
   }
+  const saveNewPost = async () => {
+    let data = await FetchApi.createUser({
+      name:"1",
+      email:'2',
+      avatar:"ok ok"
+    })
+  }
 
   return (
     <ContainerSt>
@@ -228,7 +236,7 @@ const CreateRecipe = ({ navigation }) => {
       </Pressable>
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
-      <Pressable onPress={() => {}}>
+      <Pressable onPress={saveNewPost}>
         <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
       {/* BUTTON ENDS */}
