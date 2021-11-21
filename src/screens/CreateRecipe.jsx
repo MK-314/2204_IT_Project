@@ -16,6 +16,8 @@ import { default as HandIcon } from 'react-native-vector-icons/FontAwesome5'
 import { default as PhotoIcon } from 'react-native-vector-icons/Foundation'
 //
 import { Text } from 'react-native'
+import { FireBaseImageHandler } from '../../firebase'
+import { pickImage } from '../../imagePicker'
 
 const ContainerSt = styled(ContainerDefault)`
   /*  */
@@ -91,7 +93,10 @@ const SmallTitleBox2 = styled(SmallTitleBox1)`
   background-color: ${props =>
     props.directionsDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
-const SmallTitleBox3 = styled(SmallTitleBox1)``
+const SmallTitleBox3 = styled(SmallTitleBox1)`
+  background-color: ${props =>
+    props.imageDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
+`
 
 const TextOfSmallBox = styled.Text`
   font-size: 20px;
@@ -138,9 +143,11 @@ const CreateRecipe = ({ navigation }) => {
   }
   const uploadImageToFireBase = async () => {
     let pickedImage = await pickImage()
-    let snapshot = await uploadImageToFireBase(pickedImage.uri)
-    alert(snapshot.metadata.fullPath)
-    setfileName(snapshot.metadata.fullPath)
+    let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
+      pickedImage.uri
+    )
+    await AsyncStorage.setItem('PostPhoto', snapshot.metadata.fullPath)
+    setImageDone(true)
   }
 
   return (
@@ -212,7 +219,7 @@ const CreateRecipe = ({ navigation }) => {
       <Pressable onPress={uploadImageToFireBase}>
         <ImageRow>
           <IconPhoto name={'photo'} onPress={() => {}} />
-          <SmallTitleBox3 style={styles.elementShadow}>
+          <SmallTitleBox3 style={styles.elementShadow} imageDone={imageDone}>
             <TextOfSmallBox>Image</TextOfSmallBox>
             {!imageDone && <IconHand name={'hand-pointer'} />}
             {imageDone && <IconCheck name={'check'} />}
