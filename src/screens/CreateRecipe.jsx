@@ -38,7 +38,7 @@ const TitleBox = styled.View`
   margin-bottom: 40px;
   overflow: hidden;
   /*  */
-  background-color: ${ConstantsRecipe.gray2};
+  background-color: ${props => (props.bgGreen ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2)};
 `
 
 const CustomText = styled.Text`
@@ -92,22 +92,27 @@ const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalText, setModalText] = useState('')
   const [recipeName, setRecipeName] = useState('Name of Your Recipe')
+  const [bgGreen, setbgGreen] = useState(false);
+
+
+  const dataFromModal = async () => {
+    setModalVisible(false)
+    AsyncStorage.getItem('recipeName')
+      .then(tempName => {
+        if (tempName.length > 0) {
+          setRecipeName(tempName)
+          setbgGreen(true)
+        }
+      })
+      .catch(e => {})
+  }
 
   return (
     <ContainerSt>
       <ModalCard
         visibleModal={modalVisible}
         modalText={modalText}
-        visibleModalUp={async () => {
-          setModalVisible(false)
-          AsyncStorage.getItem('recipeName')
-            .then(tempName => {
-              if (tempName.length > 0) {
-                setRecipeName(tempName)
-              }
-            })
-            .catch(e => {})
-        }}
+        visibleModalUp={dataFromModal}
       />
       {/* NAME START */}
       <Pressable
@@ -117,7 +122,7 @@ const CreateRecipe = ({ navigation }) => {
         }}
       >
         <RowSt>
-          <TitleBox style={styles.elementShadow}>
+          <TitleBox style={styles.elementShadow} bgGreen={bgGreen}>
             <CustomText>{recipeName}</CustomText>
           </TitleBox>
         </RowSt>
