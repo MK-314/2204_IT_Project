@@ -98,11 +98,13 @@ const CreateRecipe = ({ navigation }) => {
           setModalVisible(false)
         }}
       />
-      <RowSt>
-        <TitleBox style={styles.elementShadow}>
-          <CustomText>Name of Your Recipe</CustomText>
-        </TitleBox>
-      </RowSt>
+      <Pressable onPress={() => setModalVisible(true)}>
+        <RowSt>
+          <TitleBox style={styles.elementShadow}>
+            <CustomText>Name of Your Recipe</CustomText>
+          </TitleBox>
+        </RowSt>
+      </Pressable>
       <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
         <SmallTitleBox style={styles.elementShadow}>
@@ -124,11 +126,9 @@ const CreateRecipe = ({ navigation }) => {
           <IconHand name={'hand-pointer'} onPress={() => {}} />
         </SmallTitleBox>
       </ImageRow>
-      <RowSt>
-        {/* <Pressable onPress={() => setModalVisible(true)}>
+      {/* <Pressable onPress={() => setModalVisible(true)}>
           <CustomText>Directions</CustomText>
         </Pressable> */}
-      </RowSt>
       <Pressable onPress={() => {}}>
         <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
