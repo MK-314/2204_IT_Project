@@ -63,7 +63,7 @@ const ModalCard = props => {
             autoCapitalize='none'
             autoCorrect={false}
             value={inputValue}
-            onChangeText={(newValue = setInputValue(newValue))}
+            onChangeText={newValue => setInputValue(newValue)}
           />
         </RowOfElements>
         <Pressable onPress={storeInput}>
