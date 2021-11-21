@@ -40,15 +40,15 @@ const ModalCard = props => {
     if (inputValue.length > 0) {
       switch (props.mode) {
         case 'recipeName':
-          await AsyncStorage.setItem(props.mode, inputValue)
+          await AsyncStorage.setItem('recipeName', inputValue)
           setInputValue('')
           break
         case 'Ingredients':
-          await AsyncStorage.setItem(props.mode, inputValue)
+          await AsyncStorage.setItem('Ingredients', inputValue)
           setInputValue('')
           break
         case 'Directions':
-          await AsyncStorage.setItem(props.mode, inputValue)
+          await AsyncStorage.setItem('Directions', inputValue)
           setInputValue('')
           break
       }

@@ -110,6 +110,7 @@ const CreateRecipe = ({ navigation }) => {
   const [nameDone, setNameDone] = useState(false)
   const [ingredientsDone, setIngredientsDone] = useState(false)
   const [directionsDone, setDirectionsDone] = useState(false)
+  const [imageDone, setImageDone] = useState(false);
   //
   const [mode, setMode] = useState('')
 
@@ -144,7 +145,7 @@ const CreateRecipe = ({ navigation }) => {
         mode={mode}
         visibleModalUp={dataFromModal}
       />
-      {/* NAME START */}
+      {/* NAME STARTS */}
       <Pressable
         onPress={() => {
           setModalText('Recipe name:')
@@ -158,7 +159,7 @@ const CreateRecipe = ({ navigation }) => {
           </TitleBox>
         </RowSt>
       </Pressable>
-      {/* NAME END */}
+      {/* NAME ENDS */}
       {/* INGREDIENTS START */}
       <Pressable
         onPress={() => {
@@ -201,19 +202,26 @@ const CreateRecipe = ({ navigation }) => {
         </ViewArrowAndText>
       </Pressable>
       {/* DIRECTIONS END */}
+      {/* IMAGE START */}
+      <Pressable
+        onPress={() => {
+        }}
+      >
       <ImageRow>
         <IconPhoto name={'photo'} onPress={() => {}} />
         <SmallTitleBox3 style={styles.elementShadow}>
           <TextOfSmallBox>Image</TextOfSmallBox>
-          <IconHand name={'hand-pointer'} onPress={() => {}} />
+          {!imageDone && <IconHand name={'hand-pointer'} />}
+          {imageDone && <IconCheck name={'check'} />}
         </SmallTitleBox3>
       </ImageRow>
-      {/* <Pressable onPress={() => setModalVisible(true)}>
-          <CustomText>Directions</CustomText>
-        </Pressable> */}
+      </Pressable>
+      {/* IMAGE ENDS */}
+      {/* BUTTON STARTS */}
       <Pressable onPress={() => {}}>
         <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
+      {/* BUTTON ENDS */}
     </ContainerSt>
   )
 }
