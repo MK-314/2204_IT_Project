@@ -38,6 +38,14 @@ const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleSingUp = async () => {
+    let data = await FetchApi.createUser({
+      name:"1",
+      email:'2',
+      avatar:"ok ok"
+    })
+  }
+
   return (
     <ContainerSt>
       <RowSt>
@@ -54,7 +62,7 @@ const SingUpScreen = ({ navigation }) => {
       </RowSt>
       <RowSt>
         <Button
-          onPress={() => {}}
+          onPress={handleSingUp}
           title='Register'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
