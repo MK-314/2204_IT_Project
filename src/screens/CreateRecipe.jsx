@@ -137,7 +137,10 @@ const CreateRecipe = ({ navigation }) => {
     }
   }
   const uploadImageToFireBase = async () => {
-    
+    let pickedImage = await pickImage()
+    let snapshot = await uploadImageToFireBase(pickedImage.uri)
+    alert(snapshot.metadata.fullPath)
+    setfileName(snapshot.metadata.fullPath)
   }
 
   return (
