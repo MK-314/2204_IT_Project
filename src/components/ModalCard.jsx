@@ -4,6 +4,8 @@ import styled from 'styled-components/native'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const CustomView = styled.View`
   display: flex;
