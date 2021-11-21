@@ -130,7 +130,7 @@ const CreateRecipe = ({ navigation }) => {
         </Pressable> */}
       </RowSt>
       <Pressable onPress={() => {}}>
-        <SmallDefaultBtn text={'Save Post'} />
+        <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
     </ContainerSt>
   )

@@ -6,18 +6,18 @@ import { RowOfElements } from './RowOfElements'
 
 const DefaultBtn = styled(RowOfElements)`
   background-color: ${ConstantsRecipe.green};
-  margin-top: 20px;
   width: 40%;
   border-radius: 20px;
   padding: 10px;
 `
 const BtnText = styled.Text`
   color: ${ConstantsRecipe.white};
+  font-size: 18px;
 `
 
 const SmallDefaultBtn = props => {
   return (
-    <RowOfElements>
+    <RowOfElements style={{ marginTop: props.marginSt }}>
       <DefaultBtn style={styles.boxShadow}>
         <BtnText>{props.text}</BtnText>
       </DefaultBtn>
@@ -27,14 +27,14 @@ const SmallDefaultBtn = props => {
 
 const styles = StyleSheet.create({
   boxShadow: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 5
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
-    elevation: 11,
+    elevation: 11
   }
 })
 export default SmallDefaultBtn
