@@ -38,7 +38,8 @@ const TitleBox = styled.View`
   margin-bottom: 40px;
   overflow: hidden;
   /*  */
-  background-color: ${props => (props.bgGreen ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2)};
+  background-color: ${props =>
+    props.bgGreen ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
 
 const CustomText = styled.Text`
@@ -92,8 +93,8 @@ const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalText, setModalText] = useState('')
   const [recipeName, setRecipeName] = useState('Name of Your Recipe')
-  const [bgGreen, setbgGreen] = useState(false);
-
+  const [bgGreen, setbgGreen] = useState(false)
+  const [mode, setMode] = useState('')
 
   const dataFromModal = async () => {
     setModalVisible(false)
@@ -112,12 +113,14 @@ const CreateRecipe = ({ navigation }) => {
       <ModalCard
         visibleModal={modalVisible}
         modalText={modalText}
+        mode={mode}
         visibleModalUp={dataFromModal}
       />
       {/* NAME START */}
       <Pressable
         onPress={() => {
           setModalText('Recipe name:')
+          setMode('recipeName')
           setModalVisible(true)
         }}
       >
