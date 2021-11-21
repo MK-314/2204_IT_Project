@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
+import { FireBaseAuthSystem } from '../../firebase'
+import { FetchApi } from '../../datahandler'
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
@@ -31,6 +33,11 @@ const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleSingIn = async () => {
+    let resEmail = await FireBaseAuthSystem.appSignUp(email,password)
+    navigation.navigate('CreateRecipe')
+  }
+
   return (
     <ContainerSt>
       <RowSt>
@@ -47,7 +54,7 @@ const LogInScreen = ({ navigation }) => {
       </RowSt>
       <RowSt>
         <Button
-          onPress={()=>{}}
+          onPress={handleSingIn}
           title='Log In'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
