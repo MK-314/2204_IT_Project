@@ -7,7 +7,6 @@ class ConstantsRecipe {
     static gray = "#ccc"
         // 
     static text_shadow = "#000 1px 3px 5px"
-    static box_shadow = '#000000'
 }
 
 export { ConstantsRecipe }
