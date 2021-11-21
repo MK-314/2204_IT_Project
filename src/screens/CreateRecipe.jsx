@@ -17,7 +17,7 @@ const ContainerSt = styled(ContainerDefault)`
 `
 
 const RowSt = styled(RowOfElements)`
-/*  */
+  /*  */
   /* background-color: #ccc; */
 `
 
@@ -27,7 +27,6 @@ const TitleBox = styled.View`
   min-width: 85%;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid; */
   border-radius: 20px;
   margin-top: 30px;
   overflow: hidden;
@@ -46,27 +45,21 @@ const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     <ContainerSt>
+      <ModalCard
+        visibleModal={modalVisible}
+        visibleModalUp={() => {
+          setModalVisible(false)
+        }}
+      />
       <RowSt>
         <TitleBox style={styles.elementShadow}>
           <CustomText>Name of Your Recipe</CustomText>
         </TitleBox>
       </RowSt>
       <RowSt>
-        <CustomText>Ingredients</CustomText>
-      </RowSt>
-      <RowSt>
-        <ModalCard
-          visibleModal={modalVisible}
-          visibleModalUp={() => {
-            setModalVisible(false)
-          }}
-        />
-        <Pressable onPress={() => setModalVisible(true)}>
+        {/* <Pressable onPress={() => setModalVisible(true)}>
           <CustomText>Directions</CustomText>
-        </Pressable>
-      </RowSt>
-      <RowSt>
-        <CustomText>Image</CustomText>
+        </Pressable> */}
       </RowSt>
       <Pressable onPress={() => {}}>
         <SmallDefaultBtn text={'Save Post'} />
