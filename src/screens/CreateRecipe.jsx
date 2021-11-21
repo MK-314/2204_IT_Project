@@ -12,21 +12,44 @@ import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 
 const ContainerSt = styled(ContainerDefault)`
-  background-color: ${ConstantsRecipe.blue};
+  /*  */
+  /* background-color: #425c5c; */
 `
+
 const RowSt = styled(RowOfElements)`
-  background-color: ${ConstantsRecipe.lightBlue};
+/*  */
+  /* background-color: #ccc; */
 `
+
+const TitleBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  min-width: 85%;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 20px;
+  margin-top: 30px;
+  overflow: hidden;
+  /*  */
+  /* background-color: aqua; */
+`
+
 const CustomText = styled.Text`
-  margin-top: 40px;
-  font-size: 40px;
+  font-size: 25px;
+  padding: 40px 0px;
+  /*  */
+  /* background-color: red; */
 `
+
 const CreateRecipe = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     <ContainerSt>
       <RowSt>
-        <CustomText>Name of Your Recipe</CustomText>
+        <TitleBox>
+          <CustomText>Name of Your Recipe</CustomText>
+        </TitleBox>
       </RowSt>
       <RowSt>
         <CustomText>Ingredients</CustomText>
