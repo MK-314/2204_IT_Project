@@ -11,6 +11,7 @@ import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import Icon from 'react-native-vector-icons/Entypo'
+import { Text } from 'react-native'
 
 const ContainerSt = styled(ContainerDefault)`
   /*  */
@@ -29,10 +30,11 @@ const TitleBox = styled.View`
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-bottom: 40px;
   overflow: hidden;
   /*  */
-  background-color: #aff1c9;
+  background-color: ${ConstantsRecipe.gray2};
 `
 
 const CustomText = styled.Text`
@@ -41,11 +43,24 @@ const CustomText = styled.Text`
   /*  */
   /* background-color: red; */
 `
+const ViewArrowAndText = styled(RowSt)`
+  justify-content: space-evenly;
+  /* background-color: aqua; */
+`
 const IconArr = styled(Icon)`
-font-size: 150px;
+  font-size: 100px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const SmallTitleBox = styled(TitleBox)`
+  min-width: 42%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+`
+const IngredientsText = styled.Text`
+  font-size: 20px;
+  padding: 25px 10px;
 `
 
 const CreateRecipe = ({ navigation }) => {
@@ -63,9 +78,24 @@ const CreateRecipe = ({ navigation }) => {
           <CustomText>Name of Your Recipe</CustomText>
         </TitleBox>
       </RowSt>
-      <RowSt>
+      <ViewArrowAndText>
         <IconArr name={'arrow-long-right'} onPress={() => {}} />
-      </RowSt>
+        <SmallTitleBox style={styles.elementShadow}>
+          <IngredientsText>Ingredients</IngredientsText>
+        </SmallTitleBox>
+      </ViewArrowAndText>
+      <ViewArrowAndText>
+        <IconArr name={'arrow-long-right'} onPress={() => {}} />
+        <SmallTitleBox style={styles.elementShadow}>
+          <IngredientsText>Directions</IngredientsText>
+        </SmallTitleBox>
+      </ViewArrowAndText>
+      <ViewArrowAndText>
+        <IconArr name={'arrow-long-right'} onPress={() => {}} />
+        <SmallTitleBox style={styles.elementShadow}>
+          <IngredientsText>Image</IngredientsText>
+        </SmallTitleBox>
+      </ViewArrowAndText>
       <RowSt>
         {/* <Pressable onPress={() => setModalVisible(true)}>
           <CustomText>Directions</CustomText>
