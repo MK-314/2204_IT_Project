@@ -15,7 +15,7 @@ const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-    background-color: ${ConstantsRecipe.lightBlue};
+  background-color: ${ConstantsRecipe.lightBlue};
 `
 const TextInputSt = styled.TextInput`
   display: flex;
@@ -34,8 +34,11 @@ const LogInScreen = ({ navigation }) => {
   const [password, setPassword] = useState('')
 
   const handleSingIn = async () => {
-    let resEmail = await FireBaseAuthSystem.appSignUp(email,password)
-    navigation.navigate('CreateRecipe')
+    await FireBaseAuthSystem.appSignIn(email, password)
+    .then(res => {
+      navigation.navigate('CreateRecipe')
+    })
+    .catch(e=>{'Wrong credentials. Try again or reset password. Error: '+e})
   }
 
   return (
@@ -44,10 +47,18 @@ const LogInScreen = ({ navigation }) => {
         <CustomText>Sign In</CustomText>
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Email' />
+        <TextInputSt
+          value={email}
+          onChangeText={newValue => setEmail(newValue)}
+          placeholder={'Enter your email ...'}
+        />
       </RowSt>
       <RowSt>
-        <TextInputSt placeholder='Password' />
+        <TextInputSt
+          value={password}
+          onChangeText={newValue => setPassword(newValue)}
+          placeholder={'Enter your password ...'}
+        />
       </RowSt>
       <RowSt>
         <Text>Forgot password?</Text>

@@ -33,14 +33,14 @@ class FireBaseAuthSystem {
                     res(user.email)
                 })
                 .catch(error => {
-                    alert(error.message)
+                    rej(error.message)
                 })
         })
     }
 
-    static appSignUp(email, password) {
+    static appSignIn(email, password) {
         return new Promise(async(res, rej) => {
-            createUserWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, password)
                 .then(userCredential => {
                     // Signed in
                     const user = userCredential.user
@@ -50,7 +50,7 @@ class FireBaseAuthSystem {
                     res(user.email)
                 })
                 .catch(error => {
-                    alert(error.message)
+                    rej(error.message)
                 })
         })
     }
