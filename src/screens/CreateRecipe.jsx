@@ -100,7 +100,13 @@ const CreateRecipe = ({ navigation }) => {
         modalText={modalText}
         visibleModalUp={async () => {
           setModalVisible(false)
-          setRecipeName(await AsyncStorage.getItem('recipeName'))
+          AsyncStorage.getItem('recipeName')
+            .then(tempName => {
+              if (tempName.length > 0) {
+                setRecipeName(tempName)
+              }
+            })
+            .catch(e => {})
         }}
       />
       {/* NAME START */}
