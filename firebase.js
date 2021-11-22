@@ -67,7 +67,6 @@ class FireBaseAuthSystem {
     }
 }
 
-
 class FireBaseImageHandler {
     static getUrlByName(fileName) {
         return new Promise(async(res, rej) => {
