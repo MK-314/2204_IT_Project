@@ -27,26 +27,24 @@ const RowSt = styled(RowOfElements)`
   margin-left: 30px;
   height: 1260px;
   overflow: hidden;
-  /*  */
-  /* background-color: ${ConstantsRecipe.lightBlue}; */
 `
 const MainText = styled.Text`
   font-size: 17px;
   font-style: italic;
   line-height: 23px;
 `
-const View1 = styled.View`
-  max-height: 250px;
+const IngredientContainer = styled.View`
+  max-height: 220px;
+  overflow: hidden;
+  background-color: #ccc;
+  border-radius: 20px;
 `
 
 const FoodCategory = ({ navigation }) => {
   const item = navigation.getParam('item')
-  const [myArr, setmyArr] = useState([])
+  const [arrOfIngredients, setArrOfIngredients] = useState([])
   useEffect(() => {
-    const temp = []
-    temp.push(item)
-    setmyArr(temp)
-    console.log(JSON.stringify(myArr))
+    setArrOfIngredients(item.ingredients.split('\n'))
   }, [])
   return (
     <ContainerSt>
@@ -58,22 +56,16 @@ const FoodCategory = ({ navigation }) => {
       />
       <Ingredients />
       <RowSt>
-        <FlatList
-          vertical
-          data={myArr}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => {
-            return (
-              <View1>
-                <MainText>
-                  {item.ingredients}
-                  {item.ingredients}
-                  {item.ingredients}
-                </MainText>
-              </View1>
-            )
-          }}
-        />
+        <IngredientContainer>
+          <FlatList
+            vertical
+            data={arrOfIngredients}
+            keyExtractor={item => Math.random()}
+            renderItem={({ item }) => {
+              return <MainText>{item}</MainText>
+            }}
+          />
+        </IngredientContainer>
         {/* <MainText>{item.ingredients}</MainText> */}
       </RowSt>
       <FooterSt>
