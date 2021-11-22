@@ -59,10 +59,10 @@ const HomeScreen = ({ navigation }) => {
         />
         <ListOfResults
           search={search}
-          toFoodCategoryById={id => {
-            console.log(id + ' this iddddd')
+          toFoodCategoryById={item => {
+            console.log(item + ' this iddddd')
             navigation.navigate('FoodCategory', {
-              id: id
+              item: item
             })
           }}
         />

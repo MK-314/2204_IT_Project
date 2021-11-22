@@ -31,7 +31,7 @@ const RowSt = styled(RowOfElements)`
 `
 
 const FoodCategory = ({  navigation }) => {
-  const  id  = navigation.getParam('id')
+  const  item  = navigation.getParam('item')
   const ingreds = [
     { number: 1, name: '1 pound ground lean beef' },
     { number: 2, name: '1 large egg' },
@@ -47,8 +47,7 @@ const FoodCategory = ({  navigation }) => {
   ]
   return (
     <ContainerSt>
-      {console.log(id + ' ITEEEEM')}
-      <Text>{id}</Text>
+      {/* {console.log(JSON.stringify(item))} */}
       <SmallFoodCard
         toHomeScreen={() => {
           navigation.navigate('Home')

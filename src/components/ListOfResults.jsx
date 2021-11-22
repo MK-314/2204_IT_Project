@@ -32,7 +32,7 @@ const ListOfResults = props => {
           return (
             <Pressable
               onPress={() => {
-                props.toFoodCategoryById(item.id)
+                props.toFoodCategoryById(item)
               }}
             >
               <FoodCard
