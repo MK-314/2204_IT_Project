@@ -10,18 +10,8 @@ import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { FooterDefault } from '../components/small_elements/FooterDefault'
 
-const FooterSt = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  width: ${props => (props.hidden ? '0%' : '100%')};
-  position: absolute;
-  left: 0;
-  bottom: 30px;
-  min-height: 100px;
-  z-index: 1;
-`
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
@@ -66,13 +56,16 @@ const HomeScreen = ({ navigation }) => {
             })
           }}
         />
-        <FooterSt hidden={footerHidden}>
-          <NavIcons />
-        </FooterSt>
+        <FooterDefault hidden={footerHidden}>
+          <NavIcons
+            toProfileScreen={() => {
+              navigation.navigate('ProfileScreen')
+            }}
+          />
+        </FooterDefault>
       </ContainerDefault>
     </TouchableWithoutFeedback>
   )
 }
 
 export default HomeScreen
-export { FooterSt }

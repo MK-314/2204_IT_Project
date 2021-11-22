@@ -7,22 +7,21 @@ import styled from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../constants'
+import NavIcons from '../components/NavIcons'
+import { FooterDefault } from '../components/small_elements/FooterDefault'
 
-const ContainerSt = styled(ContainerDefault)`
-  background-color: ${ConstantsRecipe.blue};
-`
-const RowSt = styled(RowOfElements)`
-    background-color: ${ConstantsRecipe.lightBlue};
-`
 const ProfileScreen = ({ navigation }) => {
 
   return (
-    <ContainerSt>
-      <RowSt>
-        <Text>ok ok</Text>
-      </RowSt>
-    </ContainerSt>
+    <ContainerDefault>
+      <RowOfElements>
+        
+      </RowOfElements>
+      <FooterDefault>
+        <NavIcons />
+      </FooterDefault>
+    </ContainerDefault>
   )
 }
 export default ProfileScreen
+

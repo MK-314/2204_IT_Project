@@ -10,13 +10,13 @@ import {
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
-import { FooterSt } from './HomeScreen'
 import SmallFoodCard from './../components/foodCategory/SmallFoodCard'
 import Ingredients from './../components/foodCategory/Ingredients'
 import IngredientsList from './../components/foodCategory/IngredientsList'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
+import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
@@ -66,9 +66,9 @@ const FoodCategory = ({ navigation }) => {
           />
         </Box>
       </RowSt>
-      <FooterSt>
+      <FooterDefault>
         <NavIcons />
-      </FooterSt>
+      </FooterDefault>
     </ContainerSt>
   )
 }

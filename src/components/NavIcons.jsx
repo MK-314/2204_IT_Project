@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, Keyboard, Pressable } from 'react-native'
 import styled from 'styled-components/native'
 import IconBook from 'react-native-vector-icons/FontAwesome'
 import IconFavorite from 'react-native-vector-icons/AntDesign'
@@ -62,10 +62,10 @@ const DisabledText = styled(TextSt)`
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 
-const NavIcons = () => {
+const NavIcons = props => {
   const [bigHeart, setBigHeart] = useState(false)
   return (
-    <RowSt >
+    <RowSt>
       <BoxSt style={styles.customShadow}>
         <IconBookSt name='book' />
         <TextSt>Recipes</TextSt>
@@ -84,8 +84,14 @@ const NavIcons = () => {
         <DisabledText>Favorites</DisabledText>
       </BoxSt>
       <BoxSt>
-        <IconProfileSt name='github' />
-        <DisabledText>Profile</DisabledText>
+        <Pressable
+          onPress={() => {
+            props.toProfileScreen()
+          }}
+        >
+          <IconProfileSt name='github' />
+          <DisabledText>Profile</DisabledText>
+        </Pressable>
       </BoxSt>
     </RowSt>
   )
