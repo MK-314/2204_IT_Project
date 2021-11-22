@@ -22,24 +22,23 @@ const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 30px;
-  height: 1260px;
+  min-height: 200px;
+`
+const Box = styled.View`
+  width: 350px;
+  height: 250px;
   overflow: hidden;
+  border-color: ${ConstantsRecipe.green};;
+  border-left-width: 3px;
+  border-right-width: 3px;
 `
 const MainText = styled.Text`
   font-size: 17px;
   font-style: italic;
   line-height: 23px;
+  background-color: ${ConstantsRecipe.blue};
+  padding-left: 10px;
 `
-const IngredientContainer = styled.View`
-  max-height: 220px;
-  overflow: hidden;
-  background-color: #ccc;
-  border-radius: 20px;
-`
-
 const FoodCategory = ({ navigation }) => {
   const item = navigation.getParam('item')
   const [arrOfIngredients, setArrOfIngredients] = useState([])
@@ -54,9 +53,9 @@ const FoodCategory = ({ navigation }) => {
           navigation.navigate('Home')
         }}
       />
-      <Ingredients />
+        <Ingredients />
       <RowSt>
-        <IngredientContainer>
+        <Box >
           <FlatList
             vertical
             data={arrOfIngredients}
@@ -65,8 +64,7 @@ const FoodCategory = ({ navigation }) => {
               return <MainText>{item}</MainText>
             }}
           />
-        </IngredientContainer>
-        {/* <MainText>{item.ingredients}</MainText> */}
+        </Box>
       </RowSt>
       <FooterSt>
         <NavIcons />
@@ -74,5 +72,6 @@ const FoodCategory = ({ navigation }) => {
     </ContainerSt>
   )
 }
+
 
 export default FoodCategory

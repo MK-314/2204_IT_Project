@@ -21,7 +21,7 @@ const Box = styled.View`
   height: 270px;
   border-radius: 20px;
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   overflow: hidden;
 `
 const SmallFoodItem = styled.Image`
