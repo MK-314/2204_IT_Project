@@ -39,8 +39,8 @@ const TextSt = styled.Text`
   font-size: 35px;
   font-style: italic;
   font-weight: bold;
-  color: #249953;
-  text-shadow: 1px 1px 1px #fff;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const WhiteRow = styled(RowOfElements)`
