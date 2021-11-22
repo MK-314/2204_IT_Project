@@ -1,4 +1,12 @@
 import React, { useState } from 'react'
+import {
+  Text,
+  StyleSheet,
+  View,
+  Keyboard,
+  Image,
+  Pressable
+} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
@@ -22,7 +30,8 @@ const RowSt = styled(RowOfElements)`
   /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 
-const FoodCategory = ({ navigation }) => {
+const FoodCategory = ({  navigation }) => {
+  const  id  = navigation.getParam('id')
   const ingreds = [
     { number: 1, name: '1 pound ground lean beef' },
     { number: 2, name: '1 large egg' },
@@ -38,7 +47,13 @@ const FoodCategory = ({ navigation }) => {
   ]
   return (
     <ContainerSt>
-      <SmallFoodCard toHomeScreen={()=>{navigation.navigate('Home')}}/>
+      {console.log(id + ' ITEEEEM')}
+      <Text>{id}</Text>
+      <SmallFoodCard
+        toHomeScreen={() => {
+          navigation.navigate('Home')
+        }}
+      />
       <Ingredients />
       <RowSt>
         {/* <FlatList

@@ -59,8 +59,11 @@ const HomeScreen = ({ navigation }) => {
         />
         <ListOfResults
           search={search}
-          toFoodCategory={() => {
-            navigation.navigate('FoodCategory')
+          toFoodCategoryById={id => {
+            console.log(id + ' this iddddd')
+            navigation.navigate('FoodCategory', {
+              id: id
+            })
           }}
         />
         <FooterSt hidden={footerHidden}>

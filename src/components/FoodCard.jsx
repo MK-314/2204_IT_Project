@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  Keyboard,
+  Image,
+  Pressable
+} from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
@@ -30,7 +37,8 @@ const IconSt = styled(Icon)`
   top: 30px;
   left: 30px;
   font-size: 35px;
-  color: ${props =>(props.name == 'hearto' ?  ConstantsRecipe.green : 'orangered')};
+  color: ${props =>
+    props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
   text-shadow: 1px 1px 1px #000000;
   z-index: 1;
