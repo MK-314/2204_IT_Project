@@ -29,9 +29,9 @@ const IconSt = styled(Icon)`
   top: 30px;
   left: 30px;
   font-size: 35px;
-  color: ${ConstantsRecipe.green};
+  color: ${props =>(props.name == 'hearto' ?  ConstantsRecipe.green : 'orangered')};
   font-weight: bold;
-  text-shadow: ${ConstantsRecipe.text_shadow};
+  text-shadow: 1px 1px 1px #000000;
   z-index: 1;
 `
 const TextSt = styled.Text`
@@ -44,7 +44,7 @@ const TextSt = styled.Text`
   z-index: 1;
 `
 const WhiteRow = styled(RowOfElements)`
-  background-color: #d7dfe6;
+  background-color: ${ConstantsRecipe.gray2};
   border-radius: 20px;
   max-width: 250px;
   position: absolute;
