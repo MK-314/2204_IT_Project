@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
+import { MainHeader, WhiteRow } from './small_elements/MainHeader'
 
 const Box = styled.View`
   position: relative;
@@ -34,25 +35,6 @@ const IconSt = styled(Icon)`
   text-shadow: 1px 1px 1px #000000;
   z-index: 1;
 `
-const TextSt = styled.Text`
-  display: flex;
-  font-size: 35px;
-  font-style: italic;
-  font-weight: bold;
-  color: ${ConstantsRecipe.green};
-  text-shadow: ${ConstantsRecipe.text_shadow};
-  z-index: 1;
-`
-const WhiteRow = styled(RowOfElements)`
-  background-color: ${ConstantsRecipe.gray2};
-  border-radius: 20px;
-  max-width: 250px;
-  position: absolute;
-  bottom: 40px;
-  left: 10px;
-  z-index: 1;
-`
-
 const TextNum = styled.Text`
   display: flex;
   position: absolute;
@@ -71,15 +53,9 @@ const FoodCard = props => {
 
   return (
     <Box style={styles.customShadow}>
-      {/* <EmptyIcon
-        name={'hearto'}
-        onPress={() => {
-          props.toFoodCategory()
-        }}
-      /> */}
       <TextNum>{number}</TextNum>
       <WhiteRow style={styles.customShadow}>
-        <TextSt>{props.textFood}</TextSt>
+        <MainHeader>{props.textFood}</MainHeader>
       </WhiteRow>
       <IconSt
         name={iconName}
