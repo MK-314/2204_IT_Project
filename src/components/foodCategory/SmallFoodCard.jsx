@@ -35,10 +35,9 @@ const SmallFoodItem = styled.Image`
   border-radius: 20px;
 `
 const HeartIcon = styled(Icon)`
-  display: flex;
   position: absolute;
-  top: 30px;
-  right: 165px;
+  top: 13px;
+  left: 55px;
   font-size: 35px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
@@ -46,24 +45,31 @@ const HeartIcon = styled(Icon)`
 `
 const IconBack = styled(BackIcon)`
   position: absolute;
-  top: 30px;
-  left: 60px;
+  top: 10px;
+  left: 10px;
   font-size: 40px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconShare = styled(Icon)`
-  top: 30px;
-  right: 75px;
+  position: absolute;
+  top: 10px;
+  right: 25px;
   font-size: 35px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
-const SmallTextNum = styled(TextNum)`
-  font-size: 25px;
-  right: 130px;
+const SmallTextNum = styled.Text`
+  position: absolute;
+  top: 5px;
+  left: 105px;
+  font-size: 35px;
+  font-weight: bold;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
+  z-index: 1;
 `
 const MainHeaderModified = styled(MainHeader)`
 font-size: 25px;

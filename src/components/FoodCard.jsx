@@ -36,7 +36,6 @@ const IconSt = styled(Icon)`
   z-index: 1;
 `
 const TextNum = styled.Text`
-  display: flex;
   position: absolute;
   top: 20px;
   right: 155px;
