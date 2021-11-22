@@ -15,14 +15,16 @@ import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 const RowSt = styled(RowOfElements)`
   min-height: 200px;
   overflow: hidden;
-  /*   background-color: ${ConstantsRecipe.lightBlue}; */
+  /*  */
+  /* background-color: azure; */
 `
 const Box = styled.View`
   position: relative;
   width: 300px;
   height: 270px;
   border-radius: 20px;
-  margin: 40px 0px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   overflow: hidden;
 `
 const SmallFoodItem = styled.Image`
