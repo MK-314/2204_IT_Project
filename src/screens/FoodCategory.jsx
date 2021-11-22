@@ -23,11 +23,16 @@ const ContainerSt = styled(ContainerDefault)`
 `
 const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
-  height: 260px;
-  margin-top: 10px;
+  align-items: flex-start;
+  margin-left: 30px;
+  height: 1260px;
   overflow: hidden;
   /*  */
-  /*   background-color: ${ConstantsRecipe.lightBlue}; */
+  background-color: ${ConstantsRecipe.lightBlue};
+`
+const MainText = styled.Text`
+  font-size: 17px;
+  font-style: italic;
 `
 
 const FoodCategory = ({ navigation }) => {
@@ -36,13 +41,14 @@ const FoodCategory = ({ navigation }) => {
     <ContainerSt>
       {/* {console.log(JSON.stringify(item))} */}
       <SmallFoodCard
+        item={item}
         toHomeScreen={() => {
           navigation.navigate('Home')
         }}
       />
       <Ingredients />
       <RowSt>
-        <Text>{item.ingredients}</Text>
+        <MainText>{item.ingredients}</MainText>
       </RowSt>
       <FooterSt>
         <NavIcons />

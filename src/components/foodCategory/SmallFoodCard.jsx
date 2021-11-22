@@ -84,7 +84,7 @@ const SmallFoodCard = props => {
       <Box style={styles.customShadow}>
         <SmallFoodItem
           source={{
-            uri: 'https://images.mktw.net/im-398488?width=1280&size=1'
+            uri: props.item.imageUrl
           }}
         />
         <HeartIcon name={'heart'} />
@@ -96,9 +96,9 @@ const SmallFoodCard = props => {
           }}
         />
         <WhiteRowModified>
-          <MainHeaderModified>Burger</MainHeaderModified>
+          <MainHeaderModified>{props.item.name}</MainHeaderModified>
         </WhiteRowModified>
-        <SmallTextNum>22</SmallTextNum>
+        <SmallTextNum>{props.item.id}</SmallTextNum>
       </Box>
     </RowSt>
   )
