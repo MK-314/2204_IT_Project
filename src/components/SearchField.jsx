@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 const RowSt = styled(RowOfElements)`
   min-height: 70px;
@@ -31,6 +32,22 @@ const IconSt = styled(Icon)`
 
 const SearchField = props => {
   const [focusedBool, setfocusedBool] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+
+  // const searchFoodItem = async (newValue) => {
+  //   setInputValue(newValue)
+  //   let timer = null
+  //   clearTimeout(timer)
+  //   timer = setTimeout(() => {
+  //     console.log(JSON.stringify(props.itemsByUser[0].name)+" ITEMS")
+  //     let searchRes = props.itemsByUser.filter(it => it.name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()))
+  //     props.sendingFilteredResult(searchRes)
+  //   }, 500)
+  const searchFoodItem = (newValue) => {
+    setInputValue(newValue)
+    props.request(newValue)
+  }
+
   return (
     <RowSt>
       <TextInputSt
@@ -43,6 +60,10 @@ const SearchField = props => {
         onBlur={() => {
           setfocusedBool(false)
         }}
+        autoCapitalize='none'
+        autoCorrect={false}
+        value={inputValue}
+        onChangeText={newValue => searchFoodItem(newValue)}
       />
       <IconSt name='search' />
     </RowSt>

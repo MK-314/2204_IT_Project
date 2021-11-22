@@ -30,9 +30,14 @@ const ListOfResults = props => {
   // ]
   useEffect(async () => {
     let user_id = await AsyncStorage.getItem('user_id')
-    let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
-    setItemsByUser(itemsInUseEffect)
-  }, [])
+    if (props.search == '') {
+      let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
+      setItemsByUser(itemsInUseEffect)
+    } else {
+      let searchRes = itemsByUser.filter(it => it.name.toLocaleLowerCase().includes(props.search.toLocaleLowerCase()))
+      setItemsByUser(searchRes)
+    }
+  }, [props.search])
   return (
     <RowSt>
       <FlatList

@@ -54,7 +54,7 @@ const SingUpScreen = ({ navigation }) => {
           .catch(e => {
             alert('User was not created')
           })
-        navigation.navigate('CreateRecipe')
+        navigation.navigate('Home')
       })
       .catch(e => {
         'Firebase sing up error: ' + e

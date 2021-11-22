@@ -9,7 +9,7 @@ import ProfileScreen from './src/screens/ProfileScreen'
 import SingUpScreen from './src/screens/SingUpScreen'
 import CreateRecipe from './src/screens/CreateRecipe'
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
-LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core'])
+LogBox.ignoreLogs(['AsyncStorage has'])
 
 const navigator = createStackNavigator(
   {

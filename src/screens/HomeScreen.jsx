@@ -25,10 +25,16 @@ const FooterSt = styled.View`
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     AsyncStorage.getItem('user_id')
-      .then(id => {console.log(id+" USER ID")})
+      .then(id => {
+        console.log(id + ' USER ID')
+        if (!id) {
+          navigation.navigate('LogInScreen')
+        }
+      })
       .catch(e => {
         navigation.navigate('LogInScreen')
       })
@@ -45,11 +51,15 @@ const HomeScreen = ({ navigation }) => {
     >
       <ContainerDefault>
         <SearchField
+          request={searchRequest => {
+            setSearch(searchRequest)
+          }}
           hidden={() => {
             setfooterHidden(true)
           }}
         />
         <ListOfResults
+          search={search}
           toFoodCategory={() => {
             navigation.navigate('FoodCategory')
           }}
