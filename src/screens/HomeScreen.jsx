@@ -12,7 +12,6 @@ import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 
-
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
   const [search, setSearch] = useState('')
@@ -58,6 +57,7 @@ const HomeScreen = ({ navigation }) => {
         />
         <FooterDefault hidden={footerHidden}>
           <NavIcons
+            iconName='recipes'
             toProfileScreen={() => {
               navigation.navigate('ProfileScreen')
             }}

@@ -21,7 +21,8 @@ const IconFavoriteSt = styled(IconFavorite)`
   align-self: center;
   padding: 10px;
   font-size: 40px;
-  color: #ccc;
+  color: ${props =>
+    props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
   margin-top: 0;
 `
@@ -30,7 +31,8 @@ const IconBookSt = styled(IconBook)`
   align-self: center;
   padding: 10px;
   font-size: 40px;
-  color: ${ConstantsRecipe.green};
+  color: ${props =>
+    props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconProfileSt = styled(IconProfile)`
@@ -39,7 +41,8 @@ const IconProfileSt = styled(IconProfile)`
   padding: 10px;
   font-size: 40px;
   text-shadow: ${ConstantsRecipe.text_shadow};
-  color: #ccc;
+  color: ${props =>
+    props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 
 const BoxSt = styled.View`
@@ -50,47 +53,52 @@ const BoxSt = styled.View`
   align-items: center;
   background-color: ${ConstantsRecipe.gray2};
 `
-const TextSt = styled.Text`
-  display: flex;
+const RecipesText = styled.Text`
   font-size: 20px;
   font-weight: bold;
-  color: ${ConstantsRecipe.green};
+  color: ${props =>
+    props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
-const DisabledText = styled(TextSt)`
-  color: #ccc;
-  text-shadow: ${ConstantsRecipe.text_shadow};
+const FavoritesText = styled(RecipesText)`
+  color: ${props =>
+    props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
 `
-
+const ProfileText = styled(RecipesText)`
+  color: ${props =>
+    props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
+`
 const NavIcons = props => {
-  const [bigHeart, setBigHeart] = useState(false)
   return (
     <RowSt>
-      <BoxSt style={styles.customShadow}>
-        <IconBookSt name='book' />
-        <TextSt>Recipes</TextSt>
+      <BoxSt
+        style={[
+          props.iconName == 'recipes' ? styles.customShadow : styles.noShadow
+        ]}
+      >
+        <IconBookSt name='book' iconeName={props.iconName} />
+        <RecipesText iconeName={props.iconName}>Recipes</RecipesText>
       </BoxSt>
-      <BoxSt>
-        <IconFavoriteSt
-          name='heart'
-          big={bigHeart}
-          onPress={() => {
-            setBigHeart(true)
-            setTimeout(() => {
-              setBigHeart(false)
-            }, 2000)
-          }}
-        />
-        <DisabledText>Favorites</DisabledText>
+      <BoxSt
+        style={[
+          props.iconName == 'favorites' ? styles.customShadow : styles.noShadow
+        ]}
+      >
+        <IconFavoriteSt name='heart' iconeName={props.iconName} />
+        <FavoritesText iconeName={props.iconName}>Favorites</FavoritesText>
       </BoxSt>
-      <BoxSt>
+      <BoxSt
+        style={[
+          props.iconName == 'profile' ? styles.customShadow : styles.noShadow
+        ]}
+      >
         <Pressable
           onPress={() => {
             props.toProfileScreen()
           }}
         >
-          <IconProfileSt name='github' />
-          <DisabledText>Profile</DisabledText>
+          <IconProfileSt name='github' iconeName={props.iconName} />
+          <ProfileText iconeName={props.iconName}>Profile</ProfileText>
         </Pressable>
       </BoxSt>
     </RowSt>
@@ -106,7 +114,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.7,
     shadowRadius: 4,
     elevation: 17
-  }
+  },
+  noShadow: {}
 })
 
 export default NavIcons

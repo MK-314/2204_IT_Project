@@ -18,7 +18,7 @@ const ProfileScreen = ({ navigation }) => {
         
       </RowOfElements>
       <FooterDefault>
-        <NavIcons />
+        <NavIcons  iconName='profile'/>
       </FooterDefault>
     </ContainerDefault>
   )
