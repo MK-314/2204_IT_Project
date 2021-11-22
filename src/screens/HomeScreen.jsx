@@ -58,8 +58,8 @@ const HomeScreen = ({ navigation }) => {
         <FooterDefault hidden={footerHidden}>
           <NavIcons
             iconName='recipes'
-            toProfileScreen={() => {
-              navigation.navigate('ProfileScreen')
+            toScreen={(screen) => {
+              navigation.navigate(screen)
             }}
           />
         </FooterDefault>

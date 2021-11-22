@@ -67,8 +67,13 @@ const FoodCategory = ({ navigation }) => {
         </Box>
       </RowSt>
       <FooterDefault>
-        <NavIcons />
-      </FooterDefault>
+          <NavIcons
+            iconName='recipes'
+            toScreen={(screen) => {
+              navigation.navigate(screen)
+            }}
+          />
+        </FooterDefault>
     </ContainerSt>
   )
 }

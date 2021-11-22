@@ -18,7 +18,12 @@ const ProfileScreen = ({ navigation }) => {
         
       </RowOfElements>
       <FooterDefault>
-        <NavIcons  iconName='profile'/>
+        <NavIcons  
+        iconName='profile'
+        toScreen={(screen) => {
+          navigation.navigate(screen)
+        }}
+        />
       </FooterDefault>
     </ContainerDefault>
   )

@@ -76,8 +76,14 @@ const NavIcons = props => {
           props.iconName == 'recipes' ? styles.customShadow : styles.noShadow
         ]}
       >
-        <IconBookSt name='book' iconeName={props.iconName} />
-        <RecipesText iconeName={props.iconName}>Recipes</RecipesText>
+        <Pressable
+          onPress={() => {
+            props.toScreen('Home')
+          }}
+        >
+          <IconBookSt name='book' iconeName={props.iconName} />
+          <RecipesText iconeName={props.iconName}>Recipes</RecipesText>
+        </Pressable>
       </BoxSt>
       <BoxSt
         style={[
@@ -94,7 +100,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            props.toProfileScreen()
+            props.toScreen('ProfileScreen')
           }}
         >
           <IconProfileSt name='github' iconeName={props.iconName} />
