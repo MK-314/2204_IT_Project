@@ -10,7 +10,7 @@ const RowSt = styled(RowOfElements)`
   min-height: 70px;
   margin-top: 7%;
   /*  */
-  background-color: orangered;
+  background-color: #1f8448;
 `
 const InputBox = styled(RowOfElements)`
   position: absolute;
