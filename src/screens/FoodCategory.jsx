@@ -30,21 +30,8 @@ const RowSt = styled(RowOfElements)`
   /*   background-color: ${ConstantsRecipe.lightBlue}; */
 `
 
-const FoodCategory = ({  navigation }) => {
-  const  item  = navigation.getParam('item')
-  const ingreds = [
-    { number: 1, name: '1 pound ground lean beef' },
-    { number: 2, name: '1 large egg' },
-    { number: 3, name: '½ cup minced onion' },
-    { number: 4, name: '¼ cup fine dried bread crumbs' },
-    { number: 5, name: '1 tablespoon Worcestershire' },
-    { number: 6, name: '1 or 2 cloves garlic, peeled and minced' },
-    { number: 7, name: 'About 1/2 teaspoon salt' },
-    { number: 8, name: 'About 1/4 teaspoon pepper' },
-    { number: 9, name: '4 hamburger buns (4 in. wide), split' },
-    { number: 10, name: 'About 1/4 cup mayonnaise' },
-    { number: 11, name: 'About 1/4 cup ketchup' }
-  ]
+const FoodCategory = ({ navigation }) => {
+  const item = navigation.getParam('item')
   return (
     <ContainerSt>
       {/* {console.log(JSON.stringify(item))} */}
@@ -55,14 +42,7 @@ const FoodCategory = ({  navigation }) => {
       />
       <Ingredients />
       <RowSt>
-        {/* <FlatList
-          vertical
-          data={ingreds}
-          keyExtractor={item => item.number}
-          renderItem={({ item }) => {
-            return <IngredientsList number={item.number} name={item.name} />
-          }}
-        /> */}
+        <Text>{item.ingredients}</Text>
       </RowSt>
       <FooterSt>
         <NavIcons />
