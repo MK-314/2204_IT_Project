@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {
   Text,
   StyleSheet,
@@ -38,17 +38,32 @@ const MainText = styled.Text`
 
 const FoodCategory = ({ navigation }) => {
   const item = navigation.getParam('item')
+  const [myArr, setmyArr] = useState([]);
+  useEffect(() => {
+    const temp = []
+    temp.push(item)
+    setmyArr(temp)
+    console.log(JSON.stringify(myArr))
+  }, []);
   return (
     <ContainerSt>
       <SmallFoodCard
-        item={item}
+        item={myArr}
         toHomeScreen={() => {
           navigation.navigate('Home')
         }}
       />
       <Ingredients />
       <RowSt>
-        <MainText>{item.ingredients}</MainText>
+      <FlatList
+          vertical
+          data={myArr}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => {
+            return  <MainText>{item.ingredients}{item.ingredients}{item.ingredients}</MainText>
+          }}
+        />
+        {/* <MainText>{item.ingredients}</MainText> */}
       </RowSt>
       <FooterSt>
         <NavIcons />
