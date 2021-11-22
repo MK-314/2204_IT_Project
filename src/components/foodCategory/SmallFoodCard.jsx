@@ -65,7 +65,7 @@ const SmallTextNum = styled(TextNum)`
   font-size: 25px;
   right: 130px;
 `
-const TextSt = styled(MainHeader)`
+const MainHeaderModified = styled(MainHeader)`
 font-size: 25px;
 `
 const WhiteRowModified = styled(WhiteRow)`
@@ -91,7 +91,7 @@ const SmallFoodCard = props => {
           }}
         />
         <WhiteRowModified>
-          <TextSt>Burger</TextSt>
+          <MainHeaderModified>Burger</MainHeaderModified>
         </WhiteRowModified>
         <SmallTextNum>22</SmallTextNum>
       </Box>
