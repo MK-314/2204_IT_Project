@@ -28,18 +28,18 @@ const RowSt = styled(RowOfElements)`
   height: 1260px;
   overflow: hidden;
   /*  */
-  background-color: ${ConstantsRecipe.lightBlue};
+  /* background-color: ${ConstantsRecipe.lightBlue}; */
 `
 const MainText = styled.Text`
   font-size: 17px;
   font-style: italic;
+  line-height: 23px;
 `
 
 const FoodCategory = ({ navigation }) => {
   const item = navigation.getParam('item')
   return (
     <ContainerSt>
-      {/* {console.log(JSON.stringify(item))} */}
       <SmallFoodCard
         item={item}
         toHomeScreen={() => {
