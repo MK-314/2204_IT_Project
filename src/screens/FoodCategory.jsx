@@ -35,6 +35,18 @@ const FoodCategory = ({ navigation }) => {
     { number: 9, name: '4 hamburger buns (4 in. wide), split' },
     { number: 10, name: 'About 1/4 cup mayonnaise' },
     { number: 11, name: 'About 1/4 cup ketchup' }
+    
+    // 1 pound ground lean beef
+    // 1 large egg
+    // ½ cup minced onion
+    // ¼ cup fine dried bread crumbs
+    // 1 tablespoon Worcestershire
+    // 1 or 2 cloves garlic, peeled and minced
+    // About 1/2 teaspoon salt
+    // About 1/4 teaspoon pepper
+    // 4 hamburger buns (4 in. wide), split
+    // About 1/4 cup mayonnaise
+    // About 1/4 cup ketchup
   ]
   return (
     <ContainerSt>
