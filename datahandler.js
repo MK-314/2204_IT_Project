@@ -70,5 +70,21 @@ class FetchApi {
                 });
         })
     }
+    static getPostByUserId(user_id) {
+        return new Promise(async(res, rej) => {
+            fetch('https://recipe-ruby-api.herokuapp.com/api/users' +
+                    '?thisaction=getByUserId&user_id=' + user_id, {
+                        "method": "GET",
+                        "headers": {}
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
 }
 export { FetchApi }
