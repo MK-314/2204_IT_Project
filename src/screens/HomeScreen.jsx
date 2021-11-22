@@ -30,7 +30,6 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     AsyncStorage.getItem('user_id')
       .then(id => {
-        console.log(id + ' USER ID')
         if (!id) {
           navigation.navigate('LogInScreen')
         }

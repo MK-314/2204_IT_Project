@@ -8,26 +8,9 @@ import { RowOfElements } from './small_elements/RowOfElements'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const RowSt = styled(RowOfElements)`
-  min-height: 400px;
-  overflow: hidden;
-`
 
 const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
-  // const images = [
-  //   {
-  //     url:
-  //       'https://detoxinista.com/wp-content/uploads/2020/10/ginger-tea-recipe.jpg',
-  //       number: 17,
-  //     textFood: 'Ginger tea'
-  //   },
-  //   {
-  //     url: 'https://images.mktw.net/im-398488?width=1280&size=1',
-  //     number: 21,
-  //     textFood: 'Burger'
-  //   }
-  // ]
   useEffect(async () => {
     let user_id = await AsyncStorage.getItem('user_id')
     if (props.search == '') {
@@ -39,7 +22,7 @@ const ListOfResults = props => {
     }
   }, [props.search])
   return (
-    <RowSt>
+    <>
       <FlatList
         horizontal
         data={itemsByUser}
@@ -57,7 +40,7 @@ const ListOfResults = props => {
           )
         }}
       />
-    </RowSt>
+    </>
   )
 }
 

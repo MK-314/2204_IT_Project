@@ -4,28 +4,35 @@ import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import { AsyncStorage } from '@react-native-async-storage/async-storage'
 
 const RowSt = styled(RowOfElements)`
   min-height: 70px;
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin-top: 7%;
   /*  */
-  /* background-color: orangered; */
+  background-color: orangered;
 `
-const TextInputSt = styled.TextInput`
-  display: flex;
+const InputBox = styled(RowOfElements)`
+  position: absolute;
   background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
   height: 50px;
-  margin-right: -55px;
+  /* padding-left: 20px; */
+  border-radius: 20px;
+`
+const TextInputSt = styled.TextInput`
+  background-color: ${ConstantsRecipe.white};
+  width: 100%;
+  height: 50px;
   padding-left: 20px;
-  border-radius: 100px;
+  border-radius: 20px;
 `
 const IconSt = styled(Icon)`
   display: flex;
+  position: absolute;
+  top: 8px;
+  right: 15px;
   align-self: center;
-  padding: 10px;
   font-size: 30px;
   color: ${ConstantsRecipe.green};
 `
@@ -34,40 +41,45 @@ const SearchField = props => {
   const [focusedBool, setfocusedBool] = useState(false)
   const [inputValue, setInputValue] = useState('')
 
-  // const searchFoodItem = async (newValue) => {
-  //   setInputValue(newValue)
-  //   let timer = null
-  //   clearTimeout(timer)
-  //   timer = setTimeout(() => {
-  //     console.log(JSON.stringify(props.itemsByUser[0].name)+" ITEMS")
-  //     let searchRes = props.itemsByUser.filter(it => it.name.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()))
-  //     props.sendingFilteredResult(searchRes)
-  //   }, 500)
-  const searchFoodItem = (newValue) => {
+  const searchFoodItem = newValue => {
     setInputValue(newValue)
     props.request(newValue)
   }
 
   return (
     <RowSt>
-      <TextInputSt
-        placeholder='Search a recipe'
-        focusedSt={focusedBool}
-        onFocus={() => {
-          setfocusedBool(true)
-          props.hidden()
-        }}
-        onBlur={() => {
-          setfocusedBool(false)
-        }}
-        autoCapitalize='none'
-        autoCorrect={false}
-        value={inputValue}
-        onChangeText={newValue => searchFoodItem(newValue)}
-      />
-      <IconSt name='search' />
+      <InputBox style={styles.customShadow} focusedSt={focusedBool}>
+        <TextInputSt
+          placeholder='Search a recipe'
+          focusedSt={focusedBool}
+          onFocus={() => {
+            setfocusedBool(true)
+            props.hidden()
+          }}
+          onBlur={() => {
+            setfocusedBool(false)
+          }}
+          autoCapitalize='none'
+          autoCorrect={false}
+          value={inputValue}
+          onChangeText={newValue => searchFoodItem(newValue)}
+        />
+        <IconSt name='search' />
+      </InputBox>
     </RowSt>
   )
 }
+const styles = StyleSheet.create({
+  customShadow: {
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 17
+  }
+})
 
 export default SearchField
