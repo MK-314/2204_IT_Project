@@ -21,7 +21,7 @@ const navigator = createStackNavigator(
     CreateRecipe: CreateRecipe
   },
   {
-    initialRouteName: 'CreateRecipe',
+    initialRouteName: 'Home',
     defaultNavigationOptions: {
       title: 'Recipe App'
     }
