@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, StyleSheet, View, Keyboard } from 'react-native'
 import {
   TouchableOpacity,
@@ -9,6 +9,7 @@ import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const FooterSt = styled.View`
   display: flex;
@@ -25,6 +26,14 @@ const FooterSt = styled.View`
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
 
+  useEffect(() => {
+    AsyncStorage.getItem('user_id')
+      .then(id => {console.log(id+" USER ID")})
+      .catch(e => {
+        navigation.navigate('LogInScreen')
+      })
+  }, [])
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -40,7 +49,11 @@ const HomeScreen = ({ navigation }) => {
             setfooterHidden(true)
           }}
         />
-        <ListOfResults toFoodCategory={()=>{navigation.navigate('FoodCategory')}}/>
+        <ListOfResults
+          toFoodCategory={() => {
+            navigation.navigate('FoodCategory')
+          }}
+        />
         <FooterSt hidden={footerHidden}>
           <NavIcons />
         </FooterSt>
@@ -50,4 +63,4 @@ const HomeScreen = ({ navigation }) => {
 }
 
 export default HomeScreen
-export  {FooterSt}
+export { FooterSt }
