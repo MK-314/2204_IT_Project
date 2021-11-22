@@ -20,26 +20,11 @@ import { FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 import { FetchApi } from '../../datahandler'
 
-const ContainerSt = styled(ContainerDefault)`
-  /*  */
-  /* background-color: #425c5c; */
-`
-
-const RowSt = styled(RowOfElements)`
-  /*  */
-  /* background-color: #ccc; */
-`
-
-const TitleBox = styled.View`
-  display: flex;
-  flex-direction: row;
-  min-width: 85%;
-  align-items: center;
-  justify-content: center;
+const TitleBox = styled(RowOfElements)`
+  width: 85%;
   border-radius: 20px;
   margin-top: 50px;
   margin-bottom: 40px;
-  overflow: hidden;
   /*  */
   background-color: ${props =>
     props.nameDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
@@ -51,7 +36,7 @@ const CustomText = styled.Text`
   /*  */
   /* background-color: red; */
 `
-const ViewArrowAndText = styled(RowSt)`
+const ViewArrowAndText = styled(RowOfElements)`
   justify-content: space-evenly;
   /* background-color: aqua; */
 `
@@ -102,7 +87,6 @@ const SmallTitleBox3 = styled(SmallTitleBox1)`
 const TextOfSmallBox = styled.Text`
   font-size: 20px;
   padding: 25px 10px;
-  /* margin-left: -20px; */
 `
 const ImageRow = styled(ViewArrowAndText)`
   margin-top: 12px;
@@ -167,7 +151,7 @@ const CreateRecipe = ({ navigation }) => {
   }
 
   return (
-    <ContainerSt>
+    <ContainerDefault>
       <ModalCard
         visibleModal={modalVisible}
         modalText={modalText}
@@ -182,11 +166,11 @@ const CreateRecipe = ({ navigation }) => {
           setModalVisible(true)
         }}
       >
-        <RowSt>
+        <RowOfElements>
           <TitleBox style={styles.elementShadow} nameDone={nameDone}>
             <CustomText>{recipeName}</CustomText>
           </TitleBox>
-        </RowSt>
+        </RowOfElements>
       </Pressable>
       {/* NAME ENDS */}
       {/* INGREDIENTS START */}
@@ -248,7 +232,7 @@ const CreateRecipe = ({ navigation }) => {
         <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
       {/* BUTTON ENDS */}
-    </ContainerSt>
+    </ContainerDefault>
   )
 }
 const styles = StyleSheet.create({
