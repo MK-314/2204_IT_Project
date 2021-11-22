@@ -97,6 +97,16 @@ class FireBaseImageHandler {
             res(snapshot)
         })
     }
+    static getUrlOfImageFireBase(filename) {
+        return new Promise(async(res, rej) => {
+            const storageRef = ref(storage, filename);
+            getDownloadURL(storageRef)
+                .then((url) => {
+                    res(url)
+                })
+                .catch(e => { console.log("ERROR GET URL: " + e) })
+        })
+    }
     static deleteImageFromFireBase(fileName) {
         return new Promise(async(res, rej) => {
             // Create a reference to the file to delete

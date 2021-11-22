@@ -148,8 +148,9 @@ const CreateRecipe = ({ navigation }) => {
     let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
       pickedImage.uri
     )
-    setImageUrl(snapshot.metadata.fullPath)
-    AsyncStorage.setItem('PostPhoto', snapshot.metadata.fullPath)
+    let url = await FireBaseImageHandler.getUrlOfImageFireBase(snapshot.metadata.fullPath)
+    setImageUrl(url)
+    AsyncStorage.setItem('PostPhoto', url)
     setImageDone(true)
   }
   const saveNewPost = async () => {
