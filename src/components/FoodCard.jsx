@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, Keyboard, Image } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
+import { RowOfElements } from './small_elements/RowOfElements'
 
 const Box = styled.View`
   position: relative;
@@ -35,13 +36,20 @@ const IconSt = styled(Icon)`
 `
 const TextSt = styled.Text`
   display: flex;
-  position: absolute;
-  bottom: 50px;
-  left: 20px;
   font-size: 35px;
+  font-style: italic;
   font-weight: bold;
-  color: ${ConstantsRecipe.green};
-  text-shadow: ${ConstantsRecipe.text_shadow};
+  color: #249953;
+  text-shadow: 1px 1px 1px #fff;
+  z-index: 1;
+`
+const WhiteRow = styled(RowOfElements)`
+  background-color: #d7dfe6;
+  border-radius: 20px;
+  max-width: 250px;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
   z-index: 1;
 `
 
@@ -70,7 +78,9 @@ const FoodCard = props => {
         }}
       /> */}
       <TextNum>{number}</TextNum>
-      <TextSt>{props.textFood}</TextSt>
+      <WhiteRow style={styles.customShadow}>
+        <TextSt>{props.textFood}</TextSt>
+      </WhiteRow>
       <IconSt
         name={iconName}
         onPress={() => {
