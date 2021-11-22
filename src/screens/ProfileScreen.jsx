@@ -10,10 +10,12 @@ import { RowOfElements } from '../components/small_elements/RowOfElements'
 import NavIcons from '../components/NavIcons'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 import { ConstantsRecipe } from '../../constants'
+import { MainHeader } from '../components/small_elements/MainHeader'
 
 const CustomRow = styled(RowOfElements)`
   margin-top: 40px;
-  justify-content: space-around;
+  margin-left: 25px;
+  justify-content: flex-start;
   /* background-color: aqua; */
 `
 const AvatarBox = styled.View`
@@ -28,14 +30,11 @@ const AvatarImg = styled.Image`
   height: 140px;
   border-radius: 30px;
 `
-const NameBox = styled(RowOfElements)`
-  min-width: 42%;
-  max-width: 42%;
-  height: 120px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  background-color: ${props =>
-    props.ingredientsDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
+const NameText=styled(MainHeader)`
+  display: flex;
+  flex: 1;
+  margin-left: 35px;
+  flex-wrap: wrap;
 `
 
 const ProfileScreen = ({ navigation }) => {
@@ -50,9 +49,7 @@ const ProfileScreen = ({ navigation }) => {
             }}
           />
         </AvatarBox>
-        <NameBox style={styles.elementShadow}>
-          <Text>ok ok</Text>
-        </NameBox>
+          <NameText>Mike Mike Mike Mike </NameText>
       </CustomRow>
       <FooterDefault>
         <NavIcons
