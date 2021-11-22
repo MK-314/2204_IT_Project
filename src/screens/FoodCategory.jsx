@@ -41,14 +41,14 @@ const FoodCategory = ({ navigation }) => {
       <SmallFoodCard toHomeScreen={()=>{navigation.navigate('Home')}}/>
       <Ingredients />
       <RowSt>
-        <FlatList
+        {/* <FlatList
           vertical
           data={ingreds}
           keyExtractor={item => item.number}
           renderItem={({ item }) => {
             return <IngredientsList number={item.number} name={item.name} />
           }}
-        />
+        /> */}
       </RowSt>
       <FooterSt>
         <NavIcons />

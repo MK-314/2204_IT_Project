@@ -14,9 +14,6 @@ import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 
 const RowSt = styled(RowOfElements)`
   min-height: 200px;
-  overflow: hidden;
-  /*  */
-  /* background-color: azure; */
 `
 const Box = styled.View`
   position: relative;

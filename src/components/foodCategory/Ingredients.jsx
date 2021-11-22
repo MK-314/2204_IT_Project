@@ -6,9 +6,6 @@ import { RowOfElements } from '../small_elements/RowOfElements'
 
 const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
-  overflow: hidden;
-  /*  */
-    /* background-color: ${ConstantsRecipe.lightBlue}; */
 `
 const BlackAria = styled.View`
   display: flex;
