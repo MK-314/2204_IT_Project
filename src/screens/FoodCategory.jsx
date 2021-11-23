@@ -8,7 +8,7 @@ import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
-import { Dimensions } from 'react-native'
+import { Dimensions, ScrollView } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -56,6 +56,7 @@ const FoodCategory = ({ navigation }) => {
             renderItem={({ item }) => {
               return <MainText>{item}</MainText>
             }}
+            contentContainerStyle={{ paddingBottom: 200 }}
           />
         </Box>
       </RowSt>

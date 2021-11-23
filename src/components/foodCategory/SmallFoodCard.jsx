@@ -21,7 +21,7 @@ const Box = styled.View`
   width: ${width * 0.766666}px;
   height: ${height * 0.347625}px;
   border-radius: 20px;
-  margin-top: ${height * 0.0515}px;
+  margin-top: ${height * 0.0012875 * 25}px;
   margin-bottom: ${height * 0.012875}px;
   overflow: hidden;
 `

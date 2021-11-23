@@ -23,7 +23,7 @@ import { Dimensions } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const HeaderRow = styled(RowOfElements)`
-  margin-top: ${height * 0.0012875 * 40}px;
+  margin-top: ${height * 0.0012875 * 30}px;
   margin-left: ${width * 0.0025555 * 25}px;
   justify-content: flex-start;
   /* background-color: aqua; */
@@ -49,7 +49,7 @@ const NameText = styled(MainHeader)`
 const MainViewRow = styled(RowOfElements)`
   justify-content: flex-start;
   margin-left: ${width * 0.0025555 * 25}px;
-  margin-top: ${height * 0.0012875 * 70}px;
+  margin-top: ${height * 0.0012875 * 40}px;
   /* background-color: aqua; */
 `
 const MainViewRow2 = styled(MainViewRow)`
@@ -161,7 +161,7 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('CreateRecipe')
         }}
       >
-        <SmallDefaultBtn text={'New Recipe'} marginSt={50} />
+        <SmallDefaultBtn text={'New Recipe'} marginSt={40} />
       </Pressable>
       <FooterDefault>
         <NavIcons
