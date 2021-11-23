@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+// CONTEXT
+import React, { useEffect, useState, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+import RecipeContext from '../context/RecipeContext'
+//
 import { Text, StyleSheet, View, Keyboard } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
@@ -14,6 +15,7 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
   const [search, setSearch] = useState('')
+  const value = useContext(RecipeContext)
 
   return (
     <TouchableWithoutFeedback
@@ -44,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
         <FooterDefault hidden={footerHidden}>
           <NavIcons
             iconName='recipes'
-            toScreen={(screen) => {
+            toScreen={screen => {
               navigation.navigate(screen)
             }}
           />
