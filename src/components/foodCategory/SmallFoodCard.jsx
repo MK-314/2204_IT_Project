@@ -9,7 +9,7 @@ import {
 } from 'react-native-gesture-handler'
 import { TextNum } from '../FoodCard'
 import { RowOfElements } from '../small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
 import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 const { width, height } = Dimensions.get('window')
 
@@ -21,7 +21,7 @@ const Box = styled.View`
   width: ${width * 0.766666}px;
   height: ${height * 0.347625}px;
   border-radius: 20px;
-  margin-top: ${height * 0.0012875 * 25}px;
+  margin-top: ${height * HightUnit * 25}px;
   margin-bottom: ${height * 0.012875}px;
   overflow: hidden;
 `
@@ -63,20 +63,20 @@ const IconShare = styled(Icon)`
 `
 const SmallTextNum = styled.Text`
   position: absolute;
-  top: ${height * 0.0012875 * 5}px;
-  left: ${width * 0.0025555 * 105}px;
-  font-size: ${height * 0.0012875 * 35}px;
+  top: ${height * HightUnit * 5}px;
+  left: ${width * WidthUnit * 105}px;
+  font-size: ${height * HightUnit * 35}px;
   font-weight: bold;
   color: ${ConstantsRecipe.green};
   text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 const MainHeaderModified = styled(MainHeader)`
-  font-size: ${height * 0.0012875 * 25}px;
+  font-size: ${height * HightUnit * 25}px;
 `
 const WhiteRowModified = styled(WhiteRow)`
-  left: ${width * 0.0025555 * 25}px;
-  bottom: ${height * 0.0012875 * 10}px;
+  left: ${width * WidthUnit * 25}px;
+  bottom: ${height * HightUnit * 10}px;
 `
 
 const SmallFoodCard = props => {

@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import {  Pressable} from 'react-native'
+// CONTEXT
+import React, { useEffect, useState, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+//
+import { Pressable } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ListOfResults = props => {
+  // USECONTEXT:
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  const { search, setSearch } = useContext(RecipeContext)
+  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  // LOCAL STATES:
   const [itemsByUser, setItemsByUser] = useState([])
 
   useEffect(async () => {
-    if (props.search == '' || props.search == " " || !props.search) {
-      let user_id = await AsyncStorage.getItem('user_id')
-      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
-      setItemsByUser(itemsInUseEffect)
-    } else {
+    if (search) {
       let searchRes = itemsByUser.filter(it =>
-        it.name.toLocaleLowerCase().includes(props.search.toLocaleLowerCase())
+        it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
     }
-  }, [props.search])
+    if (modeUserRecipes) {
+      let user_id = await AsyncStorage.getItem('user_id')
+      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
+      setItemsByUser(itemsInUseEffect)
+    }
+  }, [search, updateScreen])
 
   return (
     <>

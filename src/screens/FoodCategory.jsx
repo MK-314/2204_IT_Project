@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+//
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
@@ -6,7 +8,7 @@ import SmallFoodCard from './../components/foodCategory/SmallFoodCard'
 import Ingredients from './../components/foodCategory/Ingredients'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 import { Dimensions, ScrollView } from 'react-native'
 const { width, height } = Dimensions.get('window')
@@ -15,24 +17,25 @@ const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-  min-height: ${height * 0.0012875 * 200}px;
+  min-height: ${height * HightUnit * 200}px;
 `
 const Box = styled.View`
-  width: ${width * 0.0025555 * 350}px;
-  height: ${height * 0.0012875 * 250}px;
+  width: ${width * WidthUnit * 350}px;
+  height: ${height * HightUnit * 250}px;
   overflow: hidden;
   border-color: ${ConstantsRecipe.green};
   border-left-width: 3px;
   border-right-width: 3px;
 `
 const MainText = styled.Text`
-  font-size: ${height * 0.0012875 * 17}px;
+  font-size: ${height * HightUnit * 17}px;
   font-style: italic;
-  line-height: ${height * 0.0012875 * 23}px;
+  line-height: ${height * HightUnit * 23}px;
   background-color: ${ConstantsRecipe.blue};
-  padding-left: ${width * 0.0025555 * 10}px;
+  padding-left: ${width * WidthUnit * 10}px;
 `
 const FoodCategory = ({ navigation }) => {
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   const item = navigation.getParam('item')
   const [arrOfIngredients, setArrOfIngredients] = useState([])
   useEffect(() => {
@@ -43,6 +46,7 @@ const FoodCategory = ({ navigation }) => {
       <SmallFoodCard
         item={item}
         toHomeScreen={() => {
+          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       />
@@ -64,6 +68,7 @@ const FoodCategory = ({ navigation }) => {
         <NavIcons
           iconName='recipes'
           toScreen={screen => {
+            setUpdateScreen(!updateScreen)
             navigation.navigate(screen)
           }}
         />

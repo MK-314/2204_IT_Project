@@ -9,7 +9,7 @@ import ModalCard from '../components/ModalCard'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 // ICONS
 import { default as Icon } from 'react-native-vector-icons/Entypo'
 import { default as HandIcon } from 'react-native-vector-icons/FontAwesome5'
@@ -25,16 +25,16 @@ const { width, height } = Dimensions.get('window')
 const TitleBox = styled(RowOfElements)`
   width: 85%;
   border-radius: 20px;
-  margin-top: ${height * 0.0012875 * 50}px;
-  margin-bottom: ${height * 0.0012875 * 40}px;
+  margin-top: ${height * HightUnit * 50}px;
+  margin-bottom: ${height * HightUnit * 40}px;
   /*  */
   background-color: ${props =>
     props.nameDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
 
 const CustomText = styled.Text`
-  font-size: ${height * 0.0012875 * 25}px;
-  padding: ${height * 0.0012875 * 40}px 0px;
+  font-size: ${height * HightUnit * 25}px;
+  padding: ${height * HightUnit * 40}px 0px;
   /*  */
   /* background-color: red; */
 `
@@ -43,27 +43,27 @@ const ViewArrowAndText = styled(RowOfElements)`
   /* background-color: aqua; */
 `
 const IconArr = styled(Icon)`
-  font-size: ${height * 0.0012875 * 100}px;
+  font-size: ${height * HightUnit * 100}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconHand = styled(HandIcon)`
-  font-size: ${height * 0.0012875 * 35}px;
+  font-size: ${height * HightUnit * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconPhoto = styled(PhotoIcon)`
-  font-size: ${height * 0.0012875 * 85}px;
+  font-size: ${height * HightUnit * 85}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
-  margin-right: ${width * 0.0025555 * 17}px;
-  margin-left: ${width * 0.0025555 * 5}px;
+  margin-right: ${width * WidthUnit * 17}px;
+  margin-left: ${width * WidthUnit * 5}px;
 `
 const IconCheck = styled(Icon)`
-  font-size: ${height * 0.0012875 * 35}px;
+  font-size: ${height * HightUnit * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -87,11 +87,11 @@ const SmallTitleBox3 = styled(SmallTitleBox1)`
 `
 
 const TextOfSmallBox = styled.Text`
-  font-size: ${height * 0.0012875 * 20}px;
-  padding: ${height * 0.0012875 * 25}px ${width * 0.0025555 * 10}px;
+  font-size: ${height * HightUnit * 20}px;
+  padding: ${height * HightUnit * 25}px ${width * WidthUnit * 10}px;
 `
 const ImageRow = styled(ViewArrowAndText)`
-  margin-top: ${height * 0.0012875 * 12}px;
+  margin-top: ${height * HightUnit * 12}px;
 `
 
 const CreateRecipe = ({ navigation }) => {

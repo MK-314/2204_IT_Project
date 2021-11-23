@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FetchApi } from '../../datahandler'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit } from '../../constants'
 //
 import { Dimensions } from 'react-native'
 const { width, height } = Dimensions.get('window')
@@ -24,14 +24,14 @@ const RowSt = styled(RowOfElements)`
 `
 const TextInputSt = styled.TextInput`
   display: flex;
-  margin-top: ${height * 0.0012875 * 15}px;
+  margin-top: ${height * HightUnit * 15}px;
   background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: ${height * 0.0012875 * 50}px;
+  height: ${height * HightUnit * 50}px;
   border-radius: 100px;
 `
 const CustomText = styled.Text`
-  font-size: ${height * 0.0012875 * 50}px;
+  font-size: ${height * HightUnit * 50}px;
 `
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')

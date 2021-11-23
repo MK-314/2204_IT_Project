@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+//
 import { Text, StyleSheet, View, Keyboard, Pressable } from 'react-native'
 import styled from 'styled-components/native'
 import IconBook from 'react-native-vector-icons/FontAwesome'
@@ -6,7 +8,7 @@ import IconFavorite from 'react-native-vector-icons/AntDesign'
 import IconProfile from 'react-native-vector-icons/AntDesign'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { Dimensions } from 'react-native'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 const { width, height } = Dimensions.get('window')
 
 // const BoxSt = styled.View``
@@ -18,8 +20,8 @@ const RowSt = styled(RowOfElements)`
 const IconFavoriteSt = styled(IconFavorite)`
   display: flex;
   align-self: center;
-  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
-  font-size:  ${height * 0.0012875 * 40}px;
+  padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
+  font-size: ${height * HightUnit * 40}px;
   color: ${props =>
     props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -28,8 +30,8 @@ const IconFavoriteSt = styled(IconFavorite)`
 const IconBookSt = styled(IconBook)`
   display: flex;
   align-self: center;
-  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
-  font-size:  ${height * 0.0012875 * 40}px;
+  padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
+  font-size: ${height * HightUnit * 40}px;
   color: ${props =>
     props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -37,8 +39,8 @@ const IconBookSt = styled(IconBook)`
 const IconProfileSt = styled(IconProfile)`
   display: flex;
   align-self: center;
-  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
-  font-size:  ${height * 0.0012875 * 40}px;
+  padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
+  font-size: ${height * HightUnit * 40}px;
   text-shadow: ${ConstantsRecipe.text_shadow};
   color: ${props =>
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
@@ -53,7 +55,7 @@ const BoxSt = styled.View`
   background-color: ${ConstantsRecipe.gray2};
 `
 const RecipesText = styled.Text`
-  font-size:  ${height * 0.0012875 * 20}px;
+  font-size: ${height * HightUnit * 20}px;
   font-weight: bold;
   color: ${props =>
     props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
@@ -68,6 +70,7 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   return (
     <RowSt>
       <BoxSt
@@ -77,6 +80,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
+            setUpdateScreen(!updateScreen)
             props.toScreen('Home')
           }}
         >

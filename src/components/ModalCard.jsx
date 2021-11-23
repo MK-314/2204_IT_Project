@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native'
 import styled from 'styled-components/native'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { Dimensions } from 'react-native'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
@@ -13,26 +13,26 @@ const CustomView = styled.View`
   flex-direction: column;
   background-color: ${ConstantsRecipe.white};
   border-radius: 20px;
-  padding: ${height * 0.0012875 * 35}px ${width * 0.0025555 * 35}px;
-  margin-top: ${height * 0.0012875 * 100}px;
-  margin-left: ${width * 0.0025555 * 20}px;
-  margin-right: ${width * 0.0025555 * 20}px;
-  min-height: ${height * 0.0012875 * 500}px;
+  padding: ${height * HightUnit * 35}px ${width * WidthUnit * 35}px;
+  margin-top: ${height * HightUnit * 100}px;
+  margin-left: ${width * WidthUnit * 20}px;
+  margin-right: ${width * WidthUnit * 20}px;
+  min-height: ${height * HightUnit * 500}px;
 `
 
 const DirectionText = styled.Text`
-  font-size: ${height * 0.0012875 * 25}px;
+  font-size: ${height * HightUnit * 25}px;
 `
 const InputDirections = styled.TextInput`
   /* min-height: 300px; */
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: ${height * 0.0012875 * 12}px ${width * 0.0025555 * 12}px;
+  margin: ${height * HightUnit * 12}px ${width * WidthUnit * 12}px;
   border-width: 1px;
-  padding: ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
+  padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
   justify-content: flex-start;
-  height: ${height * 0.0012875 * 350}px;
+  height: ${height * HightUnit * 350}px;
 `
 
 const ModalCard = props => {

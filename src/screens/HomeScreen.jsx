@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
+// CONTEXT
+import React, { useEffect, useState, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+//
+import { Text, StyleSheet, View, Keyboard, Pressable } from 'react-native'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
@@ -13,7 +13,6 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
-  const [search, setSearch] = useState('')
 
   return (
     <TouchableWithoutFeedback
@@ -26,15 +25,11 @@ const HomeScreen = ({ navigation }) => {
     >
       <ContainerDefault>
         <SearchField
-          request={searchRequest => {
-            setSearch(searchRequest)
-          }}
           hidden={() => {
             setfooterHidden(true)
           }}
         />
         <ListOfResults
-          search={search}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item
@@ -44,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
         <FooterDefault hidden={footerHidden}>
           <NavIcons
             iconName='recipes'
-            toScreen={(screen) => {
+            toScreen={screen => {
               navigation.navigate(screen)
             }}
           />
