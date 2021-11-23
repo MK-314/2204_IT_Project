@@ -15,6 +15,8 @@ import { MainHeader } from '../components/small_elements/MainHeader'
 import { default as IconPencil } from 'react-native-vector-icons/Entypo'
 import { default as IconHeartbeat } from 'react-native-vector-icons/FontAwesome5'
 import { default as IconFollowers } from 'react-native-vector-icons/MaterialCommunityIcons'
+import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
+import { Pressable } from 'react-native'
 //
 
 const HeaderRow = styled(RowOfElements)`
@@ -146,6 +148,9 @@ const ProfileScreen = ({ navigation }) => {
         <FollowersIcon name='human-greeting' />
       </MainViewRow3>
       {/* ////////////////////////////////////////////////////////////////////// */}
+      <Pressable onPress={()=>{navigation.navigate('CreateRecipe')}}>
+        <SmallDefaultBtn text={'New Recipe'} marginSt={50} />
+      </Pressable>
       <FooterDefault>
         <NavIcons
           iconName='profile'
