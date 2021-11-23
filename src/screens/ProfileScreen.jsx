@@ -114,15 +114,16 @@ const ProfileScreen = ({ navigation }) => {
     'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
   )
   const [userState, setUserState] = useState(null)
+  const [postNumber, setPostNumber] = useState(0);
 
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
     let data = await FetchApi.getUserByEmail(email)
     let user = data[0]
-    user ? setUserState(user) : console.log('user is null')
-    user.avatar
-      ? setAvatar(user.avatar)
-      : console.log('no avatar from profile screen useeffect')
+    setUserState(user)
+    let numOfPosts = await FetchApi.countPostsByUserId(user.id)
+    setPostNumber(numOfPosts)
+    if (user.avatar) setAvatar(user.avatar)
   }, [])
 
   const handleAvatarUpload = async () => {
@@ -156,7 +157,7 @@ const ProfileScreen = ({ navigation }) => {
           <TextOfElevation>Posted Recipes</TextOfElevation>
         </ElevatedPart>
         <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>7</NumberRecipes>
+          <NumberRecipes>{postNumber}</NumberRecipes>
         </NumberRecipesBox>
         <PencilIcon name='pencil' />
       </MainViewRow>
