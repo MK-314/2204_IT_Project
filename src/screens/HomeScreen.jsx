@@ -15,7 +15,7 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
   const [search, setSearch] = useState('')
-  const value = useContext(RecipeContext)
+  const { trigger, changeTrigger } = useContext(RecipeContext)
 
   return (
     <TouchableWithoutFeedback
@@ -36,6 +36,7 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <ListOfResults
+          trigger={trigger}
           search={search}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {

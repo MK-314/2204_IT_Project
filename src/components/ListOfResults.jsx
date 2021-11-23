@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  Pressable} from 'react-native'
+import { Pressable } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
@@ -9,7 +9,7 @@ const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
 
   useEffect(async () => {
-    if (props.search == '' || props.search == " " || !props.search) {
+    if (props.search == '' || props.search == ' ' || !props.search) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
@@ -19,7 +19,7 @@ const ListOfResults = props => {
       )
       setItemsByUser(searchRes)
     }
-  }, [props.search])
+  }, [props.search, props.trigger])
 
   return (
     <>
