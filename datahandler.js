@@ -33,9 +33,7 @@ class FetchApi {
         })
     }
     static getUserByEmail(email) {
-            console.log(email + " in feeetch")
             return new Promise(async(res, rej) => {
-                console.log(email + " in feeetch")
                 fetch('https://recipe-ruby-api.herokuapp.com/api/users' +
                         "?thisaction=getByEmail&email=" + email, {
                             method: "GET",

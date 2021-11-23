@@ -1,5 +1,5 @@
 // REACT:
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, Image, Button, Pressable } from 'react-native'
 import {
   TouchableOpacity,
@@ -38,6 +38,18 @@ const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+
+  useEffect(() => {
+    AsyncStorage.getItem('user_id')
+      .then(id => {
+        if (id) {
+          navigation.navigate('Home')
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [])
 
   const handleSingUp = async () => {
     FireBaseAuthSystem.appSignUp(email, password)
@@ -95,7 +107,11 @@ const SingUpScreen = ({ navigation }) => {
           accessibilityLabel='Learn more about this purple button'
         />
       </RowSt>
-      <Pressable onPress={() => {navigation.navigate('LogInScreen')}}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('LogInScreen')
+        }}
+      >
         <RowSt>
           <Text>Have an Account? Sing In</Text>
         </RowSt>

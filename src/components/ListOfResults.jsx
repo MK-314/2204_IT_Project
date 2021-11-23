@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Keyboard, Image, Pressable } from 'react-native'
-import styled from 'styled-components/native'
-import Icon from 'react-native-vector-icons/AntDesign'
+import {  Pressable} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
-import { RowOfElements } from './small_elements/RowOfElements'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
+
   useEffect(async () => {
-    let user_id = await AsyncStorage.getItem('user_id')
-    console.log(user_id+" user id from list");
-    if (props.search == '') {
+    console.log("TESTING...");
+    console.log(props.search+" just props search");
+    console.log((props.search == '')+" is it empty?");
+    console.log((props.search == ' ')+" is it space?");
+    console.log(!props.search+" is it null?");
+    if (props.search == '' || props.search == " " || !props.search) {
+      let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
     } else {
@@ -23,6 +25,7 @@ const ListOfResults = props => {
       setItemsByUser(searchRes)
     }
   }, [props.search])
+
   return (
     <>
       <FlatList

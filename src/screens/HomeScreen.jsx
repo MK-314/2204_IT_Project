@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from 'react-native-gesture-handler'
-import styled from 'styled-components/native'
 import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
 import NavIcons from './../components/NavIcons'
@@ -15,18 +14,6 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
   const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    AsyncStorage.getItem('user_id')
-      .then(id => {
-        if (!id) {
-          navigation.navigate('LogInScreen')
-        }
-      })
-      .catch(e => {
-        navigation.navigate('LogInScreen')
-      })
-  }, [])
 
   return (
     <TouchableWithoutFeedback
@@ -49,7 +36,6 @@ const HomeScreen = ({ navigation }) => {
         <ListOfResults
           search={search}
           toFoodCategoryById={item => {
-            console.log(item + ' this iddddd')
             navigation.navigate('FoodCategory', {
               item: item
             })

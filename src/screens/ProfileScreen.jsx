@@ -107,9 +107,7 @@ const NumberRecipesBox = styled.View`
 const ProfileScreen = ({ navigation }) => {
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
-    console.log(email+" ProfileScreen RRRRRRRRRR")
     let user = await FetchApi.getUserByEmail(email)
-    console.log(JSON.stringify(user))
   }, [])
 
   return (

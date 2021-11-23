@@ -10,5 +10,6 @@ const FooterDefault = styled.View`
   bottom: 30px;
   min-height: 100px;
   z-index: 1;
+  overflow: hidden;
 `
 export { FooterDefault }

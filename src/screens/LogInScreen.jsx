@@ -1,5 +1,5 @@
 // REACT:
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, Image, Button } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
@@ -33,6 +33,18 @@ const CustomText = styled.Text`
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    AsyncStorage.getItem('user_id')
+      .then(id => {
+        if (id) {
+          navigation.navigate('Home')
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [])
 
   const handleSingIn = async () => {
     FireBaseAuthSystem.appSignIn(email, password)
