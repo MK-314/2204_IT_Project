@@ -13,6 +13,8 @@ import { ConstantsRecipe } from '../../constants'
 import { MainHeader } from '../components/small_elements/MainHeader'
 // ICONS
 import { default as IconPencil } from 'react-native-vector-icons/Entypo'
+import { default as IconHeartbeat } from 'react-native-vector-icons/FontAwesome5'
+import { default as IconFollowers } from 'react-native-vector-icons/MaterialCommunityIcons'
 //
 
 const HeaderRow = styled(RowOfElements)`
@@ -45,6 +47,12 @@ const MainViewRow = styled(RowOfElements)`
   margin-top: 70px;
   /* background-color: aqua; */
 `
+const MainViewRow2 = styled(MainViewRow)`
+  margin-top: 20px;
+`
+const MainViewRow3 = styled(MainViewRow)`
+  margin-top: 20px;
+`
 const ElevatedPart = styled(RowOfElements)`
   width: 170px;
   /* height: 50px; */
@@ -58,6 +66,18 @@ const TextOfElevation = styled.Text`
   font-weight: 700;
 `
 const PencilIcon = styled(IconPencil)`
+  font-size: 50px;
+  color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const HeartbeatIcon = styled(IconHeartbeat)`
+  font-size: 50px;
+  color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const FollowersIcon = styled(IconFollowers)`
   font-size: 50px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
@@ -105,6 +125,26 @@ const ProfileScreen = ({ navigation }) => {
         </NumberRecipesBox>
         <PencilIcon name='pencil' />
       </MainViewRow>
+      {/* ////////////////////////////////////////////////////////////////////// */}
+      <MainViewRow2>
+        <ElevatedPart style={styles.elementShadow}>
+          <TextOfElevation>Favourites</TextOfElevation>
+        </ElevatedPart>
+        <NumberRecipesBox style={styles.elementShadow}>
+          <NumberRecipes>2</NumberRecipes>
+        </NumberRecipesBox>
+        <HeartbeatIcon name='heartbeat' />
+      </MainViewRow2>
+      {/* ////////////////////////////////////////////////////////////////////// */}
+      <MainViewRow3>
+        <ElevatedPart style={styles.elementShadow}>
+          <TextOfElevation>Followers</TextOfElevation>
+        </ElevatedPart>
+        <NumberRecipesBox style={styles.elementShadow}>
+          <NumberRecipes>7</NumberRecipes>
+        </NumberRecipesBox>
+        <FollowersIcon name='human-greeting' />
+      </MainViewRow3>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <FooterDefault>
         <NavIcons
