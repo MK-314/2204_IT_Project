@@ -1,7 +1,6 @@
 // CONTEXT
 import React, { useEffect, useState, useContext } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
-import RecipeContext from '../context/RecipeContext'
 //
 import { Text, StyleSheet, View, Keyboard } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
