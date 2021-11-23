@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const RecipeContext = React.createContext()
 
 export const RecipeProvider = ({ children }) => {
-    
+
   const [trigger, setTrigger] = useState('5')
 
   const changeTrigger = thisValue => {
@@ -11,7 +11,7 @@ export const RecipeProvider = ({ children }) => {
   }
 
   return (
-    <RecipeContext.Provider value={{ data: trigger, changeTrigger }}>
+    <RecipeContext.Provider value={{ trigger: trigger, changeTrigger }}>
       {children}
     </RecipeContext.Provider>
   )

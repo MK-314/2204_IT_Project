@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
 //
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, Keyboard, Pressable } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import SearchField from './../components/SearchField'
 import ListOfResults from './../components/ListOfResults'
@@ -26,6 +26,15 @@ const HomeScreen = ({ navigation }) => {
       }}
     >
       <ContainerDefault>
+        <Pressable
+          onPress={() => {
+            console.log(trigger)
+            changeTrigger(trigger + 1)
+          }}
+        >
+          <Text style={{ fontSize: 25, color: '#000' }}>{trigger}</Text>
+        </Pressable>
+
         <SearchField
           request={searchRequest => {
             setSearch(searchRequest)
