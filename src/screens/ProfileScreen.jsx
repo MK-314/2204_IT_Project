@@ -1,5 +1,5 @@
 // REACT:
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, Image, StyleSheet } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
@@ -17,6 +17,7 @@ import { default as IconHeartbeat } from 'react-native-vector-icons/FontAwesome5
 import { default as IconFollowers } from 'react-native-vector-icons/MaterialCommunityIcons'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { Pressable } from 'react-native'
+import { FetchApi } from '../../datahandler'
 //
 
 const HeaderRow = styled(RowOfElements)`
@@ -104,6 +105,13 @@ const NumberRecipesBox = styled.View`
 `
 
 const ProfileScreen = ({ navigation }) => {
+  useEffect(async () => {
+    let email = await AsyncStorage.getItem('email')
+    console.log(email+" ProfileScreen RRRRRRRRRR")
+    let user = await FetchApi.getUserByEmail(email)
+    console.log(JSON.stringify(user))
+  }, [])
+
   return (
     <ContainerDefault>
       <HeaderRow>
@@ -148,7 +156,11 @@ const ProfileScreen = ({ navigation }) => {
         <FollowersIcon name='human-greeting' />
       </MainViewRow3>
       {/* ////////////////////////////////////////////////////////////////////// */}
-      <Pressable onPress={()=>{navigation.navigate('CreateRecipe')}}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('CreateRecipe')
+        }}
+      >
         <SmallDefaultBtn text={'New Recipe'} marginSt={50} />
       </Pressable>
       <FooterDefault>

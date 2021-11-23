@@ -29,7 +29,7 @@ class FireBaseAuthSystem {
                     const user = userCredential.user
                     AsyncStorage.setItem('user', JSON.stringify(user))
                     AsyncStorage.setItem('auth', JSON.stringify(auth))
-                    AsyncStorage.setItem('email', JSON.stringify(user.email))
+                    AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {
@@ -46,7 +46,7 @@ class FireBaseAuthSystem {
                     const user = userCredential.user
                     AsyncStorage.setItem('user', JSON.stringify(user))
                     AsyncStorage.setItem('auth', JSON.stringify(auth))
-                    AsyncStorage.setItem('email', JSON.stringify(user.email))
+                    AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {

@@ -12,8 +12,9 @@ const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
   useEffect(async () => {
     let user_id = await AsyncStorage.getItem('user_id')
+    console.log(user_id+" user id from list");
     if (props.search == '') {
-      let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
+      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
     } else {
       let searchRes = itemsByUser.filter(it =>
