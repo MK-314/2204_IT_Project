@@ -1,10 +1,6 @@
 // REACT:
 import React, { useState, useEffect } from 'react'
 import { Text, Image, Button, Pressable } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
 // FIRE_BASE:
 import { FireBaseAuthSystem, FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
@@ -16,6 +12,9 @@ import { FetchApi } from '../../datahandler'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
+//
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
@@ -25,14 +24,14 @@ const RowSt = styled(RowOfElements)`
 `
 const TextInputSt = styled.TextInput`
   display: flex;
-  margin-top: 15px;
+  margin-top: ${height * 0.0012875 * 15}px;
   background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: 50px;
+  height: ${height * 0.0012875 * 50}px;
   border-radius: 100px;
 `
 const CustomText = styled.Text`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
 `
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')

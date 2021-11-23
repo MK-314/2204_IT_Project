@@ -1,42 +1,37 @@
 import React, { useState } from 'react'
-import {
-  Text,
-  StyleSheet,
-  View,
-  Keyboard,
-  Image,
-  Pressable
-} from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { MainHeader, WhiteRow } from './small_elements/MainHeader'
 
+const { width, height } = Dimensions.get('window')
+
 const Box = styled.View`
   position: relative;
-  width: 270px;
-  height: 400px;
+  width: ${width * 0.69}px;
+  height: ${height * 0.515}px;
   border-radius: 50px;
-  margin-top: 40px;
-  margin-right: 10px;
-  margin-left: 30px;
+  margin-top: ${height * 0.0515}px;
+  margin-right: ${width * 0.025555}px;
+  margin-left: ${width * 0.076666}px;
 `
 const FoodItem = styled.Image`
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  width: 270px;
-  height: 400px;
+  width: ${width * 0.69}px;
+  height: ${height * 0.515}px;
   border-radius: 50px;
 `
 const IconSt = styled(Icon)`
   display: flex;
   position: absolute;
-  top: 30px;
-  left: 30px;
-  font-size: 35px;
+  top:  ${height * 0.038625}px;
+  left: ${width * 0.076666}px;
+  font-size: ${height * 0.038625}px;
   color: ${props =>
     props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
@@ -45,9 +40,9 @@ const IconSt = styled(Icon)`
 `
 const TextNum = styled.Text`
   position: absolute;
-  top: 20px;
-  right: 155px;
-  font-size: 35px;
+  top: ${height * 0.02575}px;
+  right: ${width * 0.3961111}px;
+  font-size: ${height * 0.0450625}px;
   font-weight: bold;
   color: ${ConstantsRecipe.green};
   text-shadow: ${ConstantsRecipe.text_shadow};

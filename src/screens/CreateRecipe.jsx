@@ -19,20 +19,22 @@ import { Text } from 'react-native'
 import { FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 import { FetchApi } from '../../datahandler'
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const TitleBox = styled(RowOfElements)`
   width: 85%;
   border-radius: 20px;
-  margin-top: 50px;
-  margin-bottom: 40px;
+  margin-top: ${height * 0.0012875 * 50}px;
+  margin-bottom: ${height * 0.0012875 * 40}px;
   /*  */
   background-color: ${props =>
     props.nameDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
 `
 
 const CustomText = styled.Text`
-  font-size: 25px;
-  padding: 40px 0px;
+  font-size: ${height * 0.0012875 * 25}px;
+  padding: ${height * 0.0012875 * 40}px 0px;
   /*  */
   /* background-color: red; */
 `
@@ -41,27 +43,27 @@ const ViewArrowAndText = styled(RowOfElements)`
   /* background-color: aqua; */
 `
 const IconArr = styled(Icon)`
-  font-size: 100px;
+  font-size: ${height * 0.0012875 * 100}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconHand = styled(HandIcon)`
-  font-size: 35px;
+  font-size: ${height * 0.0012875 * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconPhoto = styled(PhotoIcon)`
-  font-size: 85px;
+  font-size: ${height * 0.0012875 * 85}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
-  margin-right: 17px;
-  margin-left: 5px;
+  margin-right: ${width * 0.0025555 * 17}px;
+  margin-left: ${width * 0.0025555 * 5}px;
 `
 const IconCheck = styled(Icon)`
-  font-size: 35px;
+  font-size: ${height * 0.0012875 * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -85,11 +87,11 @@ const SmallTitleBox3 = styled(SmallTitleBox1)`
 `
 
 const TextOfSmallBox = styled.Text`
-  font-size: 20px;
-  padding: 25px 10px;
+  font-size: ${height * 0.0012875 * 20}px;
+  padding: ${height * 0.0012875 * 25}px ${width * 0.0025555 * 10}px;
 `
 const ImageRow = styled(ViewArrowAndText)`
-  margin-top: 12px;
+  margin-top: ${height * 0.0012875 * 12}px;
 `
 
 const CreateRecipe = ({ navigation }) => {

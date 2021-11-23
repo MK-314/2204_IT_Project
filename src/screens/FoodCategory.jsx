@@ -1,43 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Text,
-  StyleSheet,
-  View,
-  Keyboard,
-  Image,
-  Pressable
-} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
 import SmallFoodCard from './../components/foodCategory/SmallFoodCard'
 import Ingredients from './../components/foodCategory/Ingredients'
-import IngredientsList from './../components/foodCategory/IngredientsList'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
 const RowSt = styled(RowOfElements)`
-  min-height: 200px;
+  min-height: ${height * 0.0012875 * 200}px;
 `
 const Box = styled.View`
-  width: 350px;
-  height: 250px;
+  width: ${width * 0.0025555 * 350}px;
+  height: ${height * 0.0012875 * 250}px;
   overflow: hidden;
-  border-color: ${ConstantsRecipe.green};;
+  border-color: ${ConstantsRecipe.green};
   border-left-width: 3px;
   border-right-width: 3px;
 `
 const MainText = styled.Text`
-  font-size: 17px;
+  font-size: ${height * 0.0012875 * 17}px;
   font-style: italic;
-  line-height: 23px;
+  line-height: ${height * 0.0012875 * 23}px;
   background-color: ${ConstantsRecipe.blue};
-  padding-left: 10px;
+  padding-left: ${width * 0.0025555 * 10}px;
 `
 const FoodCategory = ({ navigation }) => {
   const item = navigation.getParam('item')
@@ -53,9 +46,9 @@ const FoodCategory = ({ navigation }) => {
           navigation.navigate('Home')
         }}
       />
-        <Ingredients />
+      <Ingredients />
       <RowSt>
-        <Box >
+        <Box>
           <FlatList
             vertical
             data={arrOfIngredients}
@@ -67,16 +60,15 @@ const FoodCategory = ({ navigation }) => {
         </Box>
       </RowSt>
       <FooterDefault>
-          <NavIcons
-            iconName='recipes'
-            toScreen={(screen) => {
-              navigation.navigate(screen)
-            }}
-          />
-        </FooterDefault>
+        <NavIcons
+          iconName='recipes'
+          toScreen={screen => {
+            navigation.navigate(screen)
+          }}
+        />
+      </FooterDefault>
     </ContainerSt>
   )
 }
-
 
 export default FoodCategory

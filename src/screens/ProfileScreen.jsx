@@ -19,87 +19,89 @@ import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { Pressable } from 'react-native'
 import { FetchApi } from '../../datahandler'
 //
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const HeaderRow = styled(RowOfElements)`
-  margin-top: 40px;
-  margin-left: 25px;
+  margin-top: ${height * 0.0012875 * 40}px;
+  margin-left: ${width * 0.0025555 * 25}px;
   justify-content: flex-start;
   /* background-color: aqua; */
 `
 const AvatarBox = styled.View`
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: ${width * 0.0025555 * 140}px;
+  height: ${height * 0.0012875 * 140}px;
   border-radius: 30px;
 `
 const AvatarImg = styled.Image`
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: ${width * 0.0025555 * 140}px;
+  height: ${height * 0.0012875 * 140}px;
   border-radius: 30px;
 `
 const NameText = styled(MainHeader)`
   display: flex;
   flex: 1;
-  margin-left: 35px;
+  margin-left: ${width * 0.0025555 * 35}px;
   flex-wrap: wrap;
 `
 const MainViewRow = styled(RowOfElements)`
   justify-content: flex-start;
-  margin-left: 25px;
-  margin-top: 70px;
+  margin-left: ${width * 0.0025555 * 25}px;
+  margin-top: ${height * 0.0012875 * 70}px;
   /* background-color: aqua; */
 `
 const MainViewRow2 = styled(MainViewRow)`
-  margin-top: 20px;
+  margin-top: ${height * 0.0012875 * 20}px;
 `
 const MainViewRow3 = styled(MainViewRow)`
-  margin-top: 20px;
+  margin-top: ${height * 0.0012875 * 20}px;
 `
 const ElevatedPart = styled(RowOfElements)`
-  width: 170px;
+  width: ${width * 0.0025555 * 170}px;
   /* height: 50px; */
-  margin-right: 55px;
+  margin-right: ${width * 0.0025555 * 55}px;
   border-radius: 10px;
   background-color: ${ConstantsRecipe.lightGreen};
 `
 const TextOfElevation = styled.Text`
-  padding: 20px 0px;
-  font-size: 17px;
+  padding: ${height * 0.0012875 * 20}px 0px;
+  font-size: ${height * 0.0012875 * 17}px;
   font-weight: 700;
 `
 const PencilIcon = styled(IconPencil)`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const HeartbeatIcon = styled(IconHeartbeat)`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const FollowersIcon = styled(IconFollowers)`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const NumberRecipes = styled.Text`
   position: absolute;
-  top: 3px;
-  left: 17px;
-  font-size: 35px;
-  margin-right: 20px;
+  top: ${height * 0.0012875 * 3}px;
+  left: ${width * 0.0025555 * 17}px;
+  font-size: ${height * 0.0012875 * 35}px;
+  margin-right: ${width * 0.0025555 * 20}px;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const NumberRecipesBox = styled.View`
   position: relative;
-  margin-right: 20px;
+  margin-right: ${width * 0.0025555 * 20}px;
   border-radius: 100px;
-  width: 55px;
-  height: 55px;
+  width: ${width * 0.0025555 * 55}px;
+  height: ${height * 0.0012875 * 55}px;
   background-color: ${ConstantsRecipe.lightGreen};
   text-shadow: ${ConstantsRecipe.text_shadow};
 `

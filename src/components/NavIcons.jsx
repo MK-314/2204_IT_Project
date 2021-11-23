@@ -5,22 +5,21 @@ import IconBook from 'react-native-vector-icons/FontAwesome'
 import IconFavorite from 'react-native-vector-icons/AntDesign'
 import IconProfile from 'react-native-vector-icons/AntDesign'
 import { RowOfElements } from './small_elements/RowOfElements'
+import { Dimensions } from 'react-native'
 import { ConstantsRecipe } from '../../constants'
+const { width, height } = Dimensions.get('window')
 
 // const BoxSt = styled.View``
 
 const RowSt = styled(RowOfElements)`
-  /* min-height: 15px; */
   justify-content: space-evenly;
-  /* align-items: stretch; */
-  /*  */
 `
 
 const IconFavoriteSt = styled(IconFavorite)`
   display: flex;
   align-self: center;
-  padding: 10px;
-  font-size: 40px;
+  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
+  font-size:  ${height * 0.0012875 * 40}px;
   color: ${props =>
     props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -29,8 +28,8 @@ const IconFavoriteSt = styled(IconFavorite)`
 const IconBookSt = styled(IconBook)`
   display: flex;
   align-self: center;
-  padding: 10px;
-  font-size: 40px;
+  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
+  font-size:  ${height * 0.0012875 * 40}px;
   color: ${props =>
     props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -38,8 +37,8 @@ const IconBookSt = styled(IconBook)`
 const IconProfileSt = styled(IconProfile)`
   display: flex;
   align-self: center;
-  padding: 10px;
-  font-size: 40px;
+  padding:  ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
+  font-size:  ${height * 0.0012875 * 40}px;
   text-shadow: ${ConstantsRecipe.text_shadow};
   color: ${props =>
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
@@ -54,7 +53,7 @@ const BoxSt = styled.View`
   background-color: ${ConstantsRecipe.gray2};
 `
 const RecipesText = styled.Text`
-  font-size: 20px;
+  font-size:  ${height * 0.0012875 * 20}px;
   font-weight: bold;
   color: ${props =>
     props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};

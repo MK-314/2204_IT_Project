@@ -9,11 +9,6 @@ const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
 
   useEffect(async () => {
-    console.log("TESTING...");
-    console.log(props.search+" just props search");
-    console.log((props.search == '')+" is it empty?");
-    console.log((props.search == ' ')+" is it space?");
-    console.log(!props.search+" is it null?");
     if (props.search == '' || props.search == " " || !props.search) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)

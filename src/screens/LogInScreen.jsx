@@ -11,6 +11,8 @@ import { ConstantsRecipe } from '../../constants'
 import { FireBaseAuthSystem } from '../../firebase'
 import { FetchApi } from '../../datahandler'
 import { Pressable } from 'react-native'
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
@@ -20,14 +22,14 @@ const RowSt = styled(RowOfElements)`
 `
 const TextInputSt = styled.TextInput`
   display: flex;
-  margin-top: 15px;
+  margin-top: ${height * 0.0012875 * 15}px;
   background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: 50px;
+  height: ${height * 0.0012875 * 50}px;
   border-radius: 100px;
 `
 const CustomText = styled.Text`
-  font-size: 50px;
+  font-size: ${height * 0.0012875 * 50}px;
 `
 
 const LogInScreen = ({ navigation }) => {

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { Text, StyleSheet, View, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, Keyboard, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import { AsyncStorage } from '@react-native-async-storage/async-storage'
+const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
-  min-height: 70px;
+  min-height: ${height * 0.090125}px;
   margin-top: 7%;
   /*  */
   background-color: ${ConstantsRecipe.green};
@@ -16,14 +17,13 @@ const InputBox = styled(RowOfElements)`
   position: absolute;
   background-color: ${ConstantsRecipe.white};
   width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: 50px;
-  /* padding-left: 20px; */
+  height: ${height * 0.064375}px;
   border-radius: 20px;
 `
 const TextInputSt = styled.TextInput`
   background-color: ${ConstantsRecipe.white};
   width: 100%;
-  height: 50px;
+  height: ${height * 0.064375}px;
   padding-left: 20px;
   border-radius: 20px;
 `

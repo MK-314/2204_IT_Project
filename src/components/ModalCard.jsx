@@ -3,34 +3,36 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native'
 import styled from 'styled-components/native'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
+import { Dimensions } from 'react-native'
 import SmallDefaultBtn from './small_elements/SmallDefaultBtn'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+const { width, height } = Dimensions.get('window')
 
 const CustomView = styled.View`
   display: flex;
   flex-direction: column;
   background-color: ${ConstantsRecipe.white};
   border-radius: 20px;
-  padding: 35px;
-  margin-top: 100px;
-  margin-left: 20px;
-  margin-right: 20px;
-  min-height: 500px;
+  padding: ${height * 0.0012875 * 35}px ${width * 0.0025555 * 35}px;
+  margin-top: ${height * 0.0012875 * 100}px;
+  margin-left: ${width * 0.0025555 * 20}px;
+  margin-right: ${width * 0.0025555 * 20}px;
+  min-height: ${height * 0.0012875 * 500}px;
 `
 
 const DirectionText = styled.Text`
-  font-size: 25px;
+  font-size: ${height * 0.0012875 * 25}px;
 `
 const InputDirections = styled.TextInput`
   /* min-height: 300px; */
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 12px;
+  margin: ${height * 0.0012875 * 12}px ${width * 0.0025555 * 12}px;
   border-width: 1px;
-  padding: 10px;
+  padding: ${height * 0.0012875 * 10}px ${width * 0.0025555 * 10}px;
   justify-content: flex-start;
-  height: 350px;
+  height: ${height * 0.0012875 * 350}px;
 `
 
 const ModalCard = props => {

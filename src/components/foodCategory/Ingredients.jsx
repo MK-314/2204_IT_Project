@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet,Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import { ConstantsRecipe } from '../../../constants'
 import { RowOfElements } from '../small_elements/RowOfElements'
+const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
   justify-content: flex-start;
@@ -11,13 +12,13 @@ const BlackAria = styled.View`
   display: flex;
   background-color: black;
   border-radius: 10px;
-  margin-left: 45px;
-  margin-bottom: 10px;
+  margin-left: ${width * 0.115}px;
+  margin-bottom: ${height * 0.012875}px;
 `
 const IngredientsText = styled.Text`
   color: ${ConstantsRecipe.white};
-  font-size: 18px;
-  padding: 5px 15px;
+  font-size: ${height * 0.023175}px;
+  padding:  ${height * 0.00643}px ${width * 0.038333}px;
   text-transform: uppercase;
 `
 
