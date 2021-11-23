@@ -33,12 +33,30 @@ class FetchApi {
         })
     }
     static getUserByEmail(email) {
+        return new Promise(async(res, rej) => {
+            fetch('https://recipe-ruby-api.herokuapp.com/api/users' +
+                    "?thisaction=getByEmail&email=" + email, {
+                        method: "GET",
+                        headers: {},
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
+    static updateUser(id, thisObject) {
             return new Promise(async(res, rej) => {
-                fetch('https://recipe-ruby-api.herokuapp.com/api/users' +
-                        "?thisaction=getByEmail&email=" + email, {
-                            method: "GET",
-                            headers: {},
-                        })
+                fetch("https://recipe-ruby-api.herokuapp.com/api/users/" + id, {
+                        "method": "PUT",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": JSON.stringify(thisObject)
+                    })
                     .then(response => response.json())
                     .then(data => {
                         res(data)
@@ -58,12 +76,13 @@ class FetchApi {
                     },
                     "body": JSON.stringify(postObject)
                 })
-                .then(response => {
-                    res(response);
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
                 })
                 .catch(err => {
-                    console.error(err);
-                });
+                    rej(err)
+                })
         })
     }
     static getPostByUserId(user_id) {

@@ -19,7 +19,10 @@ import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { Pressable } from 'react-native'
 import { FetchApi } from '../../datahandler'
 //
+import { pickImage } from '../../imagePicker'
+//
 import { Dimensions } from 'react-native'
+import { FireBaseImageHandler } from '../../firebase'
 const { width, height } = Dimensions.get('window')
 
 const HeaderRow = styled(RowOfElements)`
@@ -107,22 +110,44 @@ const NumberRecipesBox = styled.View`
 `
 
 const ProfileScreen = ({ navigation }) => {
+  const [avatar, setAvatar] = useState(
+    'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
+  )
+  const [userState, setUserState] = useState(null)
+
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
-    let user = await FetchApi.getUserByEmail(email)
+    let data = await FetchApi.getUserByEmail(email)
+    let user = data[0]
+    user ? setUserState(user) : console.log('user is null')
+    user.avatar
+      ? setAvatar(user.avatar)
+      : console.log('no avatar from profile screen useeffect')
   }, [])
+
+  const handleAvatarUpload = async () => {
+    let pickedImage = await pickImage()
+    let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
+      pickedImage.uri
+    )
+    let url = await FireBaseImageHandler.getUrlOfImageFireBase(
+      snapshot.metadata.fullPath
+    )
+    setAvatar(url)
+    await AsyncStorage.setItem('avatar', url)
+    let swapObject = { ...userState, avatar: url }
+    setUserState(swapObject)
+    let userUpdateResult = await FetchApi.updateUser(userState.id, swapObject)
+  }
 
   return (
     <ContainerDefault>
       <HeaderRow>
-        <AvatarBox style={styles.elementShadow}>
-          <AvatarImg
-            source={{
-              uri:
-                'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
-            }}
-          />
-        </AvatarBox>
+        <Pressable onPress={handleAvatarUpload}>
+          <AvatarBox style={styles.elementShadow}>
+            <AvatarImg source={{ uri: avatar }} />
+          </AvatarBox>
+        </Pressable>
         <NameText>Michael Kashkov</NameText>
       </HeaderRow>
       {/* ////////////////////////////////////////////////////////////////////// */}
