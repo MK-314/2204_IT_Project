@@ -11,8 +11,11 @@ import NavIcons from '../components/NavIcons'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 import { ConstantsRecipe } from '../../constants'
 import { MainHeader } from '../components/small_elements/MainHeader'
+// ICONS
+import { default as IconPencil } from 'react-native-vector-icons/Entypo'
+//
 
-const CustomRow = styled(RowOfElements)`
+const HeaderRow = styled(RowOfElements)`
   margin-top: 40px;
   margin-left: 25px;
   justify-content: flex-start;
@@ -30,17 +33,58 @@ const AvatarImg = styled.Image`
   height: 140px;
   border-radius: 30px;
 `
-const NameText=styled(MainHeader)`
+const NameText = styled(MainHeader)`
   display: flex;
   flex: 1;
   margin-left: 35px;
   flex-wrap: wrap;
 `
+const MainViewRow = styled(RowOfElements)`
+  justify-content: flex-start;
+  margin-left: 25px;
+  margin-top: 70px;
+  /* background-color: aqua; */
+`
+const ElevatedPart = styled(RowOfElements)`
+  width: 170px;
+  /* height: 50px; */
+  margin-right: 55px;
+  border-radius: 10px;
+  background-color: ${ConstantsRecipe.lightGreen};
+`
+const TextOfElevation = styled.Text`
+  padding: 20px 0px;
+  font-size: 17px;
+  font-weight: 700;
+`
+const PencilIcon = styled(IconPencil)`
+  font-size: 50px;
+  color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const NumberRecipes = styled.Text`
+  position: absolute;
+  top: 3px;
+  left: 17px;
+  font-size: 35px;
+  margin-right: 20px;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const NumberRecipesBox = styled.View`
+  position: relative;
+  margin-right: 20px;
+  border-radius: 100px;
+  width: 55px;
+  height: 55px;
+  background-color: ${ConstantsRecipe.lightGreen};
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
 
 const ProfileScreen = ({ navigation }) => {
   return (
     <ContainerDefault>
-      <CustomRow>
+      <HeaderRow>
         <AvatarBox style={styles.elementShadow}>
           <AvatarImg
             source={{
@@ -49,8 +93,19 @@ const ProfileScreen = ({ navigation }) => {
             }}
           />
         </AvatarBox>
-          <NameText>Mike Mike Mike Mike </NameText>
-      </CustomRow>
+        <NameText>Michael Kashkov</NameText>
+      </HeaderRow>
+      {/* ////////////////////////////////////////////////////////////////////// */}
+      <MainViewRow>
+        <ElevatedPart style={styles.elementShadow}>
+          <TextOfElevation>Posted Recipes</TextOfElevation>
+        </ElevatedPart>
+        <NumberRecipesBox style={styles.elementShadow}>
+          <NumberRecipes>7</NumberRecipes>
+        </NumberRecipesBox>
+        <PencilIcon name='pencil' />
+      </MainViewRow>
+      {/* ////////////////////////////////////////////////////////////////////// */}
       <FooterDefault>
         <NavIcons
           iconName='profile'
