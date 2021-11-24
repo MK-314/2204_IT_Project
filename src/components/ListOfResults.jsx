@@ -17,15 +17,18 @@ const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
 
   useEffect(async () => {
+    // if a user is searching:
     if (search) {
       let searchRes = itemsByUser.filter(it =>
         it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
+      // if a user clicked on My Recipes:
     } else if (modeUserRecipes) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
+      // if a user clicked on HomePage / Icon:
     } else {
       let allPosts = await FetchApi.getAllPosts()
       setItemsByUser(allPosts)
@@ -45,11 +48,7 @@ const ListOfResults = props => {
                 props.toFoodCategoryById(item)
               }}
             >
-              <FoodCard
-                number={item.id}
-                textFood={item.name}
-                url={item.imageUrl}
-              />
+              <FoodCard textFood={item.name} url={item.imageUrl} />
             </Pressable>
           )
         }}

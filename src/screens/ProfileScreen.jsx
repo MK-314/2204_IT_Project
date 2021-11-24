@@ -120,6 +120,7 @@ const ProfileScreen = ({ navigation }) => {
   )
   const [userState, setUserState] = useState(null)
   const [postNumber, setPostNumber] = useState(0)
+  const [favsNum, setFavsNum] = useState(0)
 
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
@@ -128,6 +129,8 @@ const ProfileScreen = ({ navigation }) => {
     setUserState(user)
     let numOfPosts = await FetchApi.countPostsByUserId(user.id)
     setPostNumber(numOfPosts)
+    let favs = await FetchApi.countFavsByUserId(user.id)
+    setFavsNum(favs)
     if (user.avatar) setAvatar(user.avatar)
   }, [])
 
@@ -180,7 +183,7 @@ const ProfileScreen = ({ navigation }) => {
           <TextOfElevation>Favourites</TextOfElevation>
         </ElevatedPart>
         <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>2</NumberRecipes>
+          <NumberRecipes>{favsNum}</NumberRecipes>
         </NumberRecipesBox>
         <HeartbeatIcon name='heartbeat' />
       </MainViewRow2>

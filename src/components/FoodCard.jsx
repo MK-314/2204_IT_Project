@@ -51,7 +51,7 @@ const TextNum = styled.Text`
 
 const FoodCard = props => {
   const [iconName, seticonName] = useState('hearto')
-  const [number, setnumber] = useState(props.number)
+  const [number, setnumber] = useState(0)
 
   return (
     <Box style={styles.customShadow}>
