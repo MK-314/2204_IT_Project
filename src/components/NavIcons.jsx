@@ -71,6 +71,8 @@ const ProfileText = styled(RecipesText)`
 `
 const NavIcons = props => {
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+
   return (
     <RowSt>
       <BoxSt
@@ -80,6 +82,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
+            setModeUserRecipes(false)
             setUpdateScreen(!updateScreen)
             props.toScreen('Home')
           }}

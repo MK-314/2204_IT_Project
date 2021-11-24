@@ -215,5 +215,36 @@ class FetchApi {
                 })
         })
     }
+    static getByUserIdAndPostId(user_id, post_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/favorites" +
+                    "?thisaction=getByUserIdAndPostId&user_id=" + user_id + "&post_id=" + post_id, {
+                        "method": "GET",
+                        "headers": {}
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
+    static deleteFavRecord(record_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/favorites/" + record_id, {
+                    "method": "DELETE",
+                    "headers": {}
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
 }
 export { FetchApi }

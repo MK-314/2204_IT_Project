@@ -1,4 +1,7 @@
+// CONTEXT
 import React, { useEffect, useState } from 'react'
+// import RecipeContext from '../context/RecipeContext.jsx'
+//
 import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
@@ -52,6 +55,8 @@ const TextNum = styled.Text`
 `
 
 const FoodCard = props => {
+  // const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
 
@@ -62,25 +67,35 @@ const FoodCard = props => {
       let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
       let filteredResult = likedPosts.filter(post => post.user_id == user_id)
       filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
-      setLikesNum(heartsNum)
+      // setLikesNum(heartsNum)
     } catch (error) {
       console.log('ERROR from FoodCard.jsx : ' + error)
     }
   }, [])
 
   const handleHearts = async () => {
-    let user_id = await AsyncStorage.getItem('user_id')
-    if (iconName == 'hearto') {
-      seticonName('heart')
-      await FetchApi.createFavRecord({
-        user_id: user_id,
-        post_id: props.itemId
-      })
-      let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
-      setLikesNum(heartsNum)
-    } else {
-      seticonName('hearto')
-      
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      if (iconName == 'hearto') {
+        await FetchApi.createFavRecord({
+          user_id: user_id,
+          post_id: props.itemId
+        })
+        let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
+        setLikesNum(heartsNum)
+        seticonName('heart')
+      } else {
+        let favRecord = await FetchApi.getByUserIdAndPostId(
+          user_id,
+          props.itemId
+        )
+        let fav_id = favRecord[0].id
+        await FetchApi.deleteFavRecord(fav_id)
+        setLikesNum(likesNum - 1)
+        seticonName('hearto')
+      }
+    } catch (error) {
+      console.log('ERRRRRRR ' + error)
     }
   }
 
