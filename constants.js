@@ -11,4 +11,9 @@ class ConstantsRecipe {
     static text_shadow = "1px 1px 1px #000000"
 }
 
+const HightUnit = 0.0012875
+const WidthUnit = 0.0025555
+
 export { ConstantsRecipe }
+export { HightUnit }
+export { WidthUnit }
