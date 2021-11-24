@@ -27,6 +27,9 @@ const ListOfResults = props => {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
+    } else {
+      let allPosts = await FetchApi.getAllPosts()
+      setItemsByUser(allPosts)
     }
   }, [search, updateScreen])
 

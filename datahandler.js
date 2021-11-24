@@ -67,6 +67,21 @@ class FetchApi {
             })
         }
         // POSTS
+    static getAllPosts() {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/posts", {
+                    "method": "GET",
+                    "headers": {}
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
     static createPost(postObject) {
         return new Promise(async(res, rej) => {
             fetch("https://recipe-ruby-api.herokuapp.com/api/posts", {
