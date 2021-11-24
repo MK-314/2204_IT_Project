@@ -22,8 +22,7 @@ const ListOfResults = props => {
         it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
-    }
-    if (modeUserRecipes) {
+    } else if (modeUserRecipes) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
