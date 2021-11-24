@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
-
+  const { search, setSearch } = useContext(RecipeContext)
 
   useEffect(async () => {
     if (props.search == '' || props.search == ' ' || !props.search) {
@@ -24,7 +24,7 @@ const ListOfResults = props => {
       )
       setItemsByUser(searchRes)
     }
-  }, [props.search, updateScreen])
+  }, [search, updateScreen])
 
   return (
     <>

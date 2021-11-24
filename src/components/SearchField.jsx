@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Text, StyleSheet, View, Keyboard, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { ConstantsRecipe } from '../../constants'
 import { AsyncStorage } from '@react-native-async-storage/async-storage'
+import RecipeContext from '../context/RecipeContext'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
@@ -39,10 +40,10 @@ const IconSt = styled(Icon)`
 
 const SearchField = props => {
   const [focusedBool, setfocusedBool] = useState(false)
-  const [inputValue, setInputValue] = useState('')
+  const { search, setSearch } = useContext(RecipeContext)
 
   const searchFoodItem = newValue => {
-    setInputValue(newValue)
+    setSearch(newValue)
     props.request(newValue)
   }
 
@@ -61,7 +62,7 @@ const SearchField = props => {
           }}
           autoCapitalize='none'
           autoCorrect={false}
-          value={inputValue}
+          value={search}
           onChangeText={newValue => searchFoodItem(newValue)}
         />
         <IconSt name='search' />

@@ -13,7 +13,6 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
-  const [search, setSearch] = useState('')
 
   return (
     <TouchableWithoutFeedback
@@ -26,15 +25,11 @@ const HomeScreen = ({ navigation }) => {
     >
       <ContainerDefault>
         <SearchField
-          request={searchRequest => {
-            setSearch(searchRequest)
-          }}
           hidden={() => {
             setfooterHidden(true)
           }}
         />
         <ListOfResults
-          search={search}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item
