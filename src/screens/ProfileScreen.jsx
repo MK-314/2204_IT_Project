@@ -1,5 +1,5 @@
 // REACT:
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Text, Image, StyleSheet } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
@@ -23,6 +23,7 @@ import { pickImage } from '../../imagePicker'
 //
 import { Dimensions } from 'react-native'
 import { FireBaseImageHandler } from '../../firebase'
+import RecipeContext from '../context/RecipeContext'
 const { width, height } = Dimensions.get('window')
 
 const HeaderRow = styled(RowOfElements)`
@@ -110,11 +111,15 @@ const NumberRecipesBox = styled.View`
 `
 
 const ProfileScreen = ({ navigation }) => {
+  // USECONTEXT
+  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  // LOCAL STATES:
   const [avatar, setAvatar] = useState(
     'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
   )
   const [userState, setUserState] = useState(null)
-  const [postNumber, setPostNumber] = useState(0);
+  const [postNumber, setPostNumber] = useState(0)
 
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
@@ -152,15 +157,23 @@ const ProfileScreen = ({ navigation }) => {
         <NameText>Michael Kashkov</NameText>
       </HeaderRow>
       {/* ////////////////////////////////////////////////////////////////////// */}
-      <MainViewRow>
-        <ElevatedPart style={styles.elementShadow}>
-          <TextOfElevation>Posted Recipes</TextOfElevation>
-        </ElevatedPart>
-        <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>{postNumber}</NumberRecipes>
-        </NumberRecipesBox>
-        <PencilIcon name='pencil' />
-      </MainViewRow>
+      <Pressable
+        onPress={() => {
+          setModeUserRecipes(true)
+          setUpdateScreen(updateScreen + 1)
+          navigation.navigate('Home')
+        }}
+      >
+        <MainViewRow>
+          <ElevatedPart style={styles.elementShadow}>
+            <TextOfElevation>Posted Recipes</TextOfElevation>
+          </ElevatedPart>
+          <NumberRecipesBox style={styles.elementShadow}>
+            <NumberRecipes>{postNumber}</NumberRecipes>
+          </NumberRecipesBox>
+          <PencilIcon name='pencil' />
+        </MainViewRow>
+      </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <MainViewRow2>
         <ElevatedPart style={styles.elementShadow}>

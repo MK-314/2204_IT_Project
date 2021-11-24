@@ -9,9 +9,12 @@ import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ListOfResults = props => {
-  const [itemsByUser, setItemsByUser] = useState([])
+  // USECONTEXT:
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   const { search, setSearch } = useContext(RecipeContext)
+  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  // LOCAL STATES:
+  const [itemsByUser, setItemsByUser] = useState([])
 
   useEffect(async () => {
     if (search) {
@@ -19,7 +22,8 @@ const ListOfResults = props => {
         it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
-    } else {
+    }
+    if (modeUserRecipes) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
