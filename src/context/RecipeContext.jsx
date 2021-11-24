@@ -4,10 +4,9 @@ const RecipeContext = React.createContext()
 
 export const RecipeProvider = ({ children }) => {
   const [updateScreen, setUpdateScreen] = useState(false)
-  //SearchField, ListOfResults:
   const [search, setSearch] = useState('')
-  // ProfileScreen
   const [modeUserRecipes, setModeUserRecipes] = useState(false)
+  const [modeUserFavs, setModeUserFavs] = useState(false)
 
   return (
     <RecipeContext.Provider
@@ -17,7 +16,9 @@ export const RecipeProvider = ({ children }) => {
         search,
         setSearch,
         modeUserRecipes,
-        setModeUserRecipes
+        setModeUserRecipes,
+        modeUserFavs,
+        setModeUserFavs
       }}
     >
       {children}

@@ -113,6 +113,7 @@ const NumberRecipesBox = styled.View`
 const ProfileScreen = ({ navigation }) => {
   // USECONTEXT
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   // LOCAL STATES:
   const [avatar, setAvatar] = useState(
@@ -178,6 +179,13 @@ const ProfileScreen = ({ navigation }) => {
         </MainViewRow>
       </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
+      <Pressable
+        onPress={() => {
+          setModeUserFavs(true)
+          setUpdateScreen(!updateScreen)
+          navigation.navigate('Home')
+        }}
+      >
       <MainViewRow2>
         <ElevatedPart style={styles.elementShadow}>
           <TextOfElevation>Favourites</TextOfElevation>
@@ -187,6 +195,7 @@ const ProfileScreen = ({ navigation }) => {
         </NumberRecipesBox>
         <HeartbeatIcon name='heartbeat' />
       </MainViewRow2>
+      </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <MainViewRow3>
         <ElevatedPart style={styles.elementShadow}>

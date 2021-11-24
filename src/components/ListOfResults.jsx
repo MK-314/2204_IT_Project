@@ -13,6 +13,7 @@ const ListOfResults = props => {
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   const { search, setSearch } = useContext(RecipeContext)
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
   // LOCAL STATES:
   const [itemsByUser, setItemsByUser] = useState([])
 
@@ -29,11 +30,24 @@ const ListOfResults = props => {
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
       // if a user clicked on HomePage / Icon:
-    } else {
+    } else if (modeUserFavs) {
+      let user_id = await AsyncStorage.getItem('user_id')
+      let favPosts = await FetchApi.getFavsByUserId(user_id)
+      setItemsByUser(favPosts)
+      // if a user clicked on HomePage / Icon:
+    }else {
       let allPosts = await FetchApi.getAllPosts()
       setItemsByUser(allPosts)
     }
   }, [search, updateScreen])
+
+  // useEffect(() => {
+  //   let isMounted = true;               // note mutable flag
+  //   someAsyncOperation().then(data => {
+  //     if (isMounted) setState(data);    // add conditional check
+  //   })
+  //   return () => { isMounted = false }; 
+  // }, []);   
 
   return (
     <>
