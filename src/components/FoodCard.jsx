@@ -6,6 +6,7 @@ import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { MainHeader, WhiteRow } from './small_elements/MainHeader'
 import { FetchApi } from '../../datahandler'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const { width, height } = Dimensions.get('window')
 
@@ -55,8 +56,16 @@ const FoodCard = props => {
   const [likesNum, setLikesNum] = useState(0)
 
   useEffect(async () => {
-    let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
-    setLikesNum(heartsNum)
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
+      let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
+      setLikesNum(heartsNum)
+      let filteredResult = likedPosts.filter(post => post.user_id == user_id)
+      filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
+    } catch (error) {
+      console.log('ERROR from foodcard : ' + error)
+    }
   }, [])
 
   return (

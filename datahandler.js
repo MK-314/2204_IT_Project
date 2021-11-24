@@ -165,5 +165,37 @@ class FetchApi {
                 })
         })
     }
+    static getFavsByUserId(user_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/favorites" +
+                    "?thisaction=getFavsByUserId&user_id=" + user_id, {
+                        "method": "GET",
+                        "headers": {}
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
+    static getFavsByPostId(post_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/favorites" +
+                    "?thisaction=getFavsByPostId&post_id=" + post_id, {
+                        "method": "GET",
+                        "headers": {}
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
 }
 export { FetchApi }
