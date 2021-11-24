@@ -42,11 +42,6 @@ const SearchField = props => {
   const [focusedBool, setfocusedBool] = useState(false)
   const { search, setSearch } = useContext(RecipeContext)
 
-  const searchFoodItem = newValue => {
-    setSearch(newValue)
-    props.request(newValue)
-  }
-
   return (
     <RowSt>
       <InputBox style={styles.customShadow} focusedSt={focusedBool}>
@@ -63,7 +58,7 @@ const SearchField = props => {
           autoCapitalize='none'
           autoCorrect={false}
           value={search}
-          onChangeText={newValue => searchFoodItem(newValue)}
+          onChangeText={newValue => setSearch(newValue)}
         />
         <IconSt name='search' />
       </InputBox>
