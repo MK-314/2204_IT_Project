@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
-// 
+//
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
@@ -46,7 +46,7 @@ const FoodCategory = ({ navigation }) => {
       <SmallFoodCard
         item={item}
         toHomeScreen={() => {
-          setUpdateScreen(updateScreen+1)
+          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       />
@@ -68,7 +68,7 @@ const FoodCategory = ({ navigation }) => {
         <NavIcons
           iconName='recipes'
           toScreen={screen => {
-            setUpdateScreen(updateScreen+1)
+            setUpdateScreen(!updateScreen)
             navigation.navigate(screen)
           }}
         />

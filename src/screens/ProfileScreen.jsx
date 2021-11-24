@@ -160,7 +160,7 @@ const ProfileScreen = ({ navigation }) => {
       <Pressable
         onPress={() => {
           setModeUserRecipes(true)
-          setUpdateScreen(updateScreen + 1)
+          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       >

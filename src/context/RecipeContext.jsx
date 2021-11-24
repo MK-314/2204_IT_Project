@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const RecipeContext = React.createContext()
 
 export const RecipeProvider = ({ children }) => {
-  const [updateScreen, setUpdateScreen] = useState(0)
+  const [updateScreen, setUpdateScreen] = useState(false)
   //SearchField, ListOfResults:
   const [search, setSearch] = useState('')
   // ProfileScreen
