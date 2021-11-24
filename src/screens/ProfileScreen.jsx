@@ -14,6 +14,7 @@ import { MainHeader } from '../components/small_elements/MainHeader'
 // ICONS
 import { default as IconPencil } from 'react-native-vector-icons/Entypo'
 import { default as IconHeartbeat } from 'react-native-vector-icons/FontAwesome5'
+import { default as IconLogOut } from 'react-native-vector-icons/Entypo'
 import { default as IconFollowers } from 'react-native-vector-icons/MaterialCommunityIcons'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { Pressable } from 'react-native'
@@ -86,6 +87,15 @@ const HeartbeatIcon = styled(IconHeartbeat)`
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
+const LogOutIcon = styled(IconLogOut)`
+  position: absolute;
+  top: ${height * HightUnit * 7}px;
+  right: ${width * WidthUnit * 7}px;
+  font-size: ${height * HightUnit * 50}px;
+  color: #774747;
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
 const FollowersIcon = styled(IconFollowers)`
   font-size: ${height * HightUnit * 50}px;
   color: ${ConstantsRecipe.green};
@@ -113,13 +123,28 @@ const NumberRecipesBox = styled.View`
 const ProfileScreen = ({ navigation }) => {
   // USECONTEXT
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
-  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
+    RecipeContext
+  )
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
+    RecipeContext
+  )
   // LOCAL STATES:
   const [avatar, setAvatar] = useState(
     'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
   )
   const [userState, setUserState] = useState(null)
   const [postNumber, setPostNumber] = useState(0)
+  const [namOfPostsThatUserLikes, setNamOfPostsThatUserLikes] = useState(0)
+
+  useEffect(async () => {
+    const unsubscribe = navigation.addListener('didFocus', () => {
+      console.log('focussed profile')
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
+    })
+    return unsubscribe
+  }, [navigation])
 
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')
@@ -128,6 +153,8 @@ const ProfileScreen = ({ navigation }) => {
     setUserState(user)
     let numOfPosts = await FetchApi.countPostsByUserId(user.id)
     setPostNumber(numOfPosts)
+    let favs = await FetchApi.countFavsByUserId(user.id)
+    setNamOfPostsThatUserLikes(favs)
     if (user.avatar) setAvatar(user.avatar)
   }, [])
 
@@ -148,19 +175,25 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <ContainerDefault>
+      <LogOutIcon
+        name='log-out'
+        onPress={async () => {
+          await AsyncStorage.clear()
+          navigation.navigate('LogInScreen')
+        }}
+      />
       <HeaderRow>
         <Pressable onPress={handleAvatarUpload}>
           <AvatarBox style={styles.elementShadow}>
             <AvatarImg source={{ uri: avatar }} />
           </AvatarBox>
         </Pressable>
-        <NameText>Michael Kashkov</NameText>
+        {userState && <NameText>{userState.name}</NameText>}
       </HeaderRow>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
           setModeUserRecipes(true)
-          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       >
@@ -175,15 +208,21 @@ const ProfileScreen = ({ navigation }) => {
         </MainViewRow>
       </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
-      <MainViewRow2>
-        <ElevatedPart style={styles.elementShadow}>
-          <TextOfElevation>Favourites</TextOfElevation>
-        </ElevatedPart>
-        <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>2</NumberRecipes>
-        </NumberRecipesBox>
-        <HeartbeatIcon name='heartbeat' />
-      </MainViewRow2>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('Favorites')
+        }}
+      >
+        <MainViewRow2>
+          <ElevatedPart style={styles.elementShadow}>
+            <TextOfElevation>Favourites</TextOfElevation>
+          </ElevatedPart>
+          <NumberRecipesBox style={styles.elementShadow}>
+            <NumberRecipes>{namOfPostsThatUserLikes}</NumberRecipes>
+          </NumberRecipesBox>
+          <HeartbeatIcon name='heartbeat' />
+        </MainViewRow2>
+      </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <MainViewRow3>
         <ElevatedPart style={styles.elementShadow}>

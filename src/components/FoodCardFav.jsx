@@ -54,9 +54,9 @@ const TextNum = styled.Text`
   z-index: 1;
 `
 
-const FoodCard = props => {
+const FoodCardFav = props => {
   // USECONTEXT
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
   // LOCAL STATES:
@@ -73,8 +73,8 @@ const FoodCard = props => {
   }, [])
 
   useEffect(async () => {
-    console.log('second => firstUseEffectDone ' + firstUseEffectDone)
-    if (firstUseEffectDone) {
+    console.log('second => firstUseEffectDoneFav ' + firstUseEffectDoneFav)
+    if (firstUseEffectDoneFav) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
@@ -85,10 +85,10 @@ const FoodCard = props => {
           : seticonName('hearto')
         setLikesNum(heartsNum)
       } catch (error) {
-        console.log('ERROR from FoodCard.jsx : ' + error)
+        console.log('ERROR from FoodCardFav.jsx : ' + error)
       }
     }
-  }, [firstUseEffectDone])
+  }, [firstUseEffectDoneFav])
 
   const handleHearts = async () => {
     try {
@@ -157,5 +157,5 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FoodCard
+export default FoodCardFav
 export { TextNum }

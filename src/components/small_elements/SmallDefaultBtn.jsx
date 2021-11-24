@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get('window')
 
 const DefaultBtn = styled(RowOfElements)`
   background-color: ${ConstantsRecipe.green};
-  width: 40%;
+  width: ${props=>props.width ? props.width : 40}%;
   border-radius: 20px;
   padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
 `
@@ -20,7 +20,7 @@ const BtnText = styled.Text`
 const SmallDefaultBtn = props => {
   return (
     <RowOfElements style={{ marginTop: props.marginSt }}>
-      <DefaultBtn style={styles.boxShadow}>
+      <DefaultBtn style={styles.boxShadow} width={props.width ? props.width : 40}>
         <BtnText>{props.text}</BtnText>
       </DefaultBtn>
     </RowOfElements>

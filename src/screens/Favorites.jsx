@@ -10,6 +10,7 @@ import NavIcons from './../components/NavIcons'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
+import ListOfResultsFav from '../components/ListOfResultsFav.jsx'
 import { RowOfElements } from '../components/small_elements/RowOfElements.jsx'
 import { H1Text } from '../components/small_elements/H1Text.jsx'
 import styled from 'styled-components/native'
@@ -24,46 +25,35 @@ const H1MainText = styled(H1Text)`
   color: #774747;
   font-weight: bold;
 `
-const HomeScreen = ({ navigation }) => {
+const Favorites = ({ navigation }) => {
   // USECONTEXT
-  const { startUseEffectChain, setStartUseEffectChain } = useContext(
-    RecipeContext
-  )
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
-    RecipeContext
-  )
   const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
     RecipeContext
   )
   const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
-  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
   // LOCAL STATES:
   const [footerHidden, setfooterHidden] = useState(false)
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
-      console.log('focussed home')
-      setFirstUseEffectDoneFav(true)
-      setStartUseEffectChainFav(false)
-      setTimeout(() => {
-        setFirstUseEffectDone(false)
-        setStartUseEffectChain(true)
-      }, 50)
+      console.log('focussed fav page')
+      setFirstUseEffectDoneFav(false)
+      setStartUseEffectChainFav(true)
     })
     return unsubscribe
   }, [navigation])
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('willBlur', () => {
-      console.log('unfocussed home')
-      setFirstUseEffectDone(true)
-      setStartUseEffectChain(false)
-      setModeUserRecipes(false)
+      console.log('unfocussed fav page')
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
     })
     return unsubscribe
   }, [navigation])
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -80,10 +70,9 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <RowOfElements>
-          {modeUserRecipes && <H1MainText>Your Recipes:</H1MainText>}
-          {!modeUserRecipes && <H1MainText>Top Recipes:</H1MainText>}
+          <H1MainText>Your Favorites:</H1MainText>
         </RowOfElements>
-        <ListOfResults
+        <ListOfResultsFav
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item
@@ -92,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
         />
         <FooterDefault hidden={footerHidden}>
           <NavIcons
-            iconName='recipes'
+            iconName='favorites'
             toScreen={screen => {
               navigation.navigate(screen)
             }}
@@ -103,4 +92,4 @@ const HomeScreen = ({ navigation }) => {
   )
 }
 
-export default HomeScreen
+export default Favorites

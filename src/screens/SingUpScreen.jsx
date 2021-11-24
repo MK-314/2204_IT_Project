@@ -1,42 +1,50 @@
 // REACT:
 import React, { useState, useEffect } from 'react'
-import { Text, Image, Button, Pressable } from 'react-native'
-// FIRE_BASE:
-import { FireBaseAuthSystem, FireBaseImageHandler } from '../../firebase'
-import { pickImage } from '../../imagePicker'
+import { Text, Image, Button, StyleSheet, Keyboard } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { FetchApi } from '../../datahandler'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe, HightUnit } from '../../constants'
-//
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
+import { FireBaseAuthSystem } from '../../firebase'
+import { FetchApi } from '../../datahandler'
+import { Pressable } from 'react-native'
 import { Dimensions } from 'react-native'
+import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
+import {
+  TextInputSt,
+  TextInputStShadow
+} from '../components/small_elements/TextInputDefault'
+import { H1Text } from '../components/small_elements/H1Text'
+import { SmalAnnotation } from '../components/small_elements/SmalAnnotation'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
-const RowSt = styled(RowOfElements)`
-  background-color: ${ConstantsRecipe.lightBlue};
+const RowEmailInput = styled(RowOfElements)`
+  margin-top: ${height * HightUnit * 10}px;
 `
-const TextInputSt = styled.TextInput`
-  display: flex;
-  margin-top: ${height * HightUnit * 15}px;
-  background-color: ${ConstantsRecipe.white};
-  width: ${props => (props.focusedSt ? '90%' : '80%')};
-  height: ${height * HightUnit * 50}px;
-  border-radius: 100px;
+const RowPassword = styled(RowEmailInput)`
+  margin-top: ${height * HightUnit * 5}px;
 `
-const CustomText = styled.Text`
-  font-size: ${height * HightUnit * 50}px;
+const DontHaveText = styled(SmalAnnotation)`
+  margin-top: ${height * HightUnit * 70}px;
+  margin-right: ${width * WidthUnit * 0}px;
+`
+const DontHaveTextRow = styled(RowOfElements)`
+  position: absolute;
+  bottom: ${height * HightUnit * 25}px;
+  width: ${props => (props.hidden ? 0 : 100)}%;
 `
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [miniTextHidden, setMiniTextHidden] = useState(false)
 
   useEffect(() => {
     AsyncStorage.getItem('user_id')
@@ -68,54 +76,88 @@ const SingUpScreen = ({ navigation }) => {
         navigation.navigate('Home')
       })
       .catch(e => {
-        'Firebase sing up error: ' + e
+        alert("Check email correctness\nPassword must be min 6 caracters")
       })
   }
-
   return (
-    <ContainerSt>
-      <RowSt>
-        <CustomText>Sign Up</CustomText>
-      </RowSt>
-      <RowSt>
-        <TextInputSt
-          value={name}
-          onChangeText={newValue => setName(newValue)}
-          placeholder={'Enter your name ...'}
-        />
-      </RowSt>
-      <RowSt>
-        <TextInputSt
-          value={email}
-          onChangeText={newValue => setEmail(newValue)}
-          placeholder={'Enter your email ...'}
-        />
-      </RowSt>
-      <RowSt>
-        <TextInputSt
-          value={password}
-          onChangeText={newValue => setPassword(newValue)}
-          placeholder={'Enter your password ...'}
-        />
-      </RowSt>
-      <RowSt>
-        <Button
-          onPress={handleSingUp}
-          title='Register'
-          color='#841584'
-          accessibilityLabel='Learn more about this purple button'
-        />
-      </RowSt>
-      <Pressable
-        onPress={() => {
-          navigation.navigate('LogInScreen')
-        }}
-      >
-        <RowSt>
-          <Text>Have an Account? Sing In</Text>
-        </RowSt>
-      </Pressable>
-    </ContainerSt>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss()
+        setTimeout(() => {
+          setMiniTextHidden(false)
+        }, 200)
+      }}
+    >
+      <ContainerSt>
+        <RowOfElements>
+          <H1Text>Sign Up</H1Text>
+        </RowOfElements>
+        <RowEmailInput>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={name}
+              onChangeText={newValue => setName(newValue)}
+              placeholder={'Enter your name ...'}
+            />
+          </TextInputStShadow>
+        </RowEmailInput>
+        <RowPassword>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={email}
+              onChangeText={newValue => setEmail(newValue)}
+              placeholder={'Enter your email ...'}
+            />
+          </TextInputStShadow>
+        </RowPassword>
+        <RowPassword>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={password}
+              onChangeText={newValue => setPassword(newValue)}
+              placeholder={'Enter your password ...'}
+            />
+          </TextInputStShadow>
+        </RowPassword>
+
+        <RowOfElements>
+          <Pressable onPress={handleSingUp}>
+            <SmallDefaultBtn text={'Sign Up'} marginSt={40} width={80} />
+          </Pressable>
+        </RowOfElements>
+
+        <DontHaveTextRow hidden={miniTextHidden}>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('LogInScreen')
+            }}
+          >
+            <DontHaveText>Have an Account? Sing In</DontHaveText>
+          </Pressable>
+        </DontHaveTextRow>
+      </ContainerSt>
+    </TouchableWithoutFeedback>
   )
 }
+const styles = StyleSheet.create({
+  customShadow: {
+    shadowColor: '#0000007d',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 7
+  }
+})
 export default SingUpScreen

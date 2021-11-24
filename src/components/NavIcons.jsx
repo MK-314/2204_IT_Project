@@ -70,7 +70,6 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
-  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   return (
     <RowSt>
       <BoxSt
@@ -80,7 +79,6 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            setUpdateScreen(!updateScreen)
             props.toScreen('Home')
           }}
         >
@@ -93,8 +91,14 @@ const NavIcons = props => {
           props.iconName == 'favorites' ? styles.customShadow : styles.noShadow
         ]}
       >
-        <IconFavoriteSt name='heart' iconeName={props.iconName} />
-        <FavoritesText iconeName={props.iconName}>Favorites</FavoritesText>
+        <Pressable
+          onPress={() => {
+            props.toScreen('Favorites')
+          }}
+        >
+          <IconFavoriteSt name='heart' iconeName={props.iconName} />
+          <FavoritesText iconeName={props.iconName}>Favorites</FavoritesText>
+        </Pressable>
       </BoxSt>
       <BoxSt
         style={[

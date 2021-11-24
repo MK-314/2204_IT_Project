@@ -4,10 +4,14 @@ const RecipeContext = React.createContext()
 
 export const RecipeProvider = ({ children }) => {
   const [updateScreen, setUpdateScreen] = useState(false)
-  //SearchField, ListOfResults:
   const [search, setSearch] = useState('')
-  // ProfileScreen
   const [modeUserRecipes, setModeUserRecipes] = useState(false)
+  // 
+  const [startUseEffectChain, setStartUseEffectChain] = useState(false)
+  const [firstUseEffectDone, setFirstUseEffectDone] = useState(true)
+  // 
+  const [startUseEffectChainFav, setStartUseEffectChainFav] = useState(false)
+  const [firstUseEffectDoneFav, setFirstUseEffectDoneFav] = useState(true)
 
   return (
     <RecipeContext.Provider
@@ -17,7 +21,15 @@ export const RecipeProvider = ({ children }) => {
         search,
         setSearch,
         modeUserRecipes,
-        setModeUserRecipes
+        setModeUserRecipes,
+        startUseEffectChain,
+        setStartUseEffectChain,
+        firstUseEffectDone,
+        setFirstUseEffectDone,
+        startUseEffectChainFav,
+        setStartUseEffectChainFav,
+        firstUseEffectDoneFav,
+        setFirstUseEffectDoneFav
       }}
     >
       {children}

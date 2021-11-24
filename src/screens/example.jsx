@@ -7,8 +7,11 @@ import styled from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
+// 
+import { Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
-const XXX = ({ navigation }) => {
+const startUseEffectChain = ({ navigation }) => {
 
   return (
     <ContainerDefault>
@@ -18,4 +21,4 @@ const XXX = ({ navigation }) => {
     </ContainerDefault>
   )
 }
-export default XXX
+export default startUseEffectChain

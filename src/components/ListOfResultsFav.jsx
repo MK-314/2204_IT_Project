@@ -7,46 +7,50 @@ import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import FoodCardFav from './FoodCardFav.jsx'
 
-const ListOfResults = props => {
+const ListOfResultsFav = props => {
   // USECONTEXT:
-  const { startUseEffectChain, setStartUseEffectChain } = useContext(
+  const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
     RecipeContext
   )
   const { search, setSearch } = useContext(RecipeContext)
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
   // LOCAL STATES:
   const [itemsByUser, setItemsByUser] = useState([])
   useEffect(async () => {
-    if (startUseEffectChain) {
+    if (startUseEffectChainFav) {
       // if a user is searching:
       if (search) {
         let searchRes = itemsByUser.filter(it =>
           it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         setItemsByUser(searchRes)
-        setFirstUseEffectDone(true)
+        setFirstUseEffectDoneFav(true)
         // if a user clicked on Recipes:
-      } else if (modeUserRecipes) {
+      } else {
         let user_id = await AsyncStorage.getItem('user_id')
-        let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
-        setItemsByUser(itemsInUseEffect)
-        setFirstUseEffectDone(true)
-        // if a user clicked on Favorites / Icon:
-      }  else {
-        let allPosts = await FetchApi.getAllPosts()
-        setItemsByUser(allPosts)
-        setFirstUseEffectDone(true)
+        // getting records from FAVS table:
+        let favRecords = await FetchApi.getFavsByUserId(user_id)
+        // for each favRecord above we are getting the posts from post table:
+        let favPosts = await Promise.all(
+          favRecords.map(async elem => {
+            return await FetchApi.getPostByID(elem.post_id)
+          })
+        )
+        setItemsByUser(favPosts)
+        setFirstUseEffectDoneFav(true)
+        // if a user clicked on HomePage / Icon:
       }
     }
-  }, [search, startUseEffectChain])
+  }, [search, startUseEffectChainFav])
 
   return (
     <>
-      {firstUseEffectDone && (
+      {firstUseEffectDoneFav && (
         <FlatList
           horizontal
           data={itemsByUser}
@@ -58,7 +62,7 @@ const ListOfResults = props => {
                   props.toFoodCategoryById(item)
                 }}
               >
-                <FoodCard
+                <FoodCardFav
                   itemId={item.id}
                   textFood={item.name}
                   url={item.imageUrl}
@@ -72,4 +76,4 @@ const ListOfResults = props => {
   )
 }
 
-export default ListOfResults
+export default ListOfResultsFav
