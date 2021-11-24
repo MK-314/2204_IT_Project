@@ -1,6 +1,6 @@
 // CONTEXT
-import React, { useEffect, useState } from 'react'
-// import RecipeContext from '../context/RecipeContext.jsx'
+import React, { useContext, useEffect, useState } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
 //
 import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
@@ -55,8 +55,9 @@ const TextNum = styled.Text`
 `
 
 const FoodCard = props => {
-  // const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
-
+  // USECONTEXT
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  // LOCAL STATES:
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
 
@@ -67,11 +68,11 @@ const FoodCard = props => {
       let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
       let filteredResult = likedPosts.filter(post => post.user_id == user_id)
       filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
-      // setLikesNum(heartsNum)
+      setLikesNum(heartsNum)
     } catch (error) {
       console.log('ERROR from FoodCard.jsx : ' + error)
     }
-  }, [])
+  }, [updateScreen])
 
   const handleHearts = async () => {
     try {
@@ -81,9 +82,11 @@ const FoodCard = props => {
           user_id: user_id,
           post_id: props.itemId
         })
+        //
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         setLikesNum(heartsNum)
         seticonName('heart')
+        // setUpdateScreen(!updateScreen)
       } else {
         let favRecord = await FetchApi.getByUserIdAndPostId(
           user_id,
@@ -91,8 +94,10 @@ const FoodCard = props => {
         )
         let fav_id = favRecord[0].id
         await FetchApi.deleteFavRecord(fav_id)
+        //
         setLikesNum(likesNum - 1)
         seticonName('hearto')
+        // setUpdateScreen(!updateScreen)
       }
     } catch (error) {
       console.log('ERRRRRRR ' + error)

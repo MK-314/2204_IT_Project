@@ -25,7 +25,6 @@ const ListOfResults = props => {
       setItemsByUser(searchRes)
       // if a user clicked on My Recipes:
     } else if (modeUserRecipes) {
-      console.log("mode ...");
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
