@@ -48,7 +48,11 @@ const ListOfResults = props => {
                 props.toFoodCategoryById(item)
               }}
             >
-              <FoodCard textFood={item.name} url={item.imageUrl} />
+              <FoodCard 
+              itemId={item.id}
+              textFood={item.name} 
+              url={item.imageUrl} 
+              />
             </Pressable>
           )
         }}

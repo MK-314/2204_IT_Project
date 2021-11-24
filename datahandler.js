@@ -136,7 +136,23 @@ class FetchApi {
     static countFavsByUserId(user_id) {
         return new Promise(async(res, rej) => {
             fetch("https://recipe-ruby-api.herokuapp.com/api/favorites" +
-                    "?thisaction=countPostsByUserId&user_id=" + user_id, {
+                    "?thisaction=countFavsByUserId&user_id=" + user_id, {
+                        "method": "GET",
+                        "headers": {}
+                    })
+                .then(response => response.json())
+                .then(data => {
+                    res(data.postNumber)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
+    static countFavsByPostId(post_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/favorites" +
+                    "?thisaction=countFavsByPostId&post_id=" + post_id, {
                         "method": "GET",
                         "headers": {}
                     })

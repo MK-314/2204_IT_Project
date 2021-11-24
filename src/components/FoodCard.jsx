@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
 import { RowOfElements } from './small_elements/RowOfElements'
 import { MainHeader, WhiteRow } from './small_elements/MainHeader'
+import { FetchApi } from '../../datahandler'
 
 const { width, height } = Dimensions.get('window')
 
@@ -29,7 +30,7 @@ const FoodItem = styled.Image`
 const IconSt = styled(Icon)`
   display: flex;
   position: absolute;
-  top:  ${height * 0.038625}px;
+  top: ${height * 0.038625}px;
   left: ${width * 0.076666}px;
   font-size: ${height * 0.038625}px;
   color: ${props =>
@@ -51,24 +52,29 @@ const TextNum = styled.Text`
 
 const FoodCard = props => {
   const [iconName, seticonName] = useState('hearto')
-  const [number, setnumber] = useState(0)
+  const [likesNum, setLikesNum] = useState(0)
+
+  useEffect(async () => {
+    let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
+    setLikesNum(heartsNum)
+  }, [])
 
   return (
     <Box style={styles.customShadow}>
-      <TextNum>{number}</TextNum>
+      <TextNum>{likesNum}</TextNum>
       <WhiteRow style={styles.customShadow}>
         <MainHeader>{props.textFood}</MainHeader>
       </WhiteRow>
       <IconSt
         name={iconName}
         onPress={() => {
-          if (iconName == 'hearto') {
-            seticonName('heart')
-            setnumber(number + 1)
-          } else {
-            seticonName('hearto')
-            setnumber(number - 1)
-          }
+          // if (iconName == 'hearto') {
+          //   seticonName('heart')
+          //   setnumber(number + 1)
+          // } else {
+          //   seticonName('hearto')
+          //   setnumber(number - 1)
+          // }
         }}
       />
       <FoodItem
