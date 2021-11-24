@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+// 
 import { FlatList } from 'react-native-gesture-handler'
 import styled from 'styled-components/native'
 import NavIcons from './../components/NavIcons'
@@ -33,6 +35,7 @@ const MainText = styled.Text`
   padding-left: ${width * 0.0025555 * 10}px;
 `
 const FoodCategory = ({ navigation }) => {
+  const { trigger, changeTrigger } = useContext(RecipeContext)
   const item = navigation.getParam('item')
   const [arrOfIngredients, setArrOfIngredients] = useState([])
   useEffect(() => {
@@ -43,6 +46,7 @@ const FoodCategory = ({ navigation }) => {
       <SmallFoodCard
         item={item}
         toHomeScreen={() => {
+          changeTrigger(trigger+1)
           navigation.navigate('Home')
         }}
       />
@@ -64,6 +68,7 @@ const FoodCategory = ({ navigation }) => {
         <NavIcons
           iconName='recipes'
           toScreen={screen => {
+            changeTrigger(trigger+1)
             navigation.navigate(screen)
           }}
         />

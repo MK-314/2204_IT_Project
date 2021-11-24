@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+// 
 import { Text, StyleSheet, View, Keyboard, Pressable } from 'react-native'
 import styled from 'styled-components/native'
 import IconBook from 'react-native-vector-icons/FontAwesome'
@@ -68,6 +70,7 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
+  const { trigger, changeTrigger } = useContext(RecipeContext)
   return (
     <RowSt>
       <BoxSt
@@ -77,6 +80,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
+            changeTrigger(trigger+1)
             props.toScreen('Home')
           }}
         >
