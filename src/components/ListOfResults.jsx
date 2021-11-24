@@ -14,15 +14,15 @@ const ListOfResults = props => {
   const { search, setSearch } = useContext(RecipeContext)
 
   useEffect(async () => {
-    if (search == '' || search == ' ' || !search) {
-      let user_id = await AsyncStorage.getItem('user_id')
-      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
-      setItemsByUser(itemsInUseEffect)
-    } else {
+    if (search) {
       let searchRes = itemsByUser.filter(it =>
         it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
+    } else {
+      let user_id = await AsyncStorage.getItem('user_id')
+      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
+      setItemsByUser(itemsInUseEffect)
     }
   }, [search, updateScreen])
 
