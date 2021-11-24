@@ -60,13 +60,29 @@ const FoodCard = props => {
       let user_id = await AsyncStorage.getItem('user_id')
       let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
       let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
-      setLikesNum(heartsNum)
       let filteredResult = likedPosts.filter(post => post.user_id == user_id)
       filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
+      setLikesNum(heartsNum)
     } catch (error) {
-      console.log('ERROR from foodcard : ' + error)
+      console.log('ERROR from FoodCard.jsx : ' + error)
     }
   }, [])
+
+  const handleHearts = async () => {
+    let user_id = await AsyncStorage.getItem('user_id')
+    if (iconName == 'hearto') {
+      seticonName('heart')
+      await FetchApi.createFavRecord({
+        user_id: user_id,
+        post_id: props.itemId
+      })
+      let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
+      setLikesNum(heartsNum)
+    } else {
+      seticonName('hearto')
+      
+    }
+  }
 
   return (
     <Box style={styles.customShadow}>
@@ -74,18 +90,7 @@ const FoodCard = props => {
       <WhiteRow style={styles.customShadow}>
         <MainHeader>{props.textFood}</MainHeader>
       </WhiteRow>
-      <IconSt
-        name={iconName}
-        onPress={() => {
-          // if (iconName == 'hearto') {
-          //   seticonName('heart')
-          //   setnumber(number + 1)
-          // } else {
-          //   seticonName('hearto')
-          //   setnumber(number - 1)
-          // }
-        }}
-      />
+      <IconSt name={iconName} onPress={handleHearts} />
       <FoodItem
         source={{
           uri: props.url
