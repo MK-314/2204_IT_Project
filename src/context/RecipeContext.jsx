@@ -3,14 +3,10 @@ import React, { useState } from 'react'
 const RecipeContext = React.createContext()
 
 export const RecipeProvider = ({ children }) => {
-  const [trigger, setTrigger] = useState(0)
-
-  const changeTrigger = thisValue => {
-    setTrigger(thisValue)
-  }
+  const [updateScreen, setUpdateScreen] = useState(0)
 
   return (
-    <RecipeContext.Provider value={{ trigger: trigger, changeTrigger }}>
+    <RecipeContext.Provider value={{ updateScreen, setUpdateScreen }}>
       {children}
     </RecipeContext.Provider>
   )

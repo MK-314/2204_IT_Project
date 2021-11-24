@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+// CONTEXT
+import React, { useEffect, useState, useContext } from 'react'
+import RecipeContext from '../context/RecipeContext.jsx'
+//
 import { Pressable } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
@@ -7,6 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ListOfResults = props => {
   const [itemsByUser, setItemsByUser] = useState([])
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+
 
   useEffect(async () => {
     if (props.search == '' || props.search == ' ' || !props.search) {
@@ -19,7 +24,7 @@ const ListOfResults = props => {
       )
       setItemsByUser(searchRes)
     }
-  }, [props.search, props.trigger])
+  }, [props.search, updateScreen])
 
   return (
     <>

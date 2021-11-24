@@ -14,7 +14,6 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
   const [search, setSearch] = useState('')
-  const { trigger, changeTrigger } = useContext(RecipeContext)
 
   return (
     <TouchableWithoutFeedback
@@ -26,15 +25,6 @@ const HomeScreen = ({ navigation }) => {
       }}
     >
       <ContainerDefault>
-        <Pressable
-          onPress={() => {
-            console.log(trigger)
-            changeTrigger(trigger + 1)
-          }}
-        >
-          <Text style={{ fontSize: 25, color: '#000' }}>{trigger}</Text>
-        </Pressable>
-
         <SearchField
           request={searchRequest => {
             setSearch(searchRequest)
@@ -44,7 +34,6 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <ListOfResults
-          trigger={trigger}
           search={search}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {

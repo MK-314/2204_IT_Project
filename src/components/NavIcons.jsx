@@ -70,7 +70,7 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
-  const { trigger, changeTrigger } = useContext(RecipeContext)
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   return (
     <RowSt>
       <BoxSt
@@ -80,7 +80,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            changeTrigger(trigger+1)
+            setUpdateScreen(updateScreen+1)
             props.toScreen('Home')
           }}
         >

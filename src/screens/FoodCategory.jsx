@@ -35,7 +35,7 @@ const MainText = styled.Text`
   padding-left: ${width * 0.0025555 * 10}px;
 `
 const FoodCategory = ({ navigation }) => {
-  const { trigger, changeTrigger } = useContext(RecipeContext)
+  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   const item = navigation.getParam('item')
   const [arrOfIngredients, setArrOfIngredients] = useState([])
   useEffect(() => {
@@ -46,7 +46,7 @@ const FoodCategory = ({ navigation }) => {
       <SmallFoodCard
         item={item}
         toHomeScreen={() => {
-          changeTrigger(trigger+1)
+          setUpdateScreen(updateScreen+1)
           navigation.navigate('Home')
         }}
       />
@@ -68,7 +68,7 @@ const FoodCategory = ({ navigation }) => {
         <NavIcons
           iconName='recipes'
           toScreen={screen => {
-            changeTrigger(trigger+1)
+            setUpdateScreen(updateScreen+1)
             navigation.navigate(screen)
           }}
         />
