@@ -13,7 +13,6 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
-  console.log("hooome");
 
   return (
     <TouchableWithoutFeedback

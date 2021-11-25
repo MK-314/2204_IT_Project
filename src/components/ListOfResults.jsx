@@ -16,61 +16,63 @@ const ListOfResults = props => {
   const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
   // LOCAL STATES:
   const [itemsByUser, setItemsByUser] = useState([])
+  const [firstUseEffectDone, setFirstUseEffectDone] = useState(false)
 
   useEffect(async () => {
+    console.log('firts');
     // if a user is searching:
     if (search) {
       let searchRes = itemsByUser.filter(it =>
         it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
       setItemsByUser(searchRes)
-      // if a user clicked on My Recipes:
+      setFirstUseEffectDone(true)
+      // if a user clicked on Recipes:
     } else if (modeUserRecipes) {
       let user_id = await AsyncStorage.getItem('user_id')
       let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
       setItemsByUser(itemsInUseEffect)
-      // if a user clicked on HomePage / Icon:
+      setFirstUseEffectDone(true)
+      // if a user clicked on Favorites / Icon:
     } else if (modeUserFavs) {
       let user_id = await AsyncStorage.getItem('user_id')
       let favPosts = await FetchApi.getFavsByUserId(user_id)
       setItemsByUser(favPosts)
+      setFirstUseEffectDone(true)
       // if a user clicked on HomePage / Icon:
-    }else {
+    } else {
       let allPosts = await FetchApi.getAllPosts()
       setItemsByUser(allPosts)
+      setFirstUseEffectDone(true)
     }
   }, [search, updateScreen])
 
-  // useEffect(() => {
-  //   let isMounted = true;               // note mutable flag
-  //   someAsyncOperation().then(data => {
-  //     if (isMounted) setState(data);    // add conditional check
-  //   })
-  //   return () => { isMounted = false }; 
-  // }, []);   
-
   return (
     <>
-      <FlatList
-        horizontal
-        data={itemsByUser}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => {
-          return (
-            <Pressable
-              onPress={() => {
-                props.toFoodCategoryById(item)
-              }}
-            >
-              <FoodCard 
-              itemId={item.id}
-              textFood={item.name} 
-              url={item.imageUrl} 
-              />
-            </Pressable>
-          )
-        }}
-      />
+      {firstUseEffectDone && (
+        <FlatList
+          horizontal
+          data={itemsByUser}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => {
+            return (
+              <Pressable
+                onPress={() => {
+                  props.toFoodCategoryById(item)
+                }}
+              >
+                <FoodCard
+                  firstUseEffectDone={firstUseEffectDone}
+                  itemId={item.id}
+                  textFood={item.name}
+                  url={item.imageUrl}
+                />
+              </Pressable>
+            )
+          }}
+        />
+      )}
+      {/* {setFirstUseEffectDone(false)} */}
     </>
   )
 }

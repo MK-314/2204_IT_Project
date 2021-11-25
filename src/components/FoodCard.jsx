@@ -62,17 +62,21 @@ const FoodCard = props => {
   const [likesNum, setLikesNum] = useState(0)
 
   useEffect(async () => {
-    try {
-      let user_id = await AsyncStorage.getItem('user_id')
-      let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
-      let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
-      let filteredResult = likedPosts.filter(post => post.user_id == user_id)
-      filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
-      setLikesNum(heartsNum)
-    } catch (error) {
-      console.log('ERROR from FoodCard.jsx : ' + error)
+    console.log('second');
+
+    if (props.firstUseEffectDone) {
+      try {
+        let user_id = await AsyncStorage.getItem('user_id')
+        let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
+        let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
+        let filteredResult = likedPosts.filter(post => post.user_id == user_id)
+        filteredResult != 0 ? seticonName('heart') : seticonName('hearto')
+        setLikesNum(heartsNum)
+      } catch (error) {
+        console.log('ERROR from FoodCard.jsx : ' + error)
+      }
     }
-  }, [updateScreen])
+  }, [])
 
   const handleHearts = async () => {
     try {
