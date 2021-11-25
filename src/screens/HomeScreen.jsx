@@ -19,23 +19,38 @@ const HomeScreen = ({ navigation }) => {
   const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
     RecipeContext
   )
+  const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
+    RecipeContext
+  )
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
+    RecipeContext
+  )
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
   // LOCAL STATES:
   const [footerHidden, setfooterHidden] = useState(false)
 
   useEffect(async () => {
-    navigation.addListener('didFocus', () => {
+    const unsubscribe = navigation.addListener('didFocus', () => {
       console.log('focussed home')
-      setFirstUseEffectDone(false)
-      setStartUseEffectChain(true)
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
+      setTimeout(() => {
+        setFirstUseEffectDone(false)
+        setStartUseEffectChain(true)
+      }, 50)
     })
-    navigation.addListener('willBlur', () => {
+    return unsubscribe
+  }, [navigation])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('willBlur', () => {
       console.log('unfocussed home')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
       setModeUserRecipes(false)
     })
-  }, [])
+    return unsubscribe
+  }, [navigation])
   return (
     <TouchableWithoutFeedback
       onPress={() => {

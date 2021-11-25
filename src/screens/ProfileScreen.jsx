@@ -113,6 +113,12 @@ const NumberRecipesBox = styled.View`
 const ProfileScreen = ({ navigation }) => {
   // USECONTEXT
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
+    RecipeContext
+  )
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
+    RecipeContext
+  )
   // LOCAL STATES:
   const [avatar, setAvatar] = useState(
     'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
@@ -120,6 +126,15 @@ const ProfileScreen = ({ navigation }) => {
   const [userState, setUserState] = useState(null)
   const [postNumber, setPostNumber] = useState(0)
   const [namOfPostsThatUserLikes, setNamOfPostsThatUserLikes] = useState(0)
+
+  useEffect(async () => {
+    const unsubscribe = navigation.addListener('didFocus', () => {
+      console.log('focussed home')
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
+    })
+    return unsubscribe
+  }, [navigation])
 
   useEffect(async () => {
     let email = await AsyncStorage.getItem('email')

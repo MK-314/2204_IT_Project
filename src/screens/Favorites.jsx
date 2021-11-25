@@ -24,17 +24,23 @@ const Favorites = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
 
   useEffect(async () => {
-    navigation.addListener('didFocus', () => {
-      console.log('focussed favorites')
+    const unsubscribe = navigation.addListener('didFocus', () => {
+      console.log('focussed fav page')
       setFirstUseEffectDoneFav(false)
       setStartUseEffectChainFav(true)
     })
-    navigation.addListener('willBlur', () => {
-      console.log('unfocussed favorites')
+    return unsubscribe
+  }, [navigation])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('willBlur', () => {
+      console.log('unfocussed fav page')
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)
     })
-  }, [])
+    return unsubscribe
+  }, [navigation])
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
