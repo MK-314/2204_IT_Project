@@ -70,7 +70,12 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
-
+  const { startUseEffectChain, setStartUseEffectChain } = useContext(
+    RecipeContext
+  )
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+    RecipeContext
+  )
   return (
     <RowSt>
       <BoxSt
@@ -80,7 +85,11 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            props.toScreen('Home')
+            setFirstUseEffectDone(true)
+            setStartUseEffectChain(false)
+            setTimeout(() => {
+              props.toScreen('Home')
+            }, 500)
           }}
         >
           <IconBookSt name='book' iconeName={props.iconName} />
@@ -94,7 +103,11 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            props.toScreen('Favorites')
+            setFirstUseEffectDone(true)
+            setStartUseEffectChain(false)
+            setTimeout(() => {
+              props.toScreen('Favorites')
+            }, 500)
           }}
         >
           <IconFavoriteSt name='heart' iconeName={props.iconName} />
