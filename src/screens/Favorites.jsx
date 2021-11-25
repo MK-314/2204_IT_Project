@@ -29,7 +29,7 @@ const Favorites = ({ navigation }) => {
       setFirstUseEffectDoneFav(false)
       setStartUseEffectChainFav(true)
     })
-    navigation.addListener('didBlur', () => {
+    navigation.addListener('willBlur', () => {
       console.log('unfocussed favorites')
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)

@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }) => {
       setFirstUseEffectDone(false)
       setStartUseEffectChain(true)
     })
-    navigation.addListener('didBlur', () => {
+    navigation.addListener('willBlur', () => {
       console.log('unfocussed home')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
