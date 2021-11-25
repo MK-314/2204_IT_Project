@@ -181,7 +181,7 @@ const ProfileScreen = ({ navigation }) => {
       <Pressable
         onPress={() => {
           setModeUserFavs(true)
-          navigation.navigate('Home')
+          navigation.navigate('Favourites')
         }}
       >
       <MainViewRow2>

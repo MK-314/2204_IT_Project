@@ -70,14 +70,6 @@ const ProfileText = styled(RecipesText)`
     props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
 `
 const NavIcons = props => {
-  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
-  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
-  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
-
-  useEffect(() => {
-    setModeUserRecipes(false)
-    setModeUserFavs(false)
-  }, [])
 
   return (
     <RowSt>
@@ -88,7 +80,6 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            console.log('nav modeUserFavs : ' + modeUserFavs)
             props.toScreen('Home')
           }}
         >
@@ -101,8 +92,14 @@ const NavIcons = props => {
           props.iconName == 'favorites' ? styles.customShadow : styles.noShadow
         ]}
       >
-        <IconFavoriteSt name='heart' iconeName={props.iconName} />
-        <FavoritesText iconeName={props.iconName}>Favorites</FavoritesText>
+        <Pressable
+          onPress={() => {
+            props.toScreen('Favorites')
+          }}
+        >
+          <IconFavoriteSt name='heart' iconeName={props.iconName} />
+          <FavoritesText iconeName={props.iconName}>Favorites</FavoritesText>
+        </Pressable>
       </BoxSt>
       <BoxSt
         style={[

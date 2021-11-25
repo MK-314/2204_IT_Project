@@ -22,12 +22,12 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(async () => {
     navigation.addListener('didFocus', () => {
-      console.log('focussed')
+      console.log('focussed home')
       setFirstUseEffectDone(false)
       setStartUseEffectChain(true)
     })
     navigation.addListener('didBlur', () => {
-      console.log('unfocussed')
+      console.log('unfocussed home')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
       setModeUserRecipes(false)

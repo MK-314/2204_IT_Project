@@ -22,12 +22,12 @@ const Favorites = ({ navigation }) => {
 
   useEffect(async () => {
     navigation.addListener('didFocus', () => {
-      console.log('focussed')
+      console.log('focussed favorites')
       setFirstUseEffectDone(false)
       setStartUseEffectChain(true)
     })
     navigation.addListener('didBlur', () => {
-      console.log('unfocussed')
+      console.log('unfocussed favorites')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
       setModeUserRecipes(false)
@@ -58,7 +58,7 @@ const Favorites = ({ navigation }) => {
         />
         <FooterDefault hidden={footerHidden}>
           <NavIcons
-            iconName='recipes'
+            iconName='favorites'
             toScreen={screen => {
               navigation.navigate(screen)
             }}
