@@ -10,30 +10,29 @@ import NavIcons from './../components/NavIcons'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
+import ListOfResultsFav from '../components/ListOfResultsFav.jsx'
 
 const Favorites = ({ navigation }) => {
   // USECONTEXT
-  const { startUseEffectChain, setStartUseEffectChain } = useContext(
+  const { startUseEffectChainFav, setStartUseEffectChainFav } = useContext(
     RecipeContext
   )
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+  const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
-  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
   // LOCAL STATES:
   const [footerHidden, setfooterHidden] = useState(false)
 
   useEffect(async () => {
     navigation.addListener('didFocus', () => {
       console.log('focussed favorites')
-      setFirstUseEffectDone(false)
-      setStartUseEffectChain(true)
+      setFirstUseEffectDoneFav(false)
+      setStartUseEffectChainFav(true)
     })
     navigation.addListener('didBlur', () => {
       console.log('unfocussed favorites')
-      setFirstUseEffectDone(true)
-      setStartUseEffectChain(false)
-      setModeUserFavs(false)
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
     })
   }, [])
   return (
@@ -51,7 +50,7 @@ const Favorites = ({ navigation }) => {
             setfooterHidden(true)
           }}
         />
-        <ListOfResults
+        <ListOfResultsFav
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item

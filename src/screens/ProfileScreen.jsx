@@ -113,8 +113,6 @@ const NumberRecipesBox = styled.View`
 const ProfileScreen = ({ navigation }) => {
   // USECONTEXT
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
-  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
-  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   // LOCAL STATES:
   const [avatar, setAvatar] = useState(
     'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg'
@@ -180,7 +178,6 @@ const ProfileScreen = ({ navigation }) => {
       {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
-          setModeUserFavs(true)
           navigation.navigate('Favourites')
         }}
       >

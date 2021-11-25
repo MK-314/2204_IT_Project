@@ -6,9 +6,12 @@ export const RecipeProvider = ({ children }) => {
   const [updateScreen, setUpdateScreen] = useState(false)
   const [search, setSearch] = useState('')
   const [modeUserRecipes, setModeUserRecipes] = useState(false)
-  const [modeUserFavs, setModeUserFavs] = useState(false)
+  // 
   const [startUseEffectChain, setStartUseEffectChain] = useState(false)
   const [firstUseEffectDone, setFirstUseEffectDone] = useState(true)
+  // 
+  const [startUseEffectChainFav, setStartUseEffectChainFav] = useState(false)
+  const [firstUseEffectDoneFav, setFirstUseEffectDoneFav] = useState(true)
 
   return (
     <RecipeContext.Provider
@@ -19,12 +22,14 @@ export const RecipeProvider = ({ children }) => {
         setSearch,
         modeUserRecipes,
         setModeUserRecipes,
-        modeUserFavs,
-        setModeUserFavs,
         startUseEffectChain,
         setStartUseEffectChain,
         firstUseEffectDone,
-        setFirstUseEffectDone
+        setFirstUseEffectDone,
+        startUseEffectChainFav,
+        setStartUseEffectChainFav,
+        firstUseEffectDoneFav,
+        setFirstUseEffectDoneFav
       }}
     >
       {children}
