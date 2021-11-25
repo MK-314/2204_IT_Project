@@ -74,6 +74,10 @@ const NavIcons = props => {
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
   const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
 
+  useEffect(() => {
+    setModeUserRecipes(false)
+    setModeUserFavs(false)
+  }, [])
 
   return (
     <RowSt>
@@ -84,9 +88,7 @@ const NavIcons = props => {
       >
         <Pressable
           onPress={() => {
-            setModeUserRecipes(false)
-            setModeUserFavs(false)
-            setUpdateScreen(!updateScreen)
+            console.log('nav modeUserFavs : ' + modeUserFavs)
             props.toScreen('Home')
           }}
         >

@@ -20,8 +20,8 @@ const ListOfResults = props => {
 
   useEffect(async () => {
     if (props.startUseEffectChain) {
+      console.log('LINE 23 inside modeUserFavs : ' + modeUserFavs)
       setFirstUseEffectDone(false)
-      console.log('firts')
       // if a user is searching:
       if (search) {
         let searchRes = itemsByUser.filter(it =>
@@ -38,7 +38,7 @@ const ListOfResults = props => {
         // if a user clicked on Favorites / Icon:
       } else if (modeUserFavs) {
         let user_id = await AsyncStorage.getItem('user_id')
-        let favPosts = await FetchApi.getFavsByUserId(user_id)
+        let favPosts = await FetchApi.getFavsByUserId(`${user_id}`)
         setItemsByUser(favPosts)
         setFirstUseEffectDone(true)
         // if a user clicked on HomePage / Icon:

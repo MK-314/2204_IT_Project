@@ -164,7 +164,6 @@ const ProfileScreen = ({ navigation }) => {
       <Pressable
         onPress={() => {
           setModeUserRecipes(true)
-          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       >
@@ -182,7 +181,6 @@ const ProfileScreen = ({ navigation }) => {
       <Pressable
         onPress={() => {
           setModeUserFavs(true)
-          setUpdateScreen(!updateScreen)
           navigation.navigate('Home')
         }}
       >
