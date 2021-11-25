@@ -7,6 +7,8 @@ export const RecipeProvider = ({ children }) => {
   const [search, setSearch] = useState('')
   const [modeUserRecipes, setModeUserRecipes] = useState(false)
   const [modeUserFavs, setModeUserFavs] = useState(false)
+  const [startUseEffectChain, setStartUseEffectChain] = useState(false)
+  const [firstUseEffectDone, setFirstUseEffectDone] = useState(true)
 
   return (
     <RecipeContext.Provider
@@ -18,7 +20,11 @@ export const RecipeProvider = ({ children }) => {
         modeUserRecipes,
         setModeUserRecipes,
         modeUserFavs,
-        setModeUserFavs
+        setModeUserFavs,
+        startUseEffectChain,
+        setStartUseEffectChain,
+        firstUseEffectDone,
+        setFirstUseEffectDone
       }}
     >
       {children}

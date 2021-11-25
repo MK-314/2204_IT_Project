@@ -10,18 +10,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ListOfResults = props => {
   // USECONTEXT:
+  const { startUseEffectChain, setStartUseEffectChain } = useContext(
+    RecipeContext
+  )
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
   const { search, setSearch } = useContext(RecipeContext)
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
   const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(RecipeContext)
   // LOCAL STATES:
   const [itemsByUser, setItemsByUser] = useState([])
-  const [firstUseEffectDone, setFirstUseEffectDone] = useState(false)
-
   useEffect(async () => {
-    if (props.startUseEffectChain) {
+    if (startUseEffectChain) {
       console.log('LINE 23 inside modeUserFavs : ' + modeUserFavs)
-      setFirstUseEffectDone(false)
       // if a user is searching:
       if (search) {
         let searchRes = itemsByUser.filter(it =>
@@ -48,7 +49,7 @@ const ListOfResults = props => {
         setFirstUseEffectDone(true)
       }
     }
-  }, [search, updateScreen, props.startUseEffectChain])
+  }, [search, startUseEffectChain])
 
   return (
     <>
@@ -65,7 +66,6 @@ const ListOfResults = props => {
                 }}
               >
                 <FoodCard
-                  firstUseEffectDone={firstUseEffectDone}
                   itemId={item.id}
                   textFood={item.name}
                   url={item.imageUrl}

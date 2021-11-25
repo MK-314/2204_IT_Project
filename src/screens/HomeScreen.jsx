@@ -12,16 +12,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const HomeScreen = ({ navigation }) => {
+  // USECONTEXT
+  const { startUseEffectChain, setStartUseEffectChain } = useContext(RecipeContext)
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(RecipeContext)
+  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
+  // LOCAL STATES:
   const [footerHidden, setfooterHidden] = useState(false)
-  const [startUseEffectChain, setXxx] = useState(false)
+
   useEffect(async () => {
     navigation.addListener('didFocus', () => {
       console.log('focussed')
-      setXxx(true)
+      setFirstUseEffectDone(false)
+      setStartUseEffectChain(true)
     })
     navigation.addListener('didBlur', () => {
       console.log('unfocussed')
-      setXxx(false)
+      setFirstUseEffectDone(true)
+      setStartUseEffectChain(false)
+      setModeUserRecipes(false)
+      setModeUserFavs(false)
     })
   }, [])
   return (
@@ -40,7 +50,6 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <ListOfResults
-          startUseEffectChain={startUseEffectChain}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item

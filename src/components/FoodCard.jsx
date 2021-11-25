@@ -56,14 +56,14 @@ const TextNum = styled.Text`
 
 const FoodCard = props => {
   // USECONTEXT
-  const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(RecipeContext)
   // LOCAL STATES:
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
 
   useEffect(async () => {
     console.log('second')
-    if (props.firstUseEffectDone) {
+    if (firstUseEffectDone) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
@@ -75,7 +75,7 @@ const FoodCard = props => {
         console.log('ERROR from FoodCard.jsx : ' + error)
       }
     }
-  }, [props.firstUseEffectDone])
+  }, [firstUseEffectDone])
 
   const handleHearts = async () => {
     try {
