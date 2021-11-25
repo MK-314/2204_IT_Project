@@ -13,9 +13,12 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const Favorites = ({ navigation }) => {
   // USECONTEXT
-  const { startUseEffectChain, setStartUseEffectChain } = useContext(RecipeContext)
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(RecipeContext)
-  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { startUseEffectChain, setStartUseEffectChain } = useContext(
+    RecipeContext
+  )
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+    RecipeContext
+  )
   const { modeUserFavs, setModeUserFavs } = useContext(RecipeContext)
   // LOCAL STATES:
   const [footerHidden, setfooterHidden] = useState(false)
@@ -30,7 +33,6 @@ const Favorites = ({ navigation }) => {
       console.log('unfocussed favorites')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
-      setModeUserRecipes(false)
       setModeUserFavs(false)
     })
   }, [])
