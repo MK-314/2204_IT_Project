@@ -56,7 +56,9 @@ const TextNum = styled.Text`
 
 const FoodCard = props => {
   // USECONTEXT
-  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(RecipeContext)
+  const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
+    RecipeContext
+  )
   // LOCAL STATES:
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
@@ -69,7 +71,9 @@ const FoodCard = props => {
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
         let filteredResult = likedPosts.filter(post => post.user_id == user_id)
-        filteredResult.length != 0 ? seticonName('heart') : seticonName('hearto')
+        filteredResult.length != 0
+          ? seticonName('heart')
+          : seticonName('hearto')
         setLikesNum(heartsNum)
       } catch (error) {
         console.log('ERROR from FoodCard.jsx : ' + error)
