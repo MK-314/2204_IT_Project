@@ -129,7 +129,7 @@ const ProfileScreen = ({ navigation }) => {
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
-      console.log('focussed home')
+      console.log('focussed profile')
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)
     })
