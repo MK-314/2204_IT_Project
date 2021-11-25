@@ -19,33 +19,36 @@ const ListOfResults = props => {
   const [firstUseEffectDone, setFirstUseEffectDone] = useState(false)
 
   useEffect(async () => {
-    console.log('firts');
-    // if a user is searching:
-    if (search) {
-      let searchRes = itemsByUser.filter(it =>
-        it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-      )
-      setItemsByUser(searchRes)
-      setFirstUseEffectDone(true)
-      // if a user clicked on Recipes:
-    } else if (modeUserRecipes) {
-      let user_id = await AsyncStorage.getItem('user_id')
-      let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
-      setItemsByUser(itemsInUseEffect)
-      setFirstUseEffectDone(true)
-      // if a user clicked on Favorites / Icon:
-    } else if (modeUserFavs) {
-      let user_id = await AsyncStorage.getItem('user_id')
-      let favPosts = await FetchApi.getFavsByUserId(user_id)
-      setItemsByUser(favPosts)
-      setFirstUseEffectDone(true)
-      // if a user clicked on HomePage / Icon:
-    } else {
-      let allPosts = await FetchApi.getAllPosts()
-      setItemsByUser(allPosts)
-      setFirstUseEffectDone(true)
+    if (props.startUseEffectChain) {
+      setFirstUseEffectDone(false)
+      console.log('firts')
+      // if a user is searching:
+      if (search) {
+        let searchRes = itemsByUser.filter(it =>
+          it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
+        setItemsByUser(searchRes)
+        setFirstUseEffectDone(true)
+        // if a user clicked on Recipes:
+      } else if (modeUserRecipes) {
+        let user_id = await AsyncStorage.getItem('user_id')
+        let itemsInUseEffect = await FetchApi.getPostByUserId(`${user_id}`)
+        setItemsByUser(itemsInUseEffect)
+        setFirstUseEffectDone(true)
+        // if a user clicked on Favorites / Icon:
+      } else if (modeUserFavs) {
+        let user_id = await AsyncStorage.getItem('user_id')
+        let favPosts = await FetchApi.getFavsByUserId(user_id)
+        setItemsByUser(favPosts)
+        setFirstUseEffectDone(true)
+        // if a user clicked on HomePage / Icon:
+      } else {
+        let allPosts = await FetchApi.getAllPosts()
+        setItemsByUser(allPosts)
+        setFirstUseEffectDone(true)
+      }
     }
-  }, [search, updateScreen])
+  }, [search, updateScreen, props.startUseEffectChain])
 
   return (
     <>
@@ -72,7 +75,6 @@ const ListOfResults = props => {
           }}
         />
       )}
-      {/* {setFirstUseEffectDone(false)} */}
     </>
   )
 }

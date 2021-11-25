@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 
-const XXX = ({ navigation }) => {
+const startUseEffectChain = ({ navigation }) => {
 
   return (
     <ContainerDefault>
@@ -18,4 +18,4 @@ const XXX = ({ navigation }) => {
     </ContainerDefault>
   )
 }
-export default XXX
+export default startUseEffectChain

@@ -13,7 +13,17 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 
 const HomeScreen = ({ navigation }) => {
   const [footerHidden, setfooterHidden] = useState(false)
-
+  const [startUseEffectChain, setXxx] = useState(false)
+  useEffect(async () => {
+    navigation.addListener('didFocus', () => {
+      console.log('focussed')
+      setXxx(true)
+    })
+    navigation.addListener('didBlur', () => {
+      console.log('unfocussed')
+      setXxx(false)
+    })
+  }, [])
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -30,6 +40,7 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <ListOfResults
+          startUseEffectChain={startUseEffectChain}
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
               item: item

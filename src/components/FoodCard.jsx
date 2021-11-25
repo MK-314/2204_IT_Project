@@ -62,8 +62,7 @@ const FoodCard = props => {
   const [likesNum, setLikesNum] = useState(0)
 
   useEffect(async () => {
-    console.log('second');
-
+    console.log('second')
     if (props.firstUseEffectDone) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')
@@ -76,7 +75,7 @@ const FoodCard = props => {
         console.log('ERROR from FoodCard.jsx : ' + error)
       }
     }
-  }, [])
+  }, [props.firstUseEffectDone])
 
   const handleHearts = async () => {
     try {
