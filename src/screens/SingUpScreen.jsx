@@ -76,7 +76,7 @@ const SingUpScreen = ({ navigation }) => {
         navigation.navigate('Home')
       })
       .catch(e => {
-        'Firebase sing up error: ' + e
+        alert("Check email correctness\nPassword must be min 6 caracters")
       })
   }
   return (

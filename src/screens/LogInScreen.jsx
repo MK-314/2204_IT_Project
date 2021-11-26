@@ -69,7 +69,7 @@ const LogInScreen = ({ navigation }) => {
         navigation.navigate('Home')
       })
       .catch(e => {
-        'Wrong credentials. Try again or reset password. Error: ' + e
+        alert(e)
       })
   }
   const handleForgotPassword = async () => {
