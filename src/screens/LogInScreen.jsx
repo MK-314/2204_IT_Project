@@ -7,7 +7,7 @@ import styled from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
-import { ConstantsRecipe, HightUnit } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 import { FireBaseAuthSystem } from '../../firebase'
 import { FetchApi } from '../../datahandler'
 import { Pressable } from 'react-native'
@@ -19,14 +19,14 @@ const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
 const RowEmailInput = styled(RowOfElements)`
-  margin-top: 10px;
+  margin-top: ${height * HightUnit * 10}px;
 `
 const RowPassword = styled(RowEmailInput)`
-  margin-top: 5px;
+  margin-top: ${height * HightUnit * 5}px;
 `
 const TextInputSt = styled.TextInput`
   position: absolute;
-  padding-left: 20px;
+  padding-left:  ${width * WidthUnit * 20}px;
   background-color: ${ConstantsRecipe.white};
   width: 100%;
   height: ${height * HightUnit * 50}px;
@@ -34,7 +34,7 @@ const TextInputSt = styled.TextInput`
 `
 const TextInputStShadow = styled(RowOfElements)`
   margin-top: ${height * HightUnit * 15}px;
-  padding-left: 20px;
+  padding-left: ${width * WidthUnit * 20}px;
   width: 80%;
   height: ${height * HightUnit * 50}px;
   border-radius: 100px;
@@ -48,21 +48,21 @@ const CustomText = styled.Text`
 `
 const ForgotPasswordText = styled(CustomText)`
   margin-top: ${height * HightUnit * 7}px;
-  margin-bottom: 10px;
-  margin-right: 55px;
-  font-size: 12px;
+  margin-bottom: ${height * HightUnit * 10}px;
+  margin-right: ${width * WidthUnit * 55}px;
+  font-size: ${height * HightUnit * 12}px;
   color: #774747;
 `
 const DontHaveText = styled(ForgotPasswordText)`
   margin-top: ${height * HightUnit * 70}px;
-  margin-right: 0px;
+  margin-right: ${width * WidthUnit * 0}px;
 `
 const RowForgot = styled(RowOfElements)`
   justify-content: flex-end;
 `
 const DontHaveTextRow = styled(RowOfElements)`
   position: absolute;
-  bottom: 25px;
+  bottom: ${height * HightUnit * 25}px;
 `
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
