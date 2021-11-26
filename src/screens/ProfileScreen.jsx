@@ -14,6 +14,7 @@ import { MainHeader } from '../components/small_elements/MainHeader'
 // ICONS
 import { default as IconPencil } from 'react-native-vector-icons/Entypo'
 import { default as IconHeartbeat } from 'react-native-vector-icons/FontAwesome5'
+import { default as IconLogOut } from 'react-native-vector-icons/Entypo'
 import { default as IconFollowers } from 'react-native-vector-icons/MaterialCommunityIcons'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { Pressable } from 'react-native'
@@ -83,6 +84,15 @@ const PencilIcon = styled(IconPencil)`
 const HeartbeatIcon = styled(IconHeartbeat)`
   font-size: ${height * HightUnit * 50}px;
   color: ${ConstantsRecipe.green};
+  font-weight: bold;
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const LogOutIcon = styled(IconLogOut)`
+  position: absolute;
+  top: ${height * HightUnit * 7}px;
+  right: ${width * WidthUnit * 7}px;
+  font-size: ${height * HightUnit * 50}px;
+  color: #774747;
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
@@ -165,6 +175,7 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <ContainerDefault>
+      <LogOutIcon name='log-out' />
       <HeaderRow>
         <Pressable onPress={handleAvatarUpload}>
           <AvatarBox style={styles.elementShadow}>
@@ -196,15 +207,15 @@ const ProfileScreen = ({ navigation }) => {
           navigation.navigate('Favorites')
         }}
       >
-      <MainViewRow2>
-        <ElevatedPart style={styles.elementShadow}>
-          <TextOfElevation>Favourites</TextOfElevation>
-        </ElevatedPart>
-        <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>{namOfPostsThatUserLikes}</NumberRecipes>
-        </NumberRecipesBox>
-        <HeartbeatIcon name='heartbeat' />
-      </MainViewRow2>
+        <MainViewRow2>
+          <ElevatedPart style={styles.elementShadow}>
+            <TextOfElevation>Favourites</TextOfElevation>
+          </ElevatedPart>
+          <NumberRecipesBox style={styles.elementShadow}>
+            <NumberRecipes>{namOfPostsThatUserLikes}</NumberRecipes>
+          </NumberRecipesBox>
+          <HeartbeatIcon name='heartbeat' />
+        </MainViewRow2>
       </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <MainViewRow3>
