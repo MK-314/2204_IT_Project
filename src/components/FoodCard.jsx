@@ -16,9 +16,9 @@ const { width, height } = Dimensions.get('window')
 const Box = styled.View`
   position: relative;
   width:  ${width * WidthUnit * 270}px;
-  height: ${height * HightUnit * 400}px;
+  height: ${height * HightUnit * 340}px;
   border-radius: 50px;
-  margin-top: ${height * HightUnit * 40}px;
+  margin-top: ${height * HightUnit * 0}px;
   margin-right:  ${width * WidthUnit * 10}px;
   margin-left: ${width * WidthUnit * 30}px;
 `
@@ -28,7 +28,7 @@ const FoodItem = styled.Image`
   top: 0;
   left: 0;
   width:  ${width * WidthUnit * 270}px;
-  height: ${height * HightUnit * 400}px;
+  height: ${height * HightUnit * 340}px;
   border-radius: 50px;
 `
 const IconSt = styled(Icon)`

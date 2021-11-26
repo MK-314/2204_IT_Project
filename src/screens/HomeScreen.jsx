@@ -10,7 +10,20 @@ import NavIcons from './../components/NavIcons'
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
+import { RowOfElements } from '../components/small_elements/RowOfElements.jsx'
+import { H1Text } from '../components/small_elements/H1Text.jsx'
+import styled from 'styled-components/native'
+import { Dimensions } from 'react-native'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants.js'
+const { width, height } = Dimensions.get('window')
 
+const H1MainText = styled(H1Text)`
+  margin-top: ${height * HightUnit * 20}px;
+  margin-bottom: ${height * HightUnit * 30}px;
+  font-size: ${height * HightUnit * 40}px;
+  color: #774747;
+  font-weight: bold;
+`
 const HomeScreen = ({ navigation }) => {
   // USECONTEXT
   const { startUseEffectChain, setStartUseEffectChain } = useContext(
@@ -66,6 +79,9 @@ const HomeScreen = ({ navigation }) => {
             setfooterHidden(true)
           }}
         />
+        <RowOfElements>
+          <H1MainText>Top Recipes:</H1MainText>
+        </RowOfElements>
         <ListOfResults
           toFoodCategoryById={item => {
             navigation.navigate('FoodCategory', {
