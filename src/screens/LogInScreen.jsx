@@ -12,6 +12,7 @@ import { FireBaseAuthSystem } from '../../firebase'
 import { FetchApi } from '../../datahandler'
 import { Pressable } from 'react-native'
 import { Dimensions } from 'react-native'
+import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -39,7 +40,8 @@ const TextInputStShadow = styled(RowOfElements)`
   border-radius: 100px;
 `
 const CustomText = styled.Text`
-  margin-top: ${height * HightUnit * 150}px;
+  margin-top: ${height * HightUnit * 120}px;
+  margin-bottom: ${height * HightUnit * 20}px;
   font-size: ${height * HightUnit * 50}px;
   color: ${ConstantsRecipe.green};
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -47,12 +49,20 @@ const CustomText = styled.Text`
 const ForgotPasswordText = styled(CustomText)`
   margin-top: ${height * HightUnit * 7}px;
   margin-bottom: 10px;
-  margin-right: 50px;
-  font-size: 15px;
+  margin-right: 55px;
+  font-size: 12px;
   color: #774747;
+`
+const DontHaveText = styled(ForgotPasswordText)`
+  margin-top: ${height * HightUnit * 70}px;
+  margin-right: 0px;
 `
 const RowForgot = styled(RowOfElements)`
   justify-content: flex-end;
+`
+const DontHaveTextRow = styled(RowOfElements)`
+  position: absolute;
+  bottom: 25px;
 `
 
 const LogInScreen = ({ navigation }) => {
@@ -108,23 +118,20 @@ const LogInScreen = ({ navigation }) => {
         <ForgotPasswordText>Forgot password?</ForgotPasswordText>
       </RowForgot>
       <RowOfElements>
-        <Button
-          onPress={handleSingIn}
-          title='Log In'
-          color='#841584'
-          accessibilityLabel='Learn more about this purple button'
-        />
+        <Pressable onPress={handleSingIn}>
+          <SmallDefaultBtn text={'Log In'} marginSt={0} />
+        </Pressable>
       </RowOfElements>
 
-      <Pressable
-        onPress={() => {
-          navigation.navigate('SingUpScreen')
-        }}
-      >
-        <RowOfElements>
-          <Text>Don't have an Account? Sing up</Text>
-        </RowOfElements>
-      </Pressable>
+      <DontHaveTextRow>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('SingUpScreen')
+          }}
+        >
+          <DontHaveText>Don't have an Account? Sing up</DontHaveText>
+        </Pressable>
+      </DontHaveTextRow>
     </ContainerSt>
   )
 }
