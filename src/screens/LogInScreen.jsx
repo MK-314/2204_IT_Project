@@ -38,12 +38,21 @@ const TextInputStShadow = styled(RowOfElements)`
   height: ${height * HightUnit * 50}px;
   border-radius: 100px;
 `
-
 const CustomText = styled.Text`
   margin-top: ${height * HightUnit * 150}px;
   font-size: ${height * HightUnit * 50}px;
   color: ${ConstantsRecipe.green};
   text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const ForgotPasswordText = styled(CustomText)`
+  margin-top: ${height * HightUnit * 7}px;
+  margin-bottom: 10px;
+  margin-right: 50px;
+  font-size: 15px;
+  color: #774747;
+`
+const RowForgot = styled(RowOfElements)`
+  justify-content: flex-end;
 `
 
 const LogInScreen = ({ navigation }) => {
@@ -95,9 +104,9 @@ const LogInScreen = ({ navigation }) => {
           />
         </TextInputStShadow>
       </RowPassword>
-      <RowOfElements>
-        <Text>Forgot password?</Text>
-      </RowOfElements>
+      <RowForgot>
+        <ForgotPasswordText>Forgot password?</ForgotPasswordText>
+      </RowForgot>
       <RowOfElements>
         <Button
           onPress={handleSingIn}
