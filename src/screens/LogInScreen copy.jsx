@@ -13,9 +13,6 @@ import { FetchApi } from '../../datahandler'
 import { Pressable } from 'react-native'
 import { Dimensions } from 'react-native'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
-import { H1Text } from '../components/small_elements/H1Text'
-import { SmalAnnotation } from '../components/small_elements/SmalAnnotation'
-import { TextInputSt, TextInputStShadow } from '../components/small_elements/TextInputDefault'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -27,7 +24,36 @@ const RowEmailInput = styled(RowOfElements)`
 const RowPassword = styled(RowEmailInput)`
   margin-top: ${height * HightUnit * 5}px;
 `
-const DontHaveText = styled(SmalAnnotation)`
+const TextInputSt = styled.TextInput`
+  position: absolute;
+  padding-left:  ${width * WidthUnit * 20}px;
+  background-color: ${ConstantsRecipe.white};
+  width: 100%;
+  height: ${height * HightUnit * 50}px;
+  border-radius: 100px;
+`
+const TextInputStShadow = styled(RowOfElements)`
+  margin-top: ${height * HightUnit * 15}px;
+  padding-left: ${width * WidthUnit * 20}px;
+  width: 80%;
+  height: ${height * HightUnit * 50}px;
+  border-radius: 100px;
+`
+const CustomText = styled.Text`
+  margin-top: ${height * HightUnit * 120}px;
+  margin-bottom: ${height * HightUnit * 20}px;
+  font-size: ${height * HightUnit * 50}px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const ForgotPasswordText = styled(CustomText)`
+  margin-top: ${height * HightUnit * 7}px;
+  margin-bottom: ${height * HightUnit * 10}px;
+  margin-right: ${width * WidthUnit * 55}px;
+  font-size: ${height * HightUnit * 12}px;
+  color: #774747;
+`
+const DontHaveText = styled(ForgotPasswordText)`
   margin-top: ${height * HightUnit * 70}px;
   margin-right: ${width * WidthUnit * 0}px;
 `
@@ -67,7 +93,7 @@ const LogInScreen = ({ navigation }) => {
   return (
     <ContainerSt>
       <RowOfElements>
-        <H1Text>Sign In</H1Text>
+        <CustomText>Sign In</CustomText>
       </RowOfElements>
       <RowEmailInput>
         <TextInputStShadow style={styles.customShadow}>
@@ -88,7 +114,7 @@ const LogInScreen = ({ navigation }) => {
         </TextInputStShadow>
       </RowPassword>
       <RowForgot>
-        <SmalAnnotation>Forgot password?</SmalAnnotation>
+        <ForgotPasswordText>Forgot password?</ForgotPasswordText>
       </RowForgot>
       <RowOfElements>
         <Pressable onPress={handleSingIn}>
