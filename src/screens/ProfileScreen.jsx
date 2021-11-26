@@ -188,7 +188,7 @@ const ProfileScreen = ({ navigation }) => {
             <AvatarImg source={{ uri: avatar }} />
           </AvatarBox>
         </Pressable>
-        <NameText>{userState.name}</NameText>
+        {userState && <NameText>{userState.name}</NameText>}
       </HeaderRow>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
