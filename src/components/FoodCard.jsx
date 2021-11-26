@@ -15,19 +15,20 @@ const { width, height } = Dimensions.get('window')
 
 const Box = styled.View`
   position: relative;
-  width:  ${width * WidthUnit * 270}px;
+  width: ${width * WidthUnit * 270}px;
   height: ${height * HightUnit * 340}px;
   border-radius: 50px;
   margin-top: ${height * HightUnit * 0}px;
-  margin-right:  ${width * WidthUnit * 10}px;
-  margin-left: ${width * WidthUnit * 30}px;
+  margin-right: ${width * WidthUnit * 10}px;
+  margin-left: ${props =>
+    props.singleMode == 1 ? width * WidthUnit * 57 : width * WidthUnit * 30}px;
 `
 const FoodItem = styled.Image`
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  width:  ${width * WidthUnit * 270}px;
+  width: ${width * WidthUnit * 270}px;
   height: ${height * HightUnit * 340}px;
   border-radius: 50px;
 `
@@ -59,6 +60,7 @@ const FoodCard = props => {
   const { firstUseEffectDone, setFirstUseEffectDone } = useContext(
     RecipeContext
   )
+  const { singleMode, setSingleMode } = useContext(RecipeContext)
   // LOCAL STATES:
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
@@ -129,13 +131,14 @@ const FoodCard = props => {
         }
       ]}
     >
-      <Box style={styles.customShadow}>
+      <Box style={styles.customShadow} singleMode={singleMode}>
         <TextNum>{likesNum}</TextNum>
         <WhiteRow style={styles.customShadow}>
           <MainHeader>{props.textFood}</MainHeader>
         </WhiteRow>
         <IconSt name={iconName} onPress={handleHearts} />
         <FoodItem
+          singleMode={singleMode}
           source={{
             uri: props.url
           }}
