@@ -193,7 +193,7 @@ const ProfileScreen = ({ navigation }) => {
       {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
-          navigation.navigate('Favourites')
+          navigation.navigate('Favorites')
         }}
       >
       <MainViewRow2>

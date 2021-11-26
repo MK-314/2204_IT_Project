@@ -1,8 +1,8 @@
 // CONTEXT
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
 //
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Animated } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { ConstantsRecipe } from '../../constants'
@@ -63,6 +63,15 @@ const FoodCard = props => {
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
 
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true
+    }).start()
+  }, [])
+
   useEffect(async () => {
     console.log('second => firstUseEffectDone ' + firstUseEffectDone)
     if (firstUseEffectDone) {
@@ -112,6 +121,14 @@ const FoodCard = props => {
   }
 
   return (
+    <Animated.View
+    style={[
+      {
+        // Bind opacity to animated value
+        opacity: fadeAnim
+      }
+    ]}
+  >
     <Box style={styles.customShadow}>
       <TextNum>{likesNum}</TextNum>
       <WhiteRow style={styles.customShadow}>
@@ -124,6 +141,7 @@ const FoodCard = props => {
         }}
       />
     </Box>
+    </Animated.View>
   )
 }
 const styles = StyleSheet.create({
