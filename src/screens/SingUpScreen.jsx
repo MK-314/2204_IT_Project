@@ -79,6 +79,7 @@ const SingUpScreen = ({ navigation }) => {
         alert("Check email correctness\nPassword must be min 6 caracters")
       })
   }
+  // ok ok
   return (
     <TouchableWithoutFeedback
       onPress={() => {
