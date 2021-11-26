@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState } from 'react'
-import { Text, Image, Modal, StyleSheet } from 'react-native'
+import { Text, Image, Modal, StyleSheet, Pressable } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
@@ -45,17 +45,20 @@ const IconBack = styled(BackIcon)`
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: 1px 1px 1px #000000;
-  `
+`
 const IconBox = styled.View`
-position: absolute;
+  position: absolute;
   top: 0px;
   right: 0px;
   width: 65px;
   height: 60px;
-  /* background-color: aqua; */
 `
 
 const ModalForgotPassword = props => {
+  const handleSubmitFromModal = async () => {
+    props.hideModal()
+  }
+
   return (
     <Modal
       animationType='slide'
@@ -67,13 +70,21 @@ const ModalForgotPassword = props => {
         <RowOfElementsCustom>
           <ModalRow style={styles.modalView}>
             <IconBox>
-              <IconBack name='closecircle' />
+              <IconBack name='closecircle' onPress={() => props.hideModal()} />
             </IconBox>
             <EmailText>Email</EmailText>
             <TextInputStShadow>
               <TextInputSt />
             </TextInputStShadow>
-            <SmallDefaultBtn text={'Reset password'} marginSt={30} width={75} />
+            <Pressable onPress={handleSubmitFromModal}>
+              <RowOfElements>
+                <SmallDefaultBtn
+                  text={'Reset password'}
+                  marginSt={30}
+                  width={75}
+                />
+              </RowOfElements>
+            </Pressable>
           </ModalRow>
         </RowOfElementsCustom>
       </ModalContainer>

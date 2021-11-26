@@ -91,7 +91,7 @@ const LogInScreen = ({ navigation }) => {
       }}
     >
       <ContainerSt>
-        <ModalForgotPassword modalVisible={modalVisible} />
+        <ModalForgotPassword modalVisible={modalVisible} hideModal={()=>{setModalVisible(false)}}/>
         <RowOfElements>
           <H1Text>Sign In</H1Text>
         </RowOfElements>
