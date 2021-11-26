@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState, useEffect } from 'react'
-import { Text, Image, Button, StyleSheet } from 'react-native'
+import { Text, Image, Button, StyleSheet, Keyboard } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
@@ -13,9 +13,13 @@ import { FetchApi } from '../../datahandler'
 import { Pressable } from 'react-native'
 import { Dimensions } from 'react-native'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
-import { TextInputSt, TextInputStShadow } from '../components/small_elements/TextInputDefault'
+import {
+  TextInputSt,
+  TextInputStShadow
+} from '../components/small_elements/TextInputDefault'
 import { H1Text } from '../components/small_elements/H1Text'
 import { SmalAnnotation } from '../components/small_elements/SmalAnnotation'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -34,11 +38,13 @@ const DontHaveText = styled(SmalAnnotation)`
 const DontHaveTextRow = styled(RowOfElements)`
   position: absolute;
   bottom: ${height * HightUnit * 25}px;
+  width: ${props => (props.hidden ? 0 : 100)}%;
 `
 const SingUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [miniTextHidden, setMiniTextHidden] = useState(false)
 
   useEffect(() => {
     AsyncStorage.getItem('user_id')
@@ -74,54 +80,72 @@ const SingUpScreen = ({ navigation }) => {
       })
   }
   return (
-    <ContainerSt>
-      <RowOfElements>
-        <H1Text>Sign Up</H1Text>
-      </RowOfElements>
-      <RowEmailInput>
-        <TextInputStShadow style={styles.customShadow}>
-          <TextInputSt
-          value={name}
-          onChangeText={newValue => setName(newValue)}
-          placeholder={'Enter your name ...'}
-          />
-        </TextInputStShadow>
-      </RowEmailInput>
-      <RowPassword>
-        <TextInputStShadow style={styles.customShadow}>
-          <TextInputSt
-          value={email}
-          onChangeText={newValue => setEmail(newValue)}
-          placeholder={'Enter your email ...'}
-          />
-        </TextInputStShadow>
-      </RowPassword>
-      <RowPassword>
-        <TextInputStShadow style={styles.customShadow}>
-          <TextInputSt
-          value={password}
-          onChangeText={newValue => setPassword(newValue)}
-          placeholder={'Enter your password ...'}
-          />
-        </TextInputStShadow>
-      </RowPassword>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss()
+        setTimeout(() => {
+          setMiniTextHidden(false)
+        }, 200)
+      }}
+    >
+      <ContainerSt>
+        <RowOfElements>
+          <H1Text>Sign Up</H1Text>
+        </RowOfElements>
+        <RowEmailInput>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={name}
+              onChangeText={newValue => setName(newValue)}
+              placeholder={'Enter your name ...'}
+            />
+          </TextInputStShadow>
+        </RowEmailInput>
+        <RowPassword>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={email}
+              onChangeText={newValue => setEmail(newValue)}
+              placeholder={'Enter your email ...'}
+            />
+          </TextInputStShadow>
+        </RowPassword>
+        <RowPassword>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={password}
+              onChangeText={newValue => setPassword(newValue)}
+              placeholder={'Enter your password ...'}
+            />
+          </TextInputStShadow>
+        </RowPassword>
 
-      <RowOfElements>
-        <Pressable onPress={handleSingUp}>
-          <SmallDefaultBtn text={'Sign Up'} marginSt={40} width={80}/>
-        </Pressable>
-      </RowOfElements>
+        <RowOfElements>
+          <Pressable onPress={handleSingUp}>
+            <SmallDefaultBtn text={'Sign Up'} marginSt={40} width={80} />
+          </Pressable>
+        </RowOfElements>
 
-      <DontHaveTextRow>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('LogInScreen')
-          }}
-        >
-          <DontHaveText>Have an Account? Sing In</DontHaveText>
-        </Pressable>
-      </DontHaveTextRow>
-    </ContainerSt>
+        <DontHaveTextRow hidden={miniTextHidden}>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('LogInScreen')
+            }}
+          >
+            <DontHaveText>Have an Account? Sing In</DontHaveText>
+          </Pressable>
+        </DontHaveTextRow>
+      </ContainerSt>
+    </TouchableWithoutFeedback>
   )
 }
 const styles = StyleSheet.create({

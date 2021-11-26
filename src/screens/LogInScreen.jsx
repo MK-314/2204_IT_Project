@@ -15,7 +15,12 @@ import { Dimensions } from 'react-native'
 import SmallDefaultBtn from '../components/small_elements/SmallDefaultBtn'
 import { H1Text } from '../components/small_elements/H1Text'
 import { SmalAnnotation } from '../components/small_elements/SmalAnnotation'
-import { TextInputSt, TextInputStShadow } from '../components/small_elements/TextInputDefault'
+import {
+  TextInputSt,
+  TextInputStShadow
+} from '../components/small_elements/TextInputDefault'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { Keyboard } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -37,10 +42,12 @@ const RowForgot = styled(RowOfElements)`
 const DontHaveTextRow = styled(RowOfElements)`
   position: absolute;
   bottom: ${height * HightUnit * 25}px;
+  width: ${props => (props.hidden ? 0 : 100)}%;
 `
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [miniTextHidden, setMiniTextHidden] = useState(false)
 
   useEffect(async () => {
     try {
@@ -65,47 +72,62 @@ const LogInScreen = ({ navigation }) => {
   }
 
   return (
-    <ContainerSt>
-      <RowOfElements>
-        <H1Text>Sign In</H1Text>
-      </RowOfElements>
-      <RowEmailInput>
-        <TextInputStShadow style={styles.customShadow}>
-          <TextInputSt
-            value={email}
-            onChangeText={newValue => setEmail(newValue)}
-            placeholder={'Enter your email ...'}
-          />
-        </TextInputStShadow>
-      </RowEmailInput>
-      <RowPassword>
-        <TextInputStShadow style={styles.customShadow}>
-          <TextInputSt
-            value={password}
-            onChangeText={newValue => setPassword(newValue)}
-            placeholder={'Enter your password ...'}
-          />
-        </TextInputStShadow>
-      </RowPassword>
-      <RowForgot>
-        <SmalAnnotation>Forgot password?</SmalAnnotation>
-      </RowForgot>
-      <RowOfElements>
-        <Pressable onPress={handleSingIn}>
-          <SmallDefaultBtn text={'Log In'} marginSt={40} width={80}/>
-        </Pressable>
-      </RowOfElements>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss()
+        setTimeout(() => {
+          setMiniTextHidden(false)
+        }, 200)
+      }}
+    >
+      <ContainerSt>
+        <RowOfElements>
+          <H1Text>Sign In</H1Text>
+        </RowOfElements>
+        <RowEmailInput>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={email}
+              onChangeText={newValue => setEmail(newValue)}
+              placeholder={'Enter your email ...'}
+            />
+          </TextInputStShadow>
+        </RowEmailInput>
+        <RowPassword>
+          <TextInputStShadow style={styles.customShadow}>
+            <TextInputSt
+              onFocus={() => {
+                setMiniTextHidden(true)
+              }}
+              value={password}
+              onChangeText={newValue => setPassword(newValue)}
+              placeholder={'Enter your password ...'}
+            />
+          </TextInputStShadow>
+        </RowPassword>
+        <RowForgot>
+          <SmalAnnotation>Forgot password?</SmalAnnotation>
+        </RowForgot>
+        <RowOfElements>
+          <Pressable onPress={handleSingIn}>
+            <SmallDefaultBtn text={'Log In'} marginSt={40} width={80} />
+          </Pressable>
+        </RowOfElements>
 
-      <DontHaveTextRow>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('SingUpScreen')
-          }}
-        >
-          <DontHaveText>Don't have an Account? Sing up</DontHaveText>
-        </Pressable>
-      </DontHaveTextRow>
-    </ContainerSt>
+        <DontHaveTextRow hidden={miniTextHidden}>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('SingUpScreen')
+            }}
+          >
+            <DontHaveText>Don't have an Account? Sing up</DontHaveText>
+          </Pressable>
+        </DontHaveTextRow>
+      </ContainerSt>
+    </TouchableWithoutFeedback>
   )
 }
 const styles = StyleSheet.create({
