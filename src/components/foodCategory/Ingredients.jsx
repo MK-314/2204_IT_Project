@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet,Dimensions } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import { ConstantsRecipe } from '../../../constants'
 import { RowOfElements } from '../small_elements/RowOfElements'
@@ -18,7 +18,7 @@ const BlackAria = styled.View`
 const IngredientsText = styled.Text`
   color: ${ConstantsRecipe.white};
   font-size: ${height * 0.023175}px;
-  padding:  ${height * 0.00643}px ${width * 0.038333}px;
+  padding: ${height * 0.00643}px ${width * 0.038333}px;
   text-transform: uppercase;
 `
 

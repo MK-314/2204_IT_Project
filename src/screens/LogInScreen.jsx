@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState, useEffect } from 'react'
-import { Text, Image, Button } from 'react-native'
+import { Text, Image, Button, StyleSheet } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
@@ -17,35 +17,46 @@ const { width, height } = Dimensions.get('window')
 const ContainerSt = styled(ContainerDefault)`
   background-color: ${ConstantsRecipe.blue};
 `
-const RowSt = styled(RowOfElements)`
-  background-color: ${ConstantsRecipe.lightBlue};
+const RowEmailInput = styled(RowOfElements)`
+  margin-top: 10px;
+`
+const RowPassword = styled(RowEmailInput)`
+  margin-top: 5px;
 `
 const TextInputSt = styled.TextInput`
-  display: flex;
-  margin-top: ${height * HightUnit * 15}px;
+  position: absolute;
+  padding-left: 20px;
   background-color: ${ConstantsRecipe.white};
-  width: ${props => (props.focusedSt ? '90%' : '80%')};
+  width: 100%;
   height: ${height * HightUnit * 50}px;
   border-radius: 100px;
 `
+const TextInputStShadow = styled(RowOfElements)`
+  margin-top: ${height * HightUnit * 15}px;
+  padding-left: 20px;
+  width: 80%;
+  height: ${height * HightUnit * 50}px;
+  border-radius: 100px;
+`
+
 const CustomText = styled.Text`
+  margin-top: ${height * HightUnit * 150}px;
   font-size: ${height * HightUnit * 50}px;
+  color: ${ConstantsRecipe.green};
+  text-shadow: ${ConstantsRecipe.text_shadow};
 `
 
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  useEffect(() => {
-    AsyncStorage.getItem('user_id')
-      .then(id => {
-        if (id) {
-          navigation.navigate('Home')
-        }
-      })
-      .catch(e => {
-        console.log(e)
-      })
+  useEffect(async () => {
+    try {
+      let id = await AsyncStorage.getItem('user_id')
+      if (id) navigation.navigate('Home')
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
   const handleSingIn = async () => {
@@ -63,45 +74,61 @@ const LogInScreen = ({ navigation }) => {
 
   return (
     <ContainerSt>
-      <RowSt>
+      <RowOfElements>
         <CustomText>Sign In</CustomText>
-      </RowSt>
-      <RowSt>
-        <TextInputSt
-          value={email}
-          onChangeText={newValue => setEmail(newValue)}
-          placeholder={'Enter your email ...'}
-        />
-      </RowSt>
-      <RowSt>
-        <TextInputSt
-          value={password}
-          onChangeText={newValue => setPassword(newValue)}
-          placeholder={'Enter your password ...'}
-        />
-      </RowSt>
-      <RowSt>
+      </RowOfElements>
+      <RowEmailInput>
+        <TextInputStShadow style={styles.customShadow}>
+          <TextInputSt
+            value={email}
+            onChangeText={newValue => setEmail(newValue)}
+            placeholder={'Enter your email ...'}
+          />
+        </TextInputStShadow>
+      </RowEmailInput>
+      <RowPassword>
+        <TextInputStShadow style={styles.customShadow}>
+          <TextInputSt
+            value={password}
+            onChangeText={newValue => setPassword(newValue)}
+            placeholder={'Enter your password ...'}
+          />
+        </TextInputStShadow>
+      </RowPassword>
+      <RowOfElements>
         <Text>Forgot password?</Text>
-      </RowSt>
-      <RowSt>
+      </RowOfElements>
+      <RowOfElements>
         <Button
           onPress={handleSingIn}
           title='Log In'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
         />
-      </RowSt>
+      </RowOfElements>
 
       <Pressable
         onPress={() => {
           navigation.navigate('SingUpScreen')
         }}
       >
-        <RowSt>
+        <RowOfElements>
           <Text>Don't have an Account? Sing up</Text>
-        </RowSt>
+        </RowOfElements>
       </Pressable>
     </ContainerSt>
   )
 }
+const styles = StyleSheet.create({
+  customShadow: {
+    shadowColor: '#0000007d',
+    shadowOffset: {
+      width: 1,
+      height: 2
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 4,
+    elevation: 7
+  }
+})
 export default LogInScreen
