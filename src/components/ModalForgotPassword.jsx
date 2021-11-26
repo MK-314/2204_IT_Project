@@ -18,8 +18,6 @@ import {
   TextInputStShadow
 } from './small_elements/TextInputDefault'
 import { H1Text } from './small_elements/H1Text'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
-import { Keyboard } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const ModalContainer = styled(ContainerDefault)`
@@ -42,7 +40,7 @@ const EmailText = styled(H1Text)`
   font-size: ${height * HightUnit * 35}px;
 `
 const IconBack = styled(BackIcon)`
-  padding: 10px;
+  padding:  ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
   font-size: ${height * HightUnit * 40}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
@@ -52,8 +50,8 @@ const IconBox = styled.View`
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 65px;
-  height: 60px;
+  width: ${width * WidthUnit * 65}px;
+  height: ${height * HightUnit * 60}px;
 `
 
 const ModalForgotPassword = props => {
