@@ -175,7 +175,13 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <ContainerDefault>
-      <LogOutIcon name='log-out' />
+      <LogOutIcon
+        name='log-out'
+        onPress={async () => {
+          await AsyncStorage.clear()
+          navigation.navigate('LogInScreen')
+        }}
+      />
       <HeaderRow>
         <Pressable onPress={handleAvatarUpload}>
           <AvatarBox style={styles.elementShadow}>
