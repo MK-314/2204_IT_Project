@@ -115,6 +115,24 @@ class FetchApi {
                 })
         })
     }
+    static updatePost(postObject, post_id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/posts/" + post_id, {
+                    "method": "PUT",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": JSON.stringify(postObject)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
     static getPostByUserId(user_id) {
         return new Promise(async(res, rej) => {
             fetch('https://recipe-ruby-api.herokuapp.com/api/posts' +

@@ -44,7 +44,6 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
-      console.log('focussed home')
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)
       setTimeout(() => {
@@ -57,7 +56,6 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('willBlur', () => {
-      console.log('unfocussed home')
       setFirstUseEffectDone(true)
       setStartUseEffectChain(false)
       setModeUserRecipes(false)

@@ -10,6 +10,7 @@ import { RowOfElements } from './small_elements/RowOfElements'
 import { MainHeader, WhiteRow } from './small_elements/MainHeader'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TextNumber } from './small_elements/TextNumber.jsx'
 
 const { width, height } = Dimensions.get('window')
 
@@ -20,7 +21,8 @@ const Box = styled.View`
   border-radius: 50px;
   margin-top: ${height * HightUnit * 0}px;
   margin-right:  ${width * WidthUnit * 10}px;
-  margin-left: ${width * WidthUnit * 30}px;
+  margin-left: ${props =>
+    props.singleMode == 1 ? width * WidthUnit * 57 : width * WidthUnit * 30}px;
 `
 const FoodItem = styled.Image`
   display: flex;
@@ -43,22 +45,13 @@ const IconSt = styled(Icon)`
   text-shadow: 1px 1px 1px #000000;
   z-index: 1;
 `
-const TextNum = styled.Text`
-  position: absolute;
-  top: ${height * HightUnit * 20}px;
-  right: ${width * WidthUnit * 155}px;
-  font-size: ${height * HightUnit * 35}px;
-  font-weight: bold;
-  color: ${ConstantsRecipe.green};
-  text-shadow: ${ConstantsRecipe.text_shadow};
-  z-index: 1;
-`
 
 const FoodCardFav = props => {
   // USECONTEXT
   const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
+  const { singleMode, setSingleMode } = useContext(RecipeContext)
   // LOCAL STATES:
   const [iconName, seticonName] = useState('hearto')
   const [likesNum, setLikesNum] = useState(0)
@@ -73,10 +66,10 @@ const FoodCardFav = props => {
   }, [])
 
   useEffect(async () => {
-    console.log('second => firstUseEffectDoneFav ' + firstUseEffectDoneFav)
     if (firstUseEffectDoneFav) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')
+        // counting hearts number:
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
         let filteredResult = likedPosts.filter(post => post.user_id == user_id)
@@ -102,7 +95,6 @@ const FoodCardFav = props => {
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         setLikesNum(heartsNum)
         seticonName('heart')
-        // setUpdateScreen(!updateScreen)
       } else {
         let favRecord = await FetchApi.getByUserIdAndPostId(
           user_id,
@@ -113,7 +105,6 @@ const FoodCardFav = props => {
         //
         setLikesNum(likesNum - 1)
         seticonName('hearto')
-        // setUpdateScreen(!updateScreen)
       }
     } catch (error) {
       console.log('ERRRRRRR ' + error)
@@ -129,13 +120,14 @@ const FoodCardFav = props => {
         }
       ]}
     >
-      <Box style={styles.customShadow}>
-        <TextNum>{likesNum}</TextNum>
+      <Box style={styles.customShadow} singleMode={singleMode}>
+        <TextNumber>{likesNum}</TextNumber>
         <WhiteRow style={styles.customShadow}>
           <MainHeader>{props.textFood}</MainHeader>
         </WhiteRow>
         <IconSt name={iconName} onPress={handleHearts} />
         <FoodItem
+          singleMode={singleMode}
           source={{
             uri: props.url
           }}
@@ -156,6 +148,4 @@ const styles = StyleSheet.create({
     elevation: 17
   }
 })
-
 export default FoodCardFav
-export { TextNum }

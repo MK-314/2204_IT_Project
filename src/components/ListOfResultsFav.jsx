@@ -16,6 +16,7 @@ const ListOfResultsFav = props => {
   )
   const { search, setSearch } = useContext(RecipeContext)
   const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
+  const { singleMode, setSingleMode } = useContext(RecipeContext)
   const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
   )
@@ -28,6 +29,7 @@ const ListOfResultsFav = props => {
         let searchRes = itemsByUser.filter(it =>
           it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
+        setSingleMode(searchRes.length)
         setItemsByUser(searchRes)
         setFirstUseEffectDoneFav(true)
         // if a user clicked on Recipes:
@@ -41,6 +43,7 @@ const ListOfResultsFav = props => {
             return await FetchApi.getPostByID(elem.post_id)
           })
         )
+        setSingleMode(favPosts.length)
         setItemsByUser(favPosts)
         setFirstUseEffectDoneFav(true)
         // if a user clicked on HomePage / Icon:

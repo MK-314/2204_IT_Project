@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import BackIcon from 'react-native-vector-icons/Ionicons'
@@ -11,18 +12,19 @@ import { TextNum } from '../FoodCard'
 import { RowOfElements } from '../small_elements/RowOfElements'
 import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
 import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
+import { FetchApi } from '../../../datahandler'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
-  min-height: ${height * 0.2575}px;
+  min-height: ${height * HightUnit * 200}px;
 `
 const Box = styled.View`
   position: relative;
-  width: ${width * 0.766666}px;
-  height: ${height * 0.347625}px;
+  width: ${width * WidthUnit * 300}px;
+  height: ${height * HightUnit * 270}px;
   border-radius: 20px;
   margin-top: ${height * HightUnit * 25}px;
-  margin-bottom: ${height * 0.012875}px;
+  margin-bottom: ${height * HightUnit * 10}px;
   overflow: hidden;
 `
 const SmallFoodItem = styled.Image`
@@ -30,33 +32,34 @@ const SmallFoodItem = styled.Image`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${width * 0.766666}px;
-  height: ${height * 0.347625}px;
+  width: ${width * WidthUnit * 300}px;
+  height: ${height * HightUnit * 270}px;
   border-radius: 20px;
 `
 const HeartIcon = styled(Icon)`
   position: absolute;
-  top: ${height * 0.0167375}px;
-  left: ${width * 0.1405555}px;
-  font-size: ${height * 0.0450625}px;
-  color: ${ConstantsRecipe.green};
+  top: ${height * HightUnit * 13}px;
+  left: ${width * WidthUnit * 55}px;
+  font-size: ${height * HightUnit * 35}px;
+  color: ${props =>
+    props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconBack = styled(BackIcon)`
   position: absolute;
-  top: ${height * 0.012875}px;
-  left: ${width * 0.0255555}px;
-  font-size: ${height * 0.0515}px;
+  top: ${height * HightUnit * 10}px;
+  left: ${width * WidthUnit * 10}px;
+  font-size: ${height * HightUnit * 40}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconShare = styled(Icon)`
   position: absolute;
-  top: ${height * 0.012875}px;
-  right: ${width * 0.0638888}px;
-  font-size: ${height * 0.0450625}px;
+  top: ${height * HightUnit * 10}px;
+  right: ${width * WidthUnit * 25}px;
+  font-size: ${height * HightUnit * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
@@ -80,6 +83,53 @@ const WhiteRowModified = styled(WhiteRow)`
 `
 
 const SmallFoodCard = props => {
+  const [likesNum, setLikesNum] = useState(0)
+  const [iconName, seticonName] = useState('hearto')
+
+  useEffect(async () => {
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      // counting hearts number: 
+      let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
+      let likedPosts = await FetchApi.getFavsByPostId(props.item.id)
+      let filteredResult = likedPosts.filter(post => post.user_id == user_id)
+      filteredResult.length != 0
+        ? seticonName('heart')
+        : seticonName('hearto')
+      setLikesNum(heartsNum)
+    } catch (error) {
+      console.log('ERROR from FoodCardFav.jsx : ' + error)
+    }
+  }, [])
+
+  const handleHearts = async () => {
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      if (iconName == 'hearto') {
+        await FetchApi.createFavRecord({
+          user_id: user_id,
+          post_id: props.item.id
+        })
+        //
+        let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
+        setLikesNum(heartsNum)
+        seticonName('heart')
+      } else {
+        let favRecord = await FetchApi.getByUserIdAndPostId(
+          user_id,
+          props.item.id
+        )
+        let fav_id = favRecord[0].id
+        await FetchApi.deleteFavRecord(fav_id)
+        //
+        setLikesNum(likesNum - 1)
+        seticonName('hearto')
+      }
+    } catch (error) {
+      console.log('ERRRRRRR ' + error)
+    }
+  }
+
   return (
     <RowSt>
       <Box style={styles.customShadow}>
@@ -88,7 +138,7 @@ const SmallFoodCard = props => {
             uri: props.item.imageUrl
           }}
         />
-        <HeartIcon name={'heart'} />
+        <HeartIcon name={iconName} onPress={handleHearts} />
         <IconShare name={'sharealt'} />
         <IconBack
           name={'arrow-back'}
@@ -99,7 +149,7 @@ const SmallFoodCard = props => {
         <WhiteRowModified>
           <MainHeaderModified>{props.item.name}</MainHeaderModified>
         </WhiteRowModified>
-        <SmallTextNum>{props.item.id}</SmallTextNum>
+        <SmallTextNum>{likesNum}</SmallTextNum>
       </Box>
     </RowSt>
   )
