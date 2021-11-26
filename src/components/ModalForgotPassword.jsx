@@ -1,5 +1,5 @@
 // REACT:
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, Image, Modal, StyleSheet, Pressable } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
@@ -18,6 +18,8 @@ import {
   TextInputStShadow
 } from './small_elements/TextInputDefault'
 import { H1Text } from './small_elements/H1Text'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { Keyboard } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const ModalContainer = styled(ContainerDefault)`
@@ -55,7 +57,13 @@ const IconBox = styled.View`
 `
 
 const ModalForgotPassword = props => {
+  const [email, setEmail] = useState('')
+  useEffect(() => {
+    props.emailFromModal(email)
+  }, [email])
+
   const handleSubmitFromModal = async () => {
+    props.submitEmail()
     props.hideModal()
   }
 
@@ -74,7 +82,11 @@ const ModalForgotPassword = props => {
             </IconBox>
             <EmailText>Email</EmailText>
             <TextInputStShadow>
-              <TextInputSt />
+              <TextInputSt
+                value={email}
+                onChangeText={newValue => setEmail(newValue)}
+                placeholder={'Enter your email ...'}
+              />
             </TextInputStShadow>
             <Pressable onPress={handleSubmitFromModal}>
               <RowOfElements>

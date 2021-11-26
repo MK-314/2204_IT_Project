@@ -74,7 +74,7 @@ const LogInScreen = ({ navigation }) => {
   }
   const handleForgotPassword = async () => {
     try {
-      let result = await FireBaseAuthSystem.resetPassword(email)
+      await FireBaseAuthSystem.resetPassword(email)
       alert('Please check your email')
     } catch (error) {
       alert("We didn't find \nthis email in a system\nTry again")
@@ -91,7 +91,16 @@ const LogInScreen = ({ navigation }) => {
       }}
     >
       <ContainerSt>
-        <ModalForgotPassword modalVisible={modalVisible} hideModal={()=>{setModalVisible(false)}}/>
+        <ModalForgotPassword
+          modalVisible={modalVisible}
+          hideModal={() => {
+            setModalVisible(false)
+          }}
+          emailFromModal={thisEmail => {
+            setEmail(thisEmail)
+          }}
+          submitEmail={handleForgotPassword}
+        />
         <RowOfElements>
           <H1Text>Sign In</H1Text>
         </RowOfElements>
