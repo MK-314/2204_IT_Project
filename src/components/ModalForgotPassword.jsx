@@ -40,17 +40,19 @@ const EmailText = styled(H1Text)`
   font-size: ${height * HightUnit * 35}px;
 `
 const IconBack = styled(BackIcon)`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px;
+  padding: 10px;
   font-size: ${height * HightUnit * 40}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: 1px 1px 1px #000000;
-`
-const IconBox=styled.View`
-    
+  `
+const IconBox = styled.View`
+position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 65px;
+  height: 60px;
+  /* background-color: aqua; */
 `
 
 const ModalForgotPassword = props => {
@@ -64,7 +66,9 @@ const ModalForgotPassword = props => {
       <ModalContainer>
         <RowOfElementsCustom>
           <ModalRow style={styles.modalView}>
-            <IconBack name='closecircle' />
+            <IconBox>
+              <IconBack name='closecircle' />
+            </IconBox>
             <EmailText>Email</EmailText>
             <TextInputStShadow>
               <TextInputSt />
