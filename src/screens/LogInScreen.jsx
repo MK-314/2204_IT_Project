@@ -64,7 +64,6 @@ const DontHaveTextRow = styled(RowOfElements)`
   position: absolute;
   bottom: 25px;
 `
-
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -119,7 +118,7 @@ const LogInScreen = ({ navigation }) => {
       </RowForgot>
       <RowOfElements>
         <Pressable onPress={handleSingIn}>
-          <SmallDefaultBtn text={'Log In'} marginSt={0} />
+          <SmallDefaultBtn text={'Log In'} marginSt={40} width={80}/>
         </Pressable>
       </RowOfElements>
 
