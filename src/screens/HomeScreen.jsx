@@ -80,7 +80,8 @@ const HomeScreen = ({ navigation }) => {
           }}
         />
         <RowOfElements>
-          <H1MainText>Top Recipes:</H1MainText>
+          {modeUserRecipes && <H1MainText>Your Recipes:</H1MainText>}
+          {!modeUserRecipes && <H1MainText>Top Recipes:</H1MainText>}
         </RowOfElements>
         <ListOfResults
           toFoodCategoryById={item => {
