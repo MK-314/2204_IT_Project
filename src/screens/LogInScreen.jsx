@@ -1,6 +1,6 @@
 // REACT:
 import React, { useState, useEffect } from 'react'
-import { Text, Image, Button, StyleSheet } from 'react-native'
+import { Text, Image, Button, StyleSheet, Modal } from 'react-native'
 // STYLED:
 import styled from 'styled-components/native'
 // SESSION STORAGE:
@@ -21,6 +21,7 @@ import {
 } from '../components/small_elements/TextInputDefault'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { Keyboard } from 'react-native'
+import ModalForgotPassword from '../components/ModalForgotPassword'
 const { width, height } = Dimensions.get('window')
 
 const ContainerSt = styled(ContainerDefault)`
@@ -48,6 +49,7 @@ const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [miniTextHidden, setMiniTextHidden] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(async () => {
     try {
@@ -70,6 +72,14 @@ const LogInScreen = ({ navigation }) => {
         'Wrong credentials. Try again or reset password. Error: ' + e
       })
   }
+  const handleForgotPassword = async () => {
+    try {
+      let result = await FireBaseAuthSystem.resetPassword(email)
+      alert('Please check your email')
+    } catch (error) {
+      alert("We didn't find \nthis email in a system\nTry again")
+    }
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -81,6 +91,7 @@ const LogInScreen = ({ navigation }) => {
       }}
     >
       <ContainerSt>
+        <ModalForgotPassword modalVisible={modalVisible} />
         <RowOfElements>
           <H1Text>Sign In</H1Text>
         </RowOfElements>
@@ -108,9 +119,15 @@ const LogInScreen = ({ navigation }) => {
             />
           </TextInputStShadow>
         </RowPassword>
-        <RowForgot>
-          <SmalAnnotation>Forgot password?</SmalAnnotation>
-        </RowForgot>
+        <Pressable
+          onPress={() => {
+            setModalVisible(true)
+          }}
+        >
+          <RowForgot>
+            <SmalAnnotation>Forgot password?</SmalAnnotation>
+          </RowForgot>
+        </Pressable>
         <RowOfElements>
           <Pressable onPress={handleSingIn}>
             <SmallDefaultBtn text={'Log In'} marginSt={40} width={80} />

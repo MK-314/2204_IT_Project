@@ -8,7 +8,7 @@ class ConstantsRecipe {
     static gray2 = "#d7dfe6"
     static gray = "#ccc"
         // 
-    static text_shadow = "1px 1px 1px #000000"
+    static text_shadow = "2px 1px 1px #000000"
 }
 
 const HightUnit = 0.0012875

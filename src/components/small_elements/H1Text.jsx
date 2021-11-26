@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
-import { Dimensions } from 'react-native'
 import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
+import { Dimensions } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 const H1Text = styled.Text`
