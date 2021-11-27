@@ -14,15 +14,15 @@ import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
-  min-height: ${height * 0.2575}px;
+  min-height: ${height * HightUnit * 200}px;
 `
 const Box = styled.View`
   position: relative;
-  width: ${width * 0.766666}px;
-  height: ${height * 0.347625}px;
+  width: ${width * WidthUnit * 300}px;
+  height: ${height * HightUnit * 270}px;
   border-radius: 20px;
   margin-top: ${height * HightUnit * 25}px;
-  margin-bottom: ${height * 0.012875}px;
+  margin-bottom: ${height * HightUnit * 10}px;
   overflow: hidden;
 `
 const SmallFoodItem = styled.Image`
@@ -30,33 +30,33 @@ const SmallFoodItem = styled.Image`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${width * 0.766666}px;
-  height: ${height * 0.347625}px;
+  width: ${width * WidthUnit * 300}px;
+  height: ${height * HightUnit * 270}px;
   border-radius: 20px;
 `
 const HeartIcon = styled(Icon)`
   position: absolute;
-  top: ${height * 0.0167375}px;
-  left: ${width * 0.1405555}px;
-  font-size: ${height * 0.0450625}px;
+  top: ${height * HightUnit * 13}px;
+  left: ${width * WidthUnit * 55}px;
+  font-size: ${height * HightUnit * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconBack = styled(BackIcon)`
   position: absolute;
-  top: ${height * 0.012875}px;
-  left: ${width * 0.0255555}px;
-  font-size: ${height * 0.0515}px;
+  top: ${height * HightUnit * 10}px;
+  left: ${width * WidthUnit * 10}px;
+  font-size: ${height * HightUnit * 40}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const IconShare = styled(Icon)`
   position: absolute;
-  top: ${height * 0.012875}px;
-  right: ${width * 0.0638888}px;
-  font-size: ${height * 0.0450625}px;
+  top: ${height * HightUnit * 10}px;
+  right: ${width * WidthUnit * 25}px;
+  font-size: ${height * HightUnit * 35}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};

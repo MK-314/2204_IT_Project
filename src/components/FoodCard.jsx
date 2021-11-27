@@ -10,6 +10,7 @@ import { RowOfElements } from './small_elements/RowOfElements'
 import { MainHeader, WhiteRow } from './small_elements/MainHeader'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TextNumber } from './small_elements/TextNumber.jsx'
 
 const { width, height } = Dimensions.get('window')
 
@@ -42,16 +43,6 @@ const IconSt = styled(Icon)`
     props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
   text-shadow: 1px 1px 1px #000000;
-  z-index: 1;
-`
-const TextNum = styled.Text`
-  position: absolute;
-  top: ${height * HightUnit * 20}px;
-  right: ${width * WidthUnit * 155}px;
-  font-size: ${height * HightUnit * 35}px;
-  font-weight: bold;
-  color: ${ConstantsRecipe.green};
-  text-shadow: ${ConstantsRecipe.text_shadow};
   z-index: 1;
 `
 
@@ -132,7 +123,7 @@ const FoodCard = props => {
       ]}
     >
       <Box style={styles.customShadow} singleMode={singleMode}>
-        <TextNum>{likesNum}</TextNum>
+        <TextNumber>{likesNum}</TextNumber>
         <WhiteRow style={styles.customShadow}>
           <MainHeader>{props.textFood}</MainHeader>
         </WhiteRow>
@@ -161,4 +152,3 @@ const styles = StyleSheet.create({
 })
 
 export default FoodCard
-export { TextNum }
