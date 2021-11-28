@@ -22,7 +22,6 @@ import { FetchApi } from '../../datahandler'
 import { Dimensions } from 'react-native'
 import { FooterDefault } from '../components/small_elements/FooterDefault'
 import NavIcons from './../components/NavIcons'
-import ModalCard2 from './../components/ModalCard2'
 const { width, height } = Dimensions.get('window')
 
 const TitleBox = styled(RowOfElements)`
@@ -172,7 +171,7 @@ const CreateRecipe = ({ navigation }) => {
 
   return (
     <ContainerDefault>
-      <ModalCard2
+      <ModalCard
         btnText={'Save'}
         visibleModal={modalVisible}
         modalText={modalText}
