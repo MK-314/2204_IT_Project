@@ -23,7 +23,7 @@ const IconFavoriteSt = styled(IconFavorite)`
   padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
   font-size: ${height * HightUnit * 40}px;
   color: ${props =>
-    props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
+    props.iconeName == 'favorites' ? 'orangered' : '#ccc'};
   text-shadow: ${ConstantsRecipe.text_shadow};
   margin-top: 0;
 `
@@ -58,16 +58,16 @@ const RecipesText = styled.Text`
   font-size: ${height * HightUnit * 20}px;
   font-weight: bold;
   color: ${props =>
-    props.iconeName == 'recipes' ? ConstantsRecipe.green : '#ccc'};
+    props.iconeName == 'recipes' ? ConstantsRecipe.green : '#a1a1a1'};
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
 const FavoritesText = styled(RecipesText)`
   color: ${props =>
-    props.iconeName == 'favorites' ? ConstantsRecipe.green : '#ccc'};
+    props.iconeName == 'favorites' ? ConstantsRecipe.green : '#a1a1a1'};
 `
 const ProfileText = styled(RecipesText)`
   color: ${props =>
-    props.iconeName == 'profile' ? ConstantsRecipe.green : '#ccc'};
+    props.iconeName == 'profile' ? ConstantsRecipe.green : '#a1a1a1'};
 `
 const NavIcons = props => {
   return (
