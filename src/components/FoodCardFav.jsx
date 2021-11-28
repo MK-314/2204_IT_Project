@@ -91,9 +91,9 @@ const FoodCardFav = props => {
           user_id: user_id,
           post_id: props.itemId
         })
+        await FetchApi.updatePost({ likes: likesNum + 1 }, props.itemId)
         //
-        let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
-        setLikesNum(heartsNum)
+        setLikesNum(likesNum + 1)
         seticonName('heart')
       } else {
         let favRecord = await FetchApi.getByUserIdAndPostId(
@@ -104,6 +104,7 @@ const FoodCardFav = props => {
         await FetchApi.deleteFavRecord(fav_id)
         //
         setLikesNum(likesNum - 1)
+        await FetchApi.updatePost({ likes: likesNum -1 }, props.itemId)
         seticonName('hearto')
       }
     } catch (error) {

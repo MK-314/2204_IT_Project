@@ -31,23 +31,21 @@ const ListOfResults = props => {
           it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         setSingleMode(searchRes.length)
-        setItemsByUser(searchRes)
-        setFirstUseEffectDone(true)
+        setItemsByUser(sortByHeartsNumber(searchRes))
         // if a user clicked on Recipes:
       } else if (modeUserRecipes) {
         let user_id = await AsyncStorage.getItem('user_id')
         let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
         setSingleMode(itemsInUseEffect.length)
-        setItemsByUser(itemsInUseEffect)
-        setFirstUseEffectDone(true)
+        setItemsByUser(sortByHeartsNumber(itemsInUseEffect))
         // if a user clicked on Favorites / Icon:
       } else {
         let allPosts = await FetchApi.getAllPosts()
         setSingleMode(allPosts.length)
         setItemsByUser(sortByHeartsNumber(allPosts))
         // ///////////////////////////////////////////////////////////////////////////////
-        setFirstUseEffectDone(true)
       }
+      setFirstUseEffectDone(true)
     }
   }, [search, startUseEffectChain])
 

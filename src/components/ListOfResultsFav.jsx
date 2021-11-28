@@ -8,6 +8,7 @@ import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import FoodCardFav from './FoodCardFav.jsx'
+import { sortByHeartsNumber } from '../../heartSorting.js'
 
 const ListOfResultsFav = props => {
   // USECONTEXT:
@@ -30,8 +31,7 @@ const ListOfResultsFav = props => {
           it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         setSingleMode(searchRes.length)
-        setItemsByUser(searchRes)
-        setFirstUseEffectDoneFav(true)
+        setItemsByUser(sortByHeartsNumber(searchRes))
         // if a user clicked on Recipes:
       } else {
         let user_id = await AsyncStorage.getItem('user_id')
@@ -44,10 +44,9 @@ const ListOfResultsFav = props => {
           })
         )
         setSingleMode(favPosts.length)
-        setItemsByUser(favPosts)
-        setFirstUseEffectDoneFav(true)
-        // if a user clicked on HomePage / Icon:
+        setItemsByUser(sortByHeartsNumber(favPosts))
       }
+      setFirstUseEffectDoneFav(true)
     }
   }, [search, startUseEffectChainFav])
 
@@ -69,6 +68,7 @@ const ListOfResultsFav = props => {
                   itemId={item.id}
                   textFood={item.name}
                   url={item.imageUrl}
+                  likes={item.likes}
                 />
               </Pressable>
             )
