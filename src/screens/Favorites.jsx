@@ -38,7 +38,6 @@ const Favorites = ({ navigation }) => {
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
-      console.log('focussed fav page')
       setFirstUseEffectDoneFav(false)
       setStartUseEffectChainFav(true)
     })
@@ -47,7 +46,6 @@ const Favorites = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('willBlur', () => {
-      console.log('unfocussed fav page')
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)
     })

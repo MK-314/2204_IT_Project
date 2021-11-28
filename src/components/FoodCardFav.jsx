@@ -66,10 +66,10 @@ const FoodCardFav = props => {
   }, [])
 
   useEffect(async () => {
-    console.log('second => firstUseEffectDoneFav ' + firstUseEffectDoneFav)
     if (firstUseEffectDoneFav) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')
+        // counting hearts number:
         let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
         let filteredResult = likedPosts.filter(post => post.user_id == user_id)

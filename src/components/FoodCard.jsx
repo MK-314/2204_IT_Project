@@ -66,7 +66,6 @@ const FoodCard = props => {
   }, [])
 
   useEffect(async () => {
-    console.log('second => firstUseEffectDone ' + firstUseEffectDone)
     if (firstUseEffectDone) {
       try {
         let user_id = await AsyncStorage.getItem('user_id')

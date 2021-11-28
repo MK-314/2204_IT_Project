@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import BackIcon from 'react-native-vector-icons/Ionicons'
@@ -11,6 +12,7 @@ import { TextNum } from '../FoodCard'
 import { RowOfElements } from '../small_elements/RowOfElements'
 import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
 import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
+import { FetchApi } from '../../../datahandler'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
@@ -80,6 +82,25 @@ const WhiteRowModified = styled(WhiteRow)`
 `
 
 const SmallFoodCard = props => {
+  const [likesNum, setLikesNum] = useState(0)
+  const [iconName, seticonName] = useState('hearto')
+
+  useEffect(async () => {
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      // counting hearts number: 
+      let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
+      let likedPosts = await FetchApi.getFavsByPostId(props.item.id)
+      let filteredResult = likedPosts.filter(post => post.user_id == user_id)
+      filteredResult.length != 0
+        ? seticonName('heart')
+        : seticonName('hearto')
+      setLikesNum(heartsNum)
+    } catch (error) {
+      console.log('ERROR from FoodCardFav.jsx : ' + error)
+    }
+  }, [])
+
   return (
     <RowSt>
       <Box style={styles.customShadow}>
@@ -88,7 +109,7 @@ const SmallFoodCard = props => {
             uri: props.item.imageUrl
           }}
         />
-        <HeartIcon name={'heart'} />
+        <HeartIcon name={iconName} />
         <IconShare name={'sharealt'} />
         <IconBack
           name={'arrow-back'}
@@ -99,7 +120,7 @@ const SmallFoodCard = props => {
         <WhiteRowModified>
           <MainHeaderModified>{props.item.name}</MainHeaderModified>
         </WhiteRowModified>
-        <SmallTextNum>{props.item.id}</SmallTextNum>
+        <SmallTextNum>{likesNum}</SmallTextNum>
       </Box>
     </RowSt>
   )
