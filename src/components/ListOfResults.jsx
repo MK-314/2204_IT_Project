@@ -7,6 +7,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { sortByHeartsNumber } from '../../heartSorting.js'
 
 const ListOfResults = props => {
   // USECONTEXT:
@@ -43,7 +44,7 @@ const ListOfResults = props => {
       } else {
         let allPosts = await FetchApi.getAllPosts()
         setSingleMode(allPosts.length)
-        setItemsByUser(allPosts)
+        setItemsByUser(await sortByHeartsNumber(allPosts))
         setFirstUseEffectDone(true)
       }
     }
