@@ -114,7 +114,7 @@ const ModalCard2 = props => {
                 placeholder={
                   props.modalText == 'Recipe name:'
                     ? 'Enter name of your recipe ...'
-                    : 'Type each sentence on a new line ...'
+                    : 'Put your text here ...'
                 }
               />
             </CustomShadow>

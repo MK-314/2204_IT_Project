@@ -141,11 +141,7 @@ const CreateRecipe = ({ navigation }) => {
   }
   const uploadImageToFireBase = async () => {
     try {
-      try {
-        let pickedImage = await pickImage()
-      } catch (error) {
-        alert('Please try to pich the image again')
-      }
+      let pickedImage = await pickImage()
       let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
         pickedImage.uri
       )
@@ -169,7 +165,7 @@ const CreateRecipe = ({ navigation }) => {
         ingredients: ingredients,
         user_id: user_id
       })
-    }else{
+    } else {
       alert('Not all fealds are completed')
     }
   }
@@ -257,7 +253,7 @@ const CreateRecipe = ({ navigation }) => {
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
       <Pressable onPress={saveNewPost}>
-        <SmallDefaultBtn text={'Save Post'} marginSt={40} />
+        <SmallDefaultBtn text={'Check it out ->'} marginSt={40} />
       </Pressable>
       {/* BUTTON ENDS */}
       <FooterDefault>
