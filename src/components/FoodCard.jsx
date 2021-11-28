@@ -68,14 +68,13 @@ const FoodCard = props => {
   useEffect(async () => {
     if (firstUseEffectDone) {
       try {
+        setLikesNum(props.likes)
         let user_id = await AsyncStorage.getItem('user_id')
-        let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
         let likedPosts = await FetchApi.getFavsByPostId(props.itemId)
         let filteredResult = likedPosts.filter(post => post.user_id == user_id)
         filteredResult.length != 0
           ? seticonName('heart')
           : seticonName('hearto')
-        setLikesNum(heartsNum)
       } catch (error) {
         console.log('ERROR from FoodCard.jsx : ' + error)
       }
@@ -90,9 +89,9 @@ const FoodCard = props => {
           user_id: user_id,
           post_id: props.itemId
         })
+        await FetchApi.updatePost({ likes: likesNum + 1 }, props.itemId)
         //
-        let heartsNum = await FetchApi.countFavsByPostId(props.itemId)
-        setLikesNum(heartsNum)
+        setLikesNum(likesNum + 1)
         seticonName('heart')
         // setUpdateScreen(!updateScreen)
       } else {
@@ -104,6 +103,7 @@ const FoodCard = props => {
         await FetchApi.deleteFavRecord(fav_id)
         //
         setLikesNum(likesNum - 1)
+        await FetchApi.updatePost({ likes: likesNum -1 }, props.itemId)
         seticonName('hearto')
         // setUpdateScreen(!updateScreen)
       }

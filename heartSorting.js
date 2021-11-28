@@ -1,13 +1,9 @@
-import { FetchApi } from "./datahandler"
-
-const sortByHeartsNumber = async(arrToSort) => {
+const sortByHeartsNumber = (arrToSort) => {
     let arr = arrToSort
     for (let top = 0; top < arr.length; top++) {
         let swap = []
         for (let non_sorted = top; non_sorted < arr.length; non_sorted++) {
-            let arr_top = await FetchApi.countFavsByPostId(arr[top].id)
-            let arr_non_sorted = await FetchApi.countFavsByPostId(arr[non_sorted].id)
-            if (arr_non_sorted < arr_top) {
+            if (arr[non_sorted].likes < arr[top].likes) {
                 swap = arr[top];
                 arr[top] = arr[non_sorted];
                 arr[non_sorted] = swap;
@@ -18,5 +14,4 @@ const sortByHeartsNumber = async(arrToSort) => {
         }
     }
 }
-
 export { sortByHeartsNumber }

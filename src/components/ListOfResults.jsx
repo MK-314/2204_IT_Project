@@ -44,7 +44,8 @@ const ListOfResults = props => {
       } else {
         let allPosts = await FetchApi.getAllPosts()
         setSingleMode(allPosts.length)
-        setItemsByUser(await sortByHeartsNumber(allPosts))
+        setItemsByUser(sortByHeartsNumber(allPosts))
+        // ///////////////////////////////////////////////////////////////////////////////
         setFirstUseEffectDone(true)
       }
     }
@@ -68,6 +69,7 @@ const ListOfResults = props => {
                   itemId={item.id}
                   textFood={item.name}
                   url={item.imageUrl}
+                  likes={item.likes}
                 />
               </Pressable>
             )
