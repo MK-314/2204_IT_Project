@@ -32,7 +32,7 @@ const MainText = styled.Text`
   font-style: italic;
   line-height: ${height * HightUnit * 23}px;
   background-color: ${ConstantsRecipe.blue};
-  padding-left: ${width * WidthUnit * 10}px;
+  padding-left: ${width * WidthUnit * 25}px;
 `
 const FoodCategory = ({ navigation }) => {
   const { updateScreen, setUpdateScreen } = useContext(RecipeContext)
@@ -60,7 +60,7 @@ const FoodCategory = ({ navigation }) => {
             renderItem={({ item }) => {
               return <MainText>{item}</MainText>
             }}
-            contentContainerStyle={{ paddingBottom: 200 }}
+            contentContainerStyle={{ paddingBottom: 200, paddingTop: 10 }}
           />
         </Box>
       </RowSt>
