@@ -110,9 +110,9 @@ const SmallFoodCard = props => {
           user_id: user_id,
           post_id: props.item.id
         })
+        await FetchApi.updatePost({ likes: likesNum + 1 }, props.item.id)
         //
-        let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
-        setLikesNum(heartsNum)
+        setLikesNum(likesNum + 1)
         seticonName('heart')
       } else {
         let favRecord = await FetchApi.getByUserIdAndPostId(
@@ -123,10 +123,11 @@ const SmallFoodCard = props => {
         await FetchApi.deleteFavRecord(fav_id)
         //
         setLikesNum(likesNum - 1)
+        await FetchApi.updatePost({ likes: likesNum -1 }, props.item.id)
         seticonName('hearto')
       }
     } catch (error) {
-      console.log('ERRRRRRR ' + error)
+      console.log('ERRORRRR FROM SMALL CARD JSX ' + error)
     }
   }
 
