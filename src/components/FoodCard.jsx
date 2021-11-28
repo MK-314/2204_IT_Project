@@ -93,7 +93,6 @@ const FoodCard = props => {
         //
         setLikesNum(likesNum + 1)
         seticonName('heart')
-        // setUpdateScreen(!updateScreen)
       } else {
         let favRecord = await FetchApi.getByUserIdAndPostId(
           user_id,
@@ -105,7 +104,6 @@ const FoodCard = props => {
         setLikesNum(likesNum - 1)
         await FetchApi.updatePost({ likes: likesNum -1 }, props.itemId)
         seticonName('hearto')
-        // setUpdateScreen(!updateScreen)
       }
     } catch (error) {
       console.log('ERRRRRRR ' + error)
