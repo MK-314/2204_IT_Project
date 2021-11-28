@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
 //
+import PTRView from 'react-native-pull-to-refresh'
 import { Pressable } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
@@ -31,28 +32,38 @@ const ListOfResults = props => {
           it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         setSingleMode(searchRes.length)
-        setItemsByUser(searchRes)
-        setFirstUseEffectDone(true)
+        setItemsByUser(sortByHeartsNumber(searchRes))
         // if a user clicked on Recipes:
       } else if (modeUserRecipes) {
         let user_id = await AsyncStorage.getItem('user_id')
         let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
         setSingleMode(itemsInUseEffect.length)
-        setItemsByUser(itemsInUseEffect)
-        setFirstUseEffectDone(true)
+        setItemsByUser(sortByHeartsNumber(itemsInUseEffect))
         // if a user clicked on Favorites / Icon:
       } else {
         let allPosts = await FetchApi.getAllPosts()
         setSingleMode(allPosts.length)
         setItemsByUser(sortByHeartsNumber(allPosts))
-        // ///////////////////////////////////////////////////////////////////////////////
-        setFirstUseEffectDone(true)
       }
+      setFirstUseEffectDone(true)
     }
   }, [search, startUseEffectChain])
 
+  const handleRefresh = () => {
+    return new Promise(async res => {
+      setFirstUseEffectDone(true)
+      setStartUseEffectChain(false)
+      setTimeout(() => {
+        setFirstUseEffectDone(false)
+        setStartUseEffectChain(true)
+        setSearch('')
+        res()
+      }, 500)
+    })
+  }
+
   return (
-    <>
+    <PTRView onRefresh={handleRefresh}>
       {firstUseEffectDone && (
         <FlatList
           horizontal
@@ -76,7 +87,7 @@ const ListOfResults = props => {
           }}
         />
       )}
-    </>
+    </PTRView>
   )
 }
 
