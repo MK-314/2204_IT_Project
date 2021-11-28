@@ -41,7 +41,8 @@ const HeartIcon = styled(Icon)`
   top: ${height * HightUnit * 13}px;
   left: ${width * WidthUnit * 55}px;
   font-size: ${height * HightUnit * 35}px;
-  color: ${ConstantsRecipe.green};
+  color: ${props =>
+    props.name == 'hearto' ? ConstantsRecipe.green : 'orangered'};
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
@@ -101,6 +102,34 @@ const SmallFoodCard = props => {
     }
   }, [])
 
+  const handleHearts = async () => {
+    try {
+      let user_id = await AsyncStorage.getItem('user_id')
+      if (iconName == 'hearto') {
+        await FetchApi.createFavRecord({
+          user_id: user_id,
+          post_id: props.item.id
+        })
+        //
+        let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
+        setLikesNum(heartsNum)
+        seticonName('heart')
+      } else {
+        let favRecord = await FetchApi.getByUserIdAndPostId(
+          user_id,
+          props.item.id
+        )
+        let fav_id = favRecord[0].id
+        await FetchApi.deleteFavRecord(fav_id)
+        //
+        setLikesNum(likesNum - 1)
+        seticonName('hearto')
+      }
+    } catch (error) {
+      console.log('ERRRRRRR ' + error)
+    }
+  }
+
   return (
     <RowSt>
       <Box style={styles.customShadow}>
@@ -109,7 +138,7 @@ const SmallFoodCard = props => {
             uri: props.item.imageUrl
           }}
         />
-        <HeartIcon name={iconName} />
+        <HeartIcon name={iconName} onPress={handleHearts} />
         <IconShare name={'sharealt'} />
         <IconBack
           name={'arrow-back'}
