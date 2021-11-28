@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import RecipeContext from '../context/RecipeContext.jsx'
 //
+import PTRView from 'react-native-pull-to-refresh'
 import { Pressable } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import FoodCard from './FoodCard'
@@ -48,8 +49,20 @@ const ListOfResults = props => {
     }
   }, [search, startUseEffectChain])
 
+  const handleRefresh = () => {
+    return new Promise(async res => {
+      setFirstUseEffectDone(true)
+      setStartUseEffectChain(false)
+      setTimeout(() => {
+        setFirstUseEffectDone(false)
+        setStartUseEffectChain(true)
+        res()
+      }, 500)
+    })
+  }
+
   return (
-    <>
+    <PTRView onRefresh={handleRefresh}>
       {firstUseEffectDone && (
         <FlatList
           horizontal
@@ -73,7 +86,7 @@ const ListOfResults = props => {
           }}
         />
       )}
-    </>
+    </PTRView>
   )
 }
 

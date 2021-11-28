@@ -44,12 +44,14 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
-      setFirstUseEffectDoneFav(true)
-      setStartUseEffectChainFav(false)
+      setTimeout(() => {
+        setFirstUseEffectDoneFav(true)
+        setStartUseEffectChainFav(false)
+      }, 50)
       setTimeout(() => {
         setFirstUseEffectDone(false)
         setStartUseEffectChain(true)
-      }, 50)
+      }, 100)
     })
     return unsubscribe
   }, [navigation])

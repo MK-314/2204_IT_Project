@@ -9,6 +9,7 @@ import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import FoodCardFav from './FoodCardFav.jsx'
 import { sortByHeartsNumber } from '../../heartSorting.js'
+import  PTRView  from 'react-native-pull-to-refresh';
 
 const ListOfResultsFav = props => {
   // USECONTEXT:
@@ -16,7 +17,6 @@ const ListOfResultsFav = props => {
     RecipeContext
   )
   const { search, setSearch } = useContext(RecipeContext)
-  const { modeUserRecipes, setModeUserRecipes } = useContext(RecipeContext)
   const { singleMode, setSingleMode } = useContext(RecipeContext)
   const { firstUseEffectDoneFav, setFirstUseEffectDoneFav } = useContext(
     RecipeContext
@@ -50,8 +50,20 @@ const ListOfResultsFav = props => {
     }
   }, [search, startUseEffectChainFav])
 
+  const handleRefresh = () => {
+    return new Promise(async res => {
+      setFirstUseEffectDoneFav(true)
+      setStartUseEffectChainFav(false)
+      setTimeout(() => {
+        setFirstUseEffectDoneFav(false)
+        setStartUseEffectChainFav(true)
+        res()
+      }, 500)
+    })
+  }
+
   return (
-    <>
+    <PTRView onRefresh={handleRefresh}>
       {firstUseEffectDoneFav && (
         <FlatList
           horizontal
@@ -75,7 +87,7 @@ const ListOfResultsFav = props => {
           }}
         />
       )}
-    </>
+    </PTRView>
   )
 }
 
