@@ -20,6 +20,9 @@ import { FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 import { FetchApi } from '../../datahandler'
 import { Dimensions } from 'react-native'
+import { FooterDefault } from '../components/small_elements/FooterDefault'
+import NavIcons from './../components/NavIcons'
+import ModalCard2 from './../components/ModalCard2'
 const { width, height } = Dimensions.get('window')
 
 const TitleBox = styled(RowOfElements)`
@@ -99,6 +102,8 @@ const CreateRecipe = ({ navigation }) => {
   const [modalText, setModalText] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [recipeName, setRecipeName] = useState('Name of Your Recipe')
+  const [ingredients, setIngredients] = useState('')
+  const [directions, setDirections] = useState('')
   //
   const [nameDone, setNameDone] = useState(false)
   const [ingredientsDone, setIngredientsDone] = useState(false)
@@ -112,53 +117,74 @@ const CreateRecipe = ({ navigation }) => {
 
     switch (mode) {
       case 'recipeName':
-        AsyncStorage.getItem('recipeName')
-          .then(tempName => {
-            if (tempName.length > 0) {
-              setRecipeName(tempName)
-              setNameDone(true)
-            }
-          })
-          .catch(e => {})
+        let nameOfRecipe = await AsyncStorage.getItem('recipeName')
+        if (nameOfRecipe.length > 3) {
+          setRecipeName(tempName)
+          setNameDone(true)
+        }
         break
       case 'Ingredients':
-        setIngredientsDone(true)
+        let listOfIngredients = await AsyncStorage.getItem('Ingredients')
+        if (listOfIngredients && listOfIngredients.length > 5) {
+          setIngredients(listOfIngredients)
+          setIngredientsDone(true)
+        }
         break
       case 'Directions':
-        setDirectionsDone(true)
+        let listOfDirections = await AsyncStorage.getItem('Directions')
+        if (listOfDirections && listOfDirections.length > 5) {
+          setDirections(listOfDirections)
+          setDirectionsDone(true)
+        }
         break
     }
   }
   const uploadImageToFireBase = async () => {
-    let pickedImage = await pickImage()
-    let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
-      pickedImage.uri
-    )
-    let url = await FireBaseImageHandler.getUrlOfImageFireBase(snapshot.metadata.fullPath)
-    setImageUrl(url)
-    AsyncStorage.setItem('PostPhoto', url)
-    setImageDone(true)
+    try {
+      try {
+        let pickedImage = await pickImage()
+      } catch (error) {
+        alert('Please try to pich the image again')
+      }
+      let snapshot = await FireBaseImageHandler.uploadImageToFireBase(
+        pickedImage.uri
+      )
+      let url = await FireBaseImageHandler.getUrlOfImageFireBase(
+        snapshot.metadata.fullPath
+      )
+      setImageUrl(url)
+      AsyncStorage.setItem('PostPhoto', url)
+      setImageDone(true)
+    } catch (error) {
+      alert('Please try to pich the image again')
+    }
   }
   const saveNewPost = async () => {
-    let directions = await AsyncStorage.getItem('Directions')
-    let ingredients = await AsyncStorage.getItem('Ingredients')
     let user_id = await AsyncStorage.getItem('user_id')
-    let data = await FetchApi.createPost({
-      name: recipeName,
-      imageUrl: imageUrl,
-      directions: directions,
-      ingredients: ingredients,
-      user_id: user_id
-    })
+    if (nameDone && imageDone && ingredientsDone && directionsDone) {
+      let data = await FetchApi.createPost({
+        name: recipeName,
+        imageUrl: imageUrl,
+        directions: directions,
+        ingredients: ingredients,
+        user_id: user_id
+      })
+    }else{
+      alert('Not all fealds are completed')
+    }
   }
 
   return (
     <ContainerDefault>
-      <ModalCard
+      <ModalCard2
+        btnText={'Save'}
         visibleModal={modalVisible}
         modalText={modalText}
         mode={mode}
         visibleModalUp={dataFromModal}
+        hideModal={() => {
+          setModalVisible(false)
+        }}
       />
       {/* NAME STARTS */}
       <Pressable
@@ -234,6 +260,14 @@ const CreateRecipe = ({ navigation }) => {
         <SmallDefaultBtn text={'Save Post'} marginSt={40} />
       </Pressable>
       {/* BUTTON ENDS */}
+      <FooterDefault>
+        <NavIcons
+          iconName='profile'
+          toScreen={screen => {
+            navigation.navigate(screen)
+          }}
+        />
+      </FooterDefault>
     </ContainerDefault>
   )
 }
