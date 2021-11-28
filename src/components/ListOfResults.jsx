@@ -43,7 +43,6 @@ const ListOfResults = props => {
         let allPosts = await FetchApi.getAllPosts()
         setSingleMode(allPosts.length)
         setItemsByUser(sortByHeartsNumber(allPosts))
-        // ///////////////////////////////////////////////////////////////////////////////
       }
       setFirstUseEffectDone(true)
     }
