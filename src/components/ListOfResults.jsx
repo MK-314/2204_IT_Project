@@ -56,6 +56,7 @@ const ListOfResults = props => {
       setTimeout(() => {
         setFirstUseEffectDone(false)
         setStartUseEffectChain(true)
+        setSearch('')
         res()
       }, 500)
     })

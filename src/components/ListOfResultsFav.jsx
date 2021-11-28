@@ -57,6 +57,7 @@ const ListOfResultsFav = props => {
       setTimeout(() => {
         setFirstUseEffectDoneFav(false)
         setStartUseEffectChainFav(true)
+        setSearch('')
         res()
       }, 500)
     })
