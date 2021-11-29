@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import styled from 'styled-components/native'
+import { default as BombIcon } from 'react-native-vector-icons/FontAwesome5'
 import Icon from 'react-native-vector-icons/AntDesign'
 import BackIcon from 'react-native-vector-icons/Ionicons'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from 'react-native-gesture-handler'
 import { TextNum } from '../FoodCard'
 import { RowOfElements } from '../small_elements/RowOfElements'
 import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
 import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 import { FetchApi } from '../../../datahandler'
+import ModalDelete from './../ModalDelete'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
@@ -55,12 +53,12 @@ const IconBack = styled(BackIcon)`
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
-const IconShare = styled(Icon)`
+const IconBomb = styled(BombIcon)`
   position: absolute;
   top: ${height * HightUnit * 10}px;
   right: ${width * WidthUnit * 25}px;
   font-size: ${height * HightUnit * 35}px;
-  color: ${ConstantsRecipe.green};
+  color: orangered;
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
 `
@@ -85,17 +83,20 @@ const WhiteRowModified = styled(WhiteRow)`
 const SmallFoodCard = props => {
   const [likesNum, setLikesNum] = useState(0)
   const [iconName, seticonName] = useState('hearto')
+  const [modalVisible, setModalVisible] = useState(false)
+  const [ableToDelete, setableToDelete] = useState(false)
 
   useEffect(async () => {
     try {
       let user_id = await AsyncStorage.getItem('user_id')
-      // counting hearts number: 
-      let heartsNum = await FetchApi.countFavsByPostId(props.item.id)
+      // counting hearts number:
+      let heartsNum = props.item.likes
       let likedPosts = await FetchApi.getFavsByPostId(props.item.id)
       let filteredResult = likedPosts.filter(post => post.user_id == user_id)
-      filteredResult.length != 0
-        ? seticonName('heart')
-        : seticonName('hearto')
+      // red or green heard:
+      filteredResult.length != 0 ? seticonName('heart') : seticonName('hearto')
+      // able to edit or not:
+      if (props.item.user_id == user_id) setableToDelete(true)
       setLikesNum(heartsNum)
     } catch (error) {
       console.log('ERROR from FoodCardFav.jsx : ' + error)
@@ -123,7 +124,7 @@ const SmallFoodCard = props => {
         await FetchApi.deleteFavRecord(fav_id)
         //
         setLikesNum(likesNum - 1)
-        await FetchApi.updatePost({ likes: likesNum -1 }, props.item.id)
+        await FetchApi.updatePost({ likes: likesNum - 1 }, props.item.id)
         seticonName('hearto')
       }
     } catch (error) {
@@ -131,8 +132,24 @@ const SmallFoodCard = props => {
     }
   }
 
+  const handleDestroyItNow = async () => {
+    try {
+      await FetchApi.deletePost(props.item.id)
+      props.toUserRecipes()
+    } catch (error) {
+      console.log('Delete Error => ' + error)
+    }
+  }
+
   return (
     <RowSt>
+      <ModalDelete
+        modalVisible={modalVisible}
+        hideModal={() => {
+          setModalVisible(false)
+        }}
+        deleteRecipe={handleDestroyItNow}
+      />
       <Box style={styles.customShadow}>
         <SmallFoodItem
           source={{
@@ -140,7 +157,9 @@ const SmallFoodCard = props => {
           }}
         />
         <HeartIcon name={iconName} onPress={handleHearts} />
-        <IconShare name={'sharealt'} />
+        {ableToDelete && (
+          <IconBomb name={'bomb'} onPress={() => setModalVisible(true)} />
+        )}
         <IconBack
           name={'arrow-back'}
           onPress={() => {

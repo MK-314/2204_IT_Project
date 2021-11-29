@@ -118,7 +118,7 @@ const CreateRecipe = ({ navigation }) => {
       case 'recipeName':
         let nameOfRecipe = await AsyncStorage.getItem('recipeName')
         if (nameOfRecipe.length > 3) {
-          setRecipeName(tempName)
+          setRecipeName(nameOfRecipe)
           setNameDone(true)
         }
         break
@@ -163,6 +163,9 @@ const CreateRecipe = ({ navigation }) => {
         directions: directions,
         ingredients: ingredients,
         user_id: user_id
+      })
+      navigation.navigate('FoodCategory', {
+        item: data
       })
     } else {
       alert('Not all fealds are completed')

@@ -5,6 +5,7 @@ import { Text, Image, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 // SESSION STORAGE:
 import AsyncStorage from '@react-native-async-storage/async-storage'
+//
 import { ContainerDefault } from '../components/small_elements/ContainerDefault'
 import { RowOfElements } from '../components/small_elements/RowOfElements'
 import NavIcons from '../components/NavIcons'
@@ -135,7 +136,8 @@ const ProfileScreen = ({ navigation }) => {
   )
   const [userState, setUserState] = useState(null)
   const [postNumber, setPostNumber] = useState(0)
-  const [namOfPostsThatUserLikes, setNamOfPostsThatUserLikes] = useState(0)
+  const [numOfPostsThatUserLikes, setNumOfPostsThatUserLikes] = useState(0)
+  const [numOfFollowers, setNumOfFollowers] = useState(0)
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', () => {
@@ -153,7 +155,9 @@ const ProfileScreen = ({ navigation }) => {
     let numOfPosts = await FetchApi.countPostsByUserId(user.id)
     setPostNumber(numOfPosts)
     let favs = await FetchApi.countFavsByUserId(user.id)
-    setNamOfPostsThatUserLikes(favs)
+    setNumOfPostsThatUserLikes(favs)
+    let userFollowers = await FetchApi.getFollowers(user.id)
+    setNumOfFollowers(userFollowers.length)
     if (user.avatar) setAvatar(user.avatar)
   }, [])
 
@@ -217,7 +221,7 @@ const ProfileScreen = ({ navigation }) => {
             <TextOfElevation>Favourites</TextOfElevation>
           </ElevatedPart>
           <NumberRecipesBox style={styles.elementShadow}>
-            <NumberRecipes>{namOfPostsThatUserLikes}</NumberRecipes>
+            <NumberRecipes>{numOfPostsThatUserLikes}</NumberRecipes>
           </NumberRecipesBox>
           <HeartbeatIcon name='heartbeat' />
         </MainViewRow2>
@@ -228,7 +232,7 @@ const ProfileScreen = ({ navigation }) => {
           <TextOfElevation>Followers</TextOfElevation>
         </ElevatedPart>
         <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>7</NumberRecipes>
+          <NumberRecipes>{numOfFollowers}</NumberRecipes>
         </NumberRecipesBox>
         <FollowersIcon name='human-greeting' />
       </MainViewRow3>

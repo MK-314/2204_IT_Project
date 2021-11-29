@@ -149,6 +149,21 @@ class FetchApi {
                 })
         })
     }
+    static deletePost(id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/posts/" + id, {
+                    "method": "DELETE",
+                    "headers": {}
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
     static countPostsByUserId(user_id) {
             return new Promise(async(res, rej) => {
                 fetch("https://recipe-ruby-api.herokuapp.com/api/posts" +
@@ -268,6 +283,23 @@ class FetchApi {
         return new Promise(async(res, rej) => {
             fetch("https://recipe-ruby-api.herokuapp.com/api/favorites/" + record_id, {
                     "method": "DELETE",
+                    "headers": {}
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res(data)
+                })
+                .catch(err => {
+                    rej(err)
+                })
+        })
+    }
+
+    // FOLLOWERS
+    static getFollowers(id) {
+        return new Promise(async(res, rej) => {
+            fetch("https://recipe-ruby-api.herokuapp.com/api/users/" + id + "/?thisaction=getFollowers", {
+                    "method": "GET",
                     "headers": {}
                 })
                 .then(response => response.json())
