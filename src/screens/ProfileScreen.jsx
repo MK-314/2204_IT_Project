@@ -26,6 +26,8 @@ import { pickImage } from '../../imagePicker'
 import { Dimensions } from 'react-native'
 import { FireBaseImageHandler } from '../../firebase'
 import RecipeContext from '../context/RecipeContext'
+import { AvatarBox } from '../components/small_elements/AvatarBox'
+import { AvatarImg } from '../components/small_elements/AvatarImg'
 const { width, height } = Dimensions.get('window')
 
 const HeaderRow = styled(RowOfElements)`
@@ -33,18 +35,6 @@ const HeaderRow = styled(RowOfElements)`
   margin-left: ${width * WidthUnit * 25}px;
   justify-content: flex-start;
   /* background-color: aqua; */
-`
-const AvatarBox = styled.View`
-  position: relative;
-  width: ${width * WidthUnit * 140}px;
-  height: ${height * HightUnit * 140}px;
-  border-radius: 30px;
-`
-const AvatarImg = styled.Image`
-  position: absolute;
-  width: ${width * WidthUnit * 140}px;
-  height: ${height * HightUnit * 140}px;
-  border-radius: 30px;
 `
 const NameText = styled(MainHeader)`
   display: flex;
@@ -138,28 +128,27 @@ const ProfileScreen = ({ navigation }) => {
   const [postNumber, setPostNumber] = useState(0)
   const [numOfPostsThatUserLikes, setNumOfPostsThatUserLikes] = useState(0)
   const [numOfFollowers, setNumOfFollowers] = useState(0)
+  const [favScreenItems, setFavScreenItems] = useState([])
 
   useEffect(async () => {
-    const unsubscribe = navigation.addListener('didFocus', () => {
+    const unsubscribe = navigation.addListener('didFocus', async () => {
       setFirstUseEffectDoneFav(true)
       setStartUseEffectChainFav(false)
+      let email = await AsyncStorage.getItem('email')
+      let data = await FetchApi.getUserByEmail(email)
+      let user = data[0]
+      setUserState(user)
+      let numOfPosts = await FetchApi.countPostsByUserId(user.id)
+      setPostNumber(numOfPosts)
+      let favs = await FetchApi.countFavsByUserId(user.id)
+      setNumOfPostsThatUserLikes(favs)
+      let userFollowers = await FetchApi.getFollowers(user.id)
+      setFavScreenItems(userFollowers)
+      setNumOfFollowers(userFollowers.length)
+      if (user.avatar) setAvatar(user.avatar)
     })
     return unsubscribe
   }, [navigation])
-
-  useEffect(async () => {
-    let email = await AsyncStorage.getItem('email')
-    let data = await FetchApi.getUserByEmail(email)
-    let user = data[0]
-    setUserState(user)
-    let numOfPosts = await FetchApi.countPostsByUserId(user.id)
-    setPostNumber(numOfPosts)
-    let favs = await FetchApi.countFavsByUserId(user.id)
-    setNumOfPostsThatUserLikes(favs)
-    let userFollowers = await FetchApi.getFollowers(user.id)
-    setNumOfFollowers(userFollowers.length)
-    if (user.avatar) setAvatar(user.avatar)
-  }, [])
 
   const handleAvatarUpload = async () => {
     let pickedImage = await pickImage()
@@ -227,15 +216,23 @@ const ProfileScreen = ({ navigation }) => {
         </MainViewRow2>
       </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
-      <MainViewRow3>
-        <ElevatedPart style={styles.elementShadow}>
-          <TextOfElevation>Followers</TextOfElevation>
-        </ElevatedPart>
-        <NumberRecipesBox style={styles.elementShadow}>
-          <NumberRecipes>{numOfFollowers}</NumberRecipes>
-        </NumberRecipesBox>
-        <FollowersIcon name='human-greeting' />
-      </MainViewRow3>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('FollowersScreen', {
+            favScreenItems: favScreenItems
+          })
+        }}
+      >
+        <MainViewRow3>
+          <ElevatedPart style={styles.elementShadow}>
+            <TextOfElevation>Followers</TextOfElevation>
+          </ElevatedPart>
+          <NumberRecipesBox style={styles.elementShadow}>
+            <NumberRecipes>{numOfFollowers}</NumberRecipes>
+          </NumberRecipesBox>
+          <FollowersIcon name='human-greeting' />
+        </MainViewRow3>
+      </Pressable>
       {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
