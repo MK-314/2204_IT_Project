@@ -15,7 +15,6 @@ import { default as Icon } from 'react-native-vector-icons/Entypo'
 import { default as HandIcon } from 'react-native-vector-icons/FontAwesome5'
 import { default as PhotoIcon } from 'react-native-vector-icons/Foundation'
 //
-import { Text } from 'react-native'
 import { FireBaseImageHandler } from '../../firebase'
 import { pickImage } from '../../imagePicker'
 import { FetchApi } from '../../datahandler'
@@ -108,7 +107,8 @@ const AvatarImgCustomized = styled(AvatarImg)`
   height: ${height * HightUnit * 100}px;
 `
 
-const CreateRecipe = ({ navigation }) => {
+const EditRecipe = ({ navigation }) => {
+  const itemForEditing = navigation.getParam('propsItem')
   //
   const [modalVisible, setModalVisible] = useState(false)
   const [modalText, setModalText] = useState('')
@@ -127,10 +127,18 @@ const CreateRecipe = ({ navigation }) => {
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('didFocus', async () => {
-      await AsyncStorage.setItem('recipeName', '')
-      await AsyncStorage.setItem('Ingredients', '')
-      await AsyncStorage.setItem('Directions', '')
-      await AsyncStorage.setItem('PostPhoto', '')
+      await AsyncStorage.setItem('recipeName', itemForEditing.name)
+      await AsyncStorage.setItem('Ingredients', itemForEditing.ingredients)
+      await AsyncStorage.setItem('Directions', itemForEditing.directions)
+      await AsyncStorage.setItem('PostPhoto', itemForEditing.imageUrl)
+      setImageUrl(itemForEditing.imageUrl)
+      setRecipeName(itemForEditing.name)
+      setIngredients(itemForEditing.ingredients)
+      setDirections(itemForEditing.directions)
+      setNameDone(true)
+      setImageDone(true)
+      setIngredientsDone(true)
+      setDirectionsDone(true)
     })
     return unsubscribe
   }, [navigation])
@@ -178,22 +186,19 @@ const CreateRecipe = ({ navigation }) => {
       alert('Please try to pich the image again')
     }
   }
-  const saveNewPost = async () => {
-    let user_id = await AsyncStorage.getItem('user_id')
-    if (nameDone && imageDone && ingredientsDone && directionsDone) {
-      let data = await FetchApi.createPost({
+  const updatePost = async () => {
+    let data = await FetchApi.updatePost(
+      {
         name: recipeName,
         imageUrl: imageUrl,
         directions: directions,
-        ingredients: ingredients,
-        user_id: user_id
-      })
-      navigation.navigate('FoodCategory', {
-        item: data
-      })
-    } else {
-      alert('Not all fealds are completed')
-    }
+        ingredients: ingredients
+      },
+      itemForEditing.id
+    )
+    navigation.navigate('FoodCategory', {
+      item: data
+    })
   }
 
   return (
@@ -287,8 +292,8 @@ const CreateRecipe = ({ navigation }) => {
       </Pressable>
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
-      <Pressable onPress={saveNewPost}>
-        <SmallDefaultBtn text={'Check it out ->'} marginSt={40} />
+      <Pressable onPress={updatePost}>
+        <SmallDefaultBtn text={'Update'} marginSt={40} />
       </Pressable>
       {/* BUTTON ENDS */}
       <FooterDefault>
@@ -314,4 +319,4 @@ const styles = StyleSheet.create({
     elevation: 17
   }
 })
-export default CreateRecipe
+export default EditRecipe

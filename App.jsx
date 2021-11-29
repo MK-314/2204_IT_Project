@@ -12,7 +12,8 @@ import SingUpScreen from './src/screens/SingUpScreen'
 import CreateRecipe from './src/screens/CreateRecipe'
 import { RecipeProvider } from './src/context/RecipeContext'
 import Favorites from './src/screens/Favorites'
-import FollowersScreen from './src/screens/FollowersScreen';
+import FollowersScreen from './src/screens/FollowersScreen'
+import EditRecipe from './src/screens/EditRecipe'
 LogBox.ignoreLogs(['Setting a timer for a long period of time'])
 LogBox.ignoreLogs(['AsyncStorage has'])
 
@@ -25,7 +26,8 @@ const navigator = createStackNavigator(
     ProfileScreen: ProfileScreen,
     CreateRecipe: CreateRecipe,
     Favorites: Favorites,
-    FollowersScreen: FollowersScreen
+    FollowersScreen: FollowersScreen,
+    EditRecipe: EditRecipe
   },
   {
     initialRouteName: 'LogInScreen',

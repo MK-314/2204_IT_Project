@@ -56,7 +56,6 @@ const MainViewRow3 = styled(MainViewRow)`
 `
 const ElevatedPart = styled(RowOfElements)`
   width: ${width * WidthUnit * 170}px;
-  /* height: 50px; */
   margin-right: ${width * WidthUnit * 55}px;
   border-radius: 10px;
   background-color: ${ConstantsRecipe.lightGreen};
@@ -182,7 +181,6 @@ const ProfileScreen = ({ navigation }) => {
         </Pressable>
         {userState && <NameText>{userState.name}</NameText>}
       </HeaderRow>
-      {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
           setModeUserRecipes(true)
@@ -199,7 +197,6 @@ const ProfileScreen = ({ navigation }) => {
           <PencilIcon name='pencil' />
         </MainViewRow>
       </Pressable>
-      {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
           navigation.navigate('Favorites')
@@ -215,7 +212,6 @@ const ProfileScreen = ({ navigation }) => {
           <HeartbeatIcon name='heartbeat' />
         </MainViewRow2>
       </Pressable>
-      {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
           navigation.navigate('FollowersScreen', {
@@ -233,7 +229,6 @@ const ProfileScreen = ({ navigation }) => {
           <FollowersIcon name='human-greeting' />
         </MainViewRow3>
       </Pressable>
-      {/* ////////////////////////////////////////////////////////////////////// */}
       <Pressable
         onPress={() => {
           navigation.navigate('CreateRecipe')

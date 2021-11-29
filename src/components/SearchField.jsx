@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Keyboard, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { RowOfElements } from './small_elements/RowOfElements'
-import { ConstantsRecipe } from '../../constants'
+import { ConstantsRecipe, HightUnit, WidthUnit } from '../../constants'
 import { AsyncStorage } from '@react-native-async-storage/async-storage'
 import RecipeContext from '../context/RecipeContext'
 const { width, height } = Dimensions.get('window')
@@ -11,7 +11,6 @@ const { width, height } = Dimensions.get('window')
 const RowSt = styled(RowOfElements)`
   min-height: ${height * 0.090125}px;
   margin-top: 7%;
-  /*  */
   background-color: ${ConstantsRecipe.green};
 `
 const InputBox = styled(RowOfElements)`
@@ -25,16 +24,16 @@ const TextInputSt = styled.TextInput`
   background-color: ${ConstantsRecipe.white};
   width: 100%;
   height: ${height * 0.064375}px;
-  padding-left: 20px;
+  padding-left: ${width * WidthUnit * 20}px;
   border-radius: 20px;
 `
 const IconSt = styled(Icon)`
   display: flex;
   position: absolute;
-  top: 8px;
-  right: 15px;
+  top: ${height * HightUnit * 8}px;
+  right: ${width * WidthUnit * 15}px;
   align-self: center;
-  font-size: 30px;
+  font-size: ${height * HightUnit * 30}px;
   color: ${ConstantsRecipe.green};
 `
 

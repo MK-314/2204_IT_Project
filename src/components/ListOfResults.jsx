@@ -9,6 +9,7 @@ import FoodCard from './FoodCard'
 import { FetchApi } from '../../datahandler'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { sortByHeartsNumber } from '../../heartSorting.js'
+import NoPosts from './foodCategory/NoPosts'
 
 const ListOfResults = props => {
   // USECONTEXT:
@@ -26,26 +27,30 @@ const ListOfResults = props => {
   //
   useEffect(async () => {
     if (startUseEffectChain) {
-      // if a user is searching:
-      if (search) {
-        let searchRes = itemsByUser.filter(it =>
-          it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        )
-        setSingleMode(searchRes.length)
-        setItemsByUser(sortByHeartsNumber(searchRes))
-        // if a user clicked on Recipes:
-      } else if (modeUserRecipes) {
-        let user_id = await AsyncStorage.getItem('user_id')
-        let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
-        setSingleMode(itemsInUseEffect.length)
-        setItemsByUser(sortByHeartsNumber(itemsInUseEffect))
-        // if a user clicked on Favorites / Icon:
-      } else {
-        let allPosts = await FetchApi.getAllPosts()
-        setSingleMode(allPosts.length)
-        setItemsByUser(sortByHeartsNumber(allPosts))
+      try {
+        // if a user is searching:
+        if (search) {
+          let searchRes = itemsByUser.filter(it =>
+            it.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+          )
+          setSingleMode(searchRes.length)
+          setItemsByUser(sortByHeartsNumber(searchRes))
+          // if a user clicked on Recipes:
+        } else if (modeUserRecipes) {
+          let user_id = await AsyncStorage.getItem('user_id')
+          let itemsInUseEffect = await FetchApi.getPostByUserId(user_id)
+          setSingleMode(itemsInUseEffect.length)
+          setItemsByUser(sortByHeartsNumber(itemsInUseEffect))
+          // if a user clicked on Favorites / Icon:
+        } else {
+          let allPosts = await FetchApi.getAllPosts()
+          setSingleMode(allPosts.length)
+          setItemsByUser(sortByHeartsNumber(allPosts))
+        }
+        setFirstUseEffectDone(true)
+      } catch (error) {
+        console.log(error)
       }
-      setFirstUseEffectDone(true)
     }
   }, [search, startUseEffectChain])
 
@@ -87,6 +92,7 @@ const ListOfResults = props => {
           }}
         />
       )}
+      {singleMode == 0 && <NoPosts />}
     </PTRView>
   )
 }

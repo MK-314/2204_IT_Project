@@ -60,8 +60,9 @@ const FoodCard = props => {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 1500,
-      useNativeDriver: true
+      tension: 150,
+      friction: 5,
+      useNativeDriver: true,
     }).start()
   }, [])
 

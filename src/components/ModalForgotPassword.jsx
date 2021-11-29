@@ -25,7 +25,7 @@ const ModalContainer = styled(ContainerDefault)`
   background-color: #000000c7;
 `
 const RowOfElementsCustom = styled(RowOfElements)`
-  /* margin-top: 250px; */
+  /* background-color: aqua; */
 `
 const ModalRow = styled(RowOfElements)`
   flex-direction: column;
@@ -40,7 +40,7 @@ const EmailText = styled(H1Text)`
   font-size: ${height * HightUnit * 35}px;
 `
 const IconBack = styled(BackIcon)`
-  padding:  ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
+  padding: ${height * HightUnit * 10}px ${width * WidthUnit * 10}px;
   font-size: ${height * HightUnit * 40}px;
   color: ${ConstantsRecipe.green};
   font-weight: bold;

@@ -24,12 +24,12 @@ class FireBaseAuthSystem {
     static appSignUp(email, password) {
         return new Promise(async(res, rej) => {
             createUserWithEmailAndPassword(auth, email, password)
-                .then(userCredential => {
+                .then(async userCredential => {
                     // Signed in
                     const user = userCredential.user
-                    AsyncStorage.setItem('user', JSON.stringify(user))
-                    AsyncStorage.setItem('auth', JSON.stringify(auth))
-                    AsyncStorage.setItem('email', user.email)
+                    await AsyncStorage.setItem('user', JSON.stringify(user))
+                    await AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    await AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {
@@ -41,12 +41,12 @@ class FireBaseAuthSystem {
     static appSignIn(email, password) {
         return new Promise(async(res, rej) => {
             signInWithEmailAndPassword(auth, email, password)
-                .then(userCredential => {
+                .then(async userCredential => {
                     // Signed in
                     const user = userCredential.user
-                    AsyncStorage.setItem('user', JSON.stringify(user))
-                    AsyncStorage.setItem('auth', JSON.stringify(auth))
-                    AsyncStorage.setItem('email', user.email)
+                    await AsyncStorage.setItem('user', JSON.stringify(user))
+                    await AsyncStorage.setItem('auth', JSON.stringify(auth))
+                    await AsyncStorage.setItem('email', user.email)
                     res(user.email)
                 })
                 .catch(error => {

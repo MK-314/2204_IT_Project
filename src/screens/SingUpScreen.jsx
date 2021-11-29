@@ -68,7 +68,6 @@ const SingUpScreen = ({ navigation }) => {
         })
           .then(async user => {
             await AsyncStorage.setItem('user_id', `${user.id}`)
-            alert('Welcome!')
           })
           .catch(e => {
             alert('User was not created')

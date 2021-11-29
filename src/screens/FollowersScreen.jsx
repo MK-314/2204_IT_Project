@@ -16,22 +16,28 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 import { H1Text } from '../components/small_elements/H1Text'
 import { AvatarBox } from '../components/small_elements/AvatarBox'
 import { AvatarImg } from '../components/small_elements/AvatarImg'
+import { Alien, HightUnit, NoPostsYet } from '../../constants'
 const { width, height } = Dimensions.get('window')
 
 const H1TextCustomized = styled(H1Text)`
-  font-size: 30px;
+  font-size: ${height * HightUnit * 30}px;
   text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: ${height * HightUnit * 15}px;
+  margin-bottom: ${height * HightUnit * 15}px;
 `
 const NameText = styled(H1TextCustomized)`
   color: #774747;
+  margin: auto;
+  text-align: center;
+  padding-bottom: 30px;
+  /* background-color: aqua; */
 `
 const RowOfElementsCustomized = styled(RowOfElements)`
-  justify-content: space-evenly;
+  justify-content: flex-start;
 `
 const AvatarBoxCusmomized = styled(AvatarBox)`
   margin-bottom: 20px;
+  margin-left: 40px;
 `
 
 const FollowersScreen = ({ navigation }) => {
@@ -64,7 +70,15 @@ const FollowersScreen = ({ navigation }) => {
             return (
               <RowOfElementsCustomized>
                 <AvatarBoxCusmomized style={styles.elementShadow}>
-                  <AvatarImg source={{ uri: item.avatar }} />
+                  {item.avatar ? (
+                    <AvatarImg source={{ uri: item.avatar }} />
+                  ) : (
+                    <AvatarImg
+                      source={{
+                        uri: Alien
+                      }}
+                    />
+                  )}
                 </AvatarBoxCusmomized>
                 <NameText>{item.name}</NameText>
               </RowOfElementsCustomized>

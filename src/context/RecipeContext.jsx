@@ -13,6 +13,7 @@ export const RecipeProvider = ({ children }) => {
   const [startUseEffectChainFav, setStartUseEffectChainFav] = useState(false)
   const [firstUseEffectDoneFav, setFirstUseEffectDoneFav] = useState(true)
   const [singleMode, setSingleMode] = useState(true)
+  const [ableToDelete, setableToDelete] = useState(false)
 
   return (
     <RecipeContext.Provider
@@ -32,7 +33,9 @@ export const RecipeProvider = ({ children }) => {
         firstUseEffectDoneFav,
         setFirstUseEffectDoneFav,
         singleMode,
-        setSingleMode
+        setSingleMode,
+        ableToDelete,
+        setableToDelete
       }}
     >
       {children}

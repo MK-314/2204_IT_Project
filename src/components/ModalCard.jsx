@@ -25,7 +25,7 @@ const ModalContainer = styled(ContainerDefault)`
   background-color: #000000c7;
 `
 const RowOfElementsCustom = styled(RowOfElements)`
-  /* margin-top: 250px; */
+  /* background-color: aqua; */
 `
 const ModalRow = styled(RowOfElements)`
   flex-direction: column;
@@ -54,7 +54,7 @@ const IconBox = styled.View`
   height: ${height * HightUnit * 65}px;
 `
 const CustomInput = styled(TextInputSt)`
-  padding-top: 20px;
+  padding-top: ${height * HightUnit * 20}px;
   height: ${height * HightUnit * 250}px;
   border-radius: 10px;
   width: 95%;
@@ -68,20 +68,33 @@ const CustomShadow = styled(TextInputStShadow)`
 const ModalCard = props => {
   const [inputValue, setInputValue] = useState('')
 
+  useEffect(async () => {
+    try {
+      switch (props.mode) {
+        case 'recipeName':
+          setInputValue(await AsyncStorage.getItem('recipeName'))
+          break
+        case 'Ingredients':
+          setInputValue(await AsyncStorage.getItem('Ingredients'))
+          break
+        case 'Directions':
+          setInputValue(await AsyncStorage.getItem('Directions'))
+          break
+      }
+    } catch (error) {}
+  }, [props.trigger])
+
   const storeInput = async () => {
     if (inputValue.length > 0) {
       switch (props.mode) {
         case 'recipeName':
           await AsyncStorage.setItem('recipeName', inputValue)
-          setInputValue('')
           break
         case 'Ingredients':
           await AsyncStorage.setItem('Ingredients', inputValue)
-          setInputValue('')
           break
         case 'Directions':
           await AsyncStorage.setItem('Directions', inputValue)
-          setInputValue('')
           break
       }
     }

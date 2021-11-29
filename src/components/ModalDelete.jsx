@@ -21,7 +21,7 @@ const ModalContainer = styled(ContainerDefault)`
   background-color: #000000c7;
 `
 const RowOfElementsCustom = styled(RowOfElements)`
-  /* margin-top: 250px; */
+  /* background-color: aqua; */
 `
 const ModalRow = styled(RowOfElements)`
   flex-direction: column;

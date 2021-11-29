@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import styled from 'styled-components/native'
@@ -11,6 +11,8 @@ import { ConstantsRecipe, HightUnit, WidthUnit } from '../../../constants'
 import { MainHeader, WhiteRow } from '../small_elements/MainHeader'
 import { FetchApi } from '../../../datahandler'
 import ModalDelete from './../ModalDelete'
+import { default as EditIcon } from 'react-native-vector-icons/FontAwesome5'
+import { default as DotsIcon } from 'react-native-vector-icons/Entypo'
 const { width, height } = Dimensions.get('window')
 
 const RowSt = styled(RowOfElements)`
@@ -56,11 +58,29 @@ const IconBack = styled(BackIcon)`
 const IconBomb = styled(BombIcon)`
   position: absolute;
   top: ${height * HightUnit * 10}px;
-  right: ${width * WidthUnit * 25}px;
+  right: ${width * WidthUnit * 15}px;
   font-size: ${height * HightUnit * 35}px;
   color: orangered;
   font-weight: bold;
   text-shadow: ${ConstantsRecipe.text_shadow};
+`
+const IconEdit = styled(EditIcon)`
+  position: absolute;
+  top: ${height * HightUnit * 60}px;
+  right: ${width * WidthUnit * 8}px;
+  font-size: ${height * HightUnit * 35}px;
+  color: #ffff0078;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #000000;
+`
+const IconDots = styled(DotsIcon)`
+  position: absolute;
+  top: ${height * HightUnit * 10}px;
+  right: ${width * WidthUnit * 5}px;
+  font-size: ${height * HightUnit * 35}px;
+  color: #ffffffbc;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #000000;
 `
 const SmallTextNum = styled.Text`
   position: absolute;
@@ -85,6 +105,7 @@ const SmallFoodCard = props => {
   const [iconName, seticonName] = useState('hearto')
   const [modalVisible, setModalVisible] = useState(false)
   const [ableToDelete, setableToDelete] = useState(false)
+  const [dotsPressed, setDotsPressed] = useState(false)
 
   useEffect(async () => {
     try {
@@ -96,12 +117,14 @@ const SmallFoodCard = props => {
       // red or green heard:
       filteredResult.length != 0 ? seticonName('heart') : seticonName('hearto')
       // able to edit or not:
-      if (props.item.user_id == user_id) setableToDelete(true)
+      props.item.user_id == user_id
+        ? setableToDelete(true)
+        : setableToDelete(false)
       setLikesNum(heartsNum)
     } catch (error) {
       console.log('ERROR from FoodCardFav.jsx : ' + error)
     }
-  }, [])
+  }, [props.trigger])
 
   const handleHearts = async () => {
     try {
@@ -157,8 +180,25 @@ const SmallFoodCard = props => {
           }}
         />
         <HeartIcon name={iconName} onPress={handleHearts} />
-        {ableToDelete && (
-          <IconBomb name={'bomb'} onPress={() => setModalVisible(true)} />
+        {dotsPressed && (
+          <IconBomb name='bomb' onPress={() => setModalVisible(true)} />
+        )}
+        {dotsPressed && (
+          <IconEdit
+            name='edit'
+            onPress={() => props.editThisItem(props.item)}
+          />
+        )}
+        {!dotsPressed && ableToDelete && (
+          <IconDots
+            name='dots-three-vertical'
+            onPress={() => {
+              setDotsPressed(true)
+              setTimeout(() => {
+                setDotsPressed(false)
+              }, 3000)
+            }}
+          />
         )}
         <IconBack
           name={'arrow-back'}
