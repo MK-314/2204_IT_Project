@@ -16,7 +16,7 @@ import { FooterDefault } from '../components/small_elements/FooterDefault'
 import { H1Text } from '../components/small_elements/H1Text'
 import { AvatarBox } from '../components/small_elements/AvatarBox'
 import { AvatarImg } from '../components/small_elements/AvatarImg'
-import { Alien, HightUnit, NoPostsYet } from '../../constants'
+import { Alien, HightUnit, NoPostsYet, WidthUnit } from '../../constants'
 const { width, height } = Dimensions.get('window')
 
 const H1TextCustomized = styled(H1Text)`
@@ -29,15 +29,15 @@ const NameText = styled(H1TextCustomized)`
   color: #774747;
   margin: auto;
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: ${height * HightUnit * 30}px;
   /* background-color: aqua; */
 `
 const RowOfElementsCustomized = styled(RowOfElements)`
   justify-content: flex-start;
 `
 const AvatarBoxCusmomized = styled(AvatarBox)`
-  margin-bottom: 20px;
-  margin-left: 40px;
+  margin-bottom: ${height * HightUnit * 20}px;
+  margin-left:  ${width * WidthUnit * 40}px;
 `
 
 const FollowersScreen = ({ navigation }) => {
