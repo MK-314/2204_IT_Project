@@ -30,8 +30,8 @@ const { width, height } = Dimensions.get('window')
 const TitleBox = styled(RowOfElements)`
   width: 85%;
   border-radius: 20px;
-  margin-top: ${height * HightUnit * 50}px;
-  margin-bottom: ${height * HightUnit * 40}px;
+  margin-top: ${height * HightUnit * 30}px;
+  margin-bottom: ${height * HightUnit * 20}px;
   /*  */
   background-color: ${props =>
     props.nameDone ? ConstantsRecipe.lightGreen : ConstantsRecipe.gray2};
@@ -288,7 +288,7 @@ const CreateRecipe = ({ navigation }) => {
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
       <Pressable onPress={saveNewPost}>
-        <SmallDefaultBtn text={'Check it out ->'} marginSt={40} />
+        <SmallDefaultBtn text={'Check it out ->'} marginSt={30} />
       </Pressable>
       {/* BUTTON ENDS */}
       <FooterDefault>
