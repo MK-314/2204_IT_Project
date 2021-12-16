@@ -24,6 +24,8 @@ const H1TextCustomized = styled(H1Text)`
   text-align: center;
   margin-top: ${height * HightUnit * 15}px;
   margin-bottom: ${height * HightUnit * 15}px;
+  margin-left:  ${height * HightUnit * 5}px;
+  margin-right:  ${height * HightUnit * 5}px;
 `
 const NameText = styled(H1TextCustomized)`
   color: #774747;

@@ -293,7 +293,7 @@ const EditRecipe = ({ navigation }) => {
       {/* IMAGE ENDS */}
       {/* BUTTON STARTS */}
       <Pressable onPress={updatePost}>
-        <SmallDefaultBtn text={'Update'} marginSt={40} />
+        <SmallDefaultBtn text={'Update'} marginSt={20} />
       </Pressable>
       {/* BUTTON ENDS */}
       <FooterDefault>

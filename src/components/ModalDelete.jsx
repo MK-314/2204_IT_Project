@@ -33,7 +33,9 @@ const ModalRow = styled(RowOfElements)`
 const Confirm = styled(H1Text)`
   margin-top: ${height * HightUnit * 10}px;
   margin-bottom: ${height * HightUnit * 10}px;
-  font-size: ${height * HightUnit * 35}px;
+  margin-left: ${height * HightUnit * 5}px;
+  margin-right: ${height * HightUnit * 5}px;
+  font-size: ${height * HightUnit * 30}px;
   color: #774747;
 `
 const IconBack = styled(BackIcon)`
